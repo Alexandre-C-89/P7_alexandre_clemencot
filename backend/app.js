@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -10,7 +11,14 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(bodyParser.json());
 
+app.post('/api/stuff', (req, res, next) => {
+    console.log(req.body);
+    res.status(201).json({
+      message: 'Objet créé !'
+    });
+});
 
 app.use('/api/stuff', (req, res, next) => {
     const stuff = [
