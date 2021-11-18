@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const cookieParser = require ("cookie-parser");
 const userRoutes = require("./routes/user.routes.js");
 const postRoutes = require("./routes/post.routes");
@@ -9,8 +8,8 @@ const {checkUser, requireAuth} = require("./middleware/auth.middleware");
 const app = express();
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
 // jwt
