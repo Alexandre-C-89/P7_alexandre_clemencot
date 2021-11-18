@@ -1,14 +1,11 @@
-const mongoose = require("mongoose");
+const mysql = require("mysql");
 
-mongoose
-    .connect(
-        "mongodb+srv://" + process.env.DB_USER_PASS + "@clusterp6.gtd99.mongodb.net/test",
-        {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true,
-            useFindAndModify: false
-        }
-    )
-    .then(() => console.log("Connected to MongoDB"))
-    .catch((err) => console.log("Failed to connect to MongoDB", err));
+const db = mysql.createConnection({
+
+    host: "localhost",
+ 
+    user: "root",
+ 
+    password: ""
+ 
+  });
