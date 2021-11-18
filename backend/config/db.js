@@ -1,13 +1,15 @@
 const mysql = require("mysql");
 const sequelize = require("sequelize");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const db = mysql.createConnection({
 
     host: "localhost",
  
-    user: "root",
+    user: process.env.user,
  
-    password: ""
+    password: process.env.password
  
 });
 
@@ -20,7 +22,7 @@ db.connect(function(err) {
     });
 });
 
-const sequelize = new Sequelize("nom_base_de_donnees", "root", "", {
+const sequelize = new sequelize("nom_base_de_donnees", "root", "", {
     dialect: "mysql",
     host: "localhost"
 });
