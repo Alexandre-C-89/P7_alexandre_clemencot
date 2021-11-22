@@ -1,23 +1,20 @@
-const Sequelize = require('sequelize')
+// const mysql = require("mysql2");
+const { Sequelize } = require("sequelize");
 
-// Creating new Object of Sequelize
-const sequelize = new Sequelize(
-    'groupomania',
-    'root',
-    '', {
-
-        // Explicitly specifying
-        // mysql database
-        dialect: 'mysql',
-
-        // By default host is 'localhost'        
-        host: 'localhost'
-    }
-);
+const sequelize = new Sequelize ("formationsql", "root", "", {
+    dialect: "mysql",
+    host: "localhost"
+});
 
 try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
+    const connection = sequelize.authenticate();
+    if (connection) {
+        console.log("Vous êtes connectez à la base de données !");
+    }
+    sequelize.query("SELECT * FROM utilisateurs ").then((results) => {
+        console.log(results);
+    })
+} catch (error) {
+    console.log(error);
+    // console.log({ message: "erreur lors de la connection !" + error});
+}

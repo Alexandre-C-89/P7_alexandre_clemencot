@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const mysql = require("./db");
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
