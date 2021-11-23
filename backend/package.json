@@ -4,6 +4,7 @@
   "description": "Projet 7 du parcours développeur web chez Openclassrooms .",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
