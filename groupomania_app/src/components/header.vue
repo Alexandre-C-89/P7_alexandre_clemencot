@@ -1,6 +1,14 @@
 <template>
-    <div id="Header">
-        <img src="../assets/icon-left-font-monochrome-white.png" alt="Logo Groupomania">
+    <div class="Header">
+        <div class="header__logo">
+            <h1>Groupomania</h1>
+        <ul>
+            <li>Connection</li>
+            <li>Créer un compte</li>
+            <li></li>
+        </ul>
+        </div>
+
     </div>
 </template>
 
@@ -12,10 +20,28 @@
 #Header{
     background-color: #2c3e50;
     border: 1px solid black;
+}
+.header__logo{
+    margin: 5px;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 img{
-    width: 20%;
+    width: 5%;
+    height: 5%;
+}
+h1{
+    margin: 10px;
+}
+ul{
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+li{
+    margin: 10px;
 }
 </style>

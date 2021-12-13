@@ -1,12 +1,15 @@
 <template>
     <Header></Header>
+    <Footer></Footer>
 </template>
 
 <script>
   import Header from "./components/header.vue";
+  import Footer from "./components/footer.vue";
   export default {
     components: {
-      Header
+      Header,
+      Footer
     }
   };
 </script>
@@ -16,6 +19,7 @@ body{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 #app {
