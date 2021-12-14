@@ -1,4 +1,4 @@
-const UserModel = require("../models/user.model");
+const userModel = require("../models/user.model");
 const ObjectID = require("mongoose").Types.ObjectID;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -25,7 +25,6 @@ passwordSchema
 .has().not().spaces()                           // Should not have spaces
 .is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values
 
-
 exports.signup = (req, res, next) => {
     if ((!passwordSchema.validate(req.body.password) || !emailValidator.validate(req.body.email))) {
         return res.status(400).json({ message: "Password et/ou email n'a pas le format requis"});
@@ -38,7 +37,7 @@ exports.signup = (req, res, next) => {
         bcrypt.hash(req.body.email, process.env.SECRET_HASH_EMAIL_KEY)
         .then(hashEmail => {
             console.log(hashEmail);
-            const user = new User({
+            const user = new user({
                 email: maskedEmail,
                 hashEmail: hashEmail,
                 password: hash
@@ -83,7 +82,7 @@ bcrypt.hash(req.body.email, process.env.SECRET_HASH_EMAIL_KEY)
   
 
 module.exports.getAllUsers = async (req, res) => {
-    const users = await UserModel.find().select("-password");
+    const users = await userModel.find().select("-password");
     res.status(200).json(users);
 };
 
@@ -91,7 +90,7 @@ module.exports.userInfo = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send("ID unknown : " + req.params.id)
 
-        UserModel.findById(req.params.id, (err, docs) => {
+        userModel.findById(req.params.id, (err, docs) => {
             if (!err) res.send(docs);
             else console.log("ID unknown : " + err);
         }).select("-password");
@@ -102,7 +101,7 @@ module.exports.userInfo = (req, res) => {
         return res.status(400).send("ID unknown : " + req.params.id)
 
     try {
-        await UserModel.findOneAndUpdate(
+        await userModel.findOneAndUpdate(
            {_id: req.params.id},
            {
                $set: {
@@ -125,7 +124,7 @@ module.exports.deleteUser = async (req, res) => {
         return res.status(400).send("ID unknown : " + req.params.id)
 
     try {
-        await UserModel.remove({ _id: req.params.id }).exec();
+        await userModel.remove({ _id: req.params.id }).exec();
         res.status(200).json({ message: "Successfully deleted. " })
     } catch (err) {
         return res.status(500).json({ message: err });
@@ -138,7 +137,7 @@ module.exports.follow = async (req, res) => {
 
     try {
         // add to the follower list
-        await UserModel.findByIdAndUpdate(
+        await userModel.findByIdAndUpdate(
             req.params.id,
             { $addToSet: { following: req.body.idToFollow }},
             { new: true, upsert: true },
@@ -148,7 +147,7 @@ module.exports.follow = async (req, res) => {
             }
         );
         // add to the follower list
-        await UserModel.findByIdAndUpdate(
+        await userModel.findByIdAndUpdate(
             req.params.id,
             { $addToSet: { following: req.body.idToFollow }},
             { new: true, upsert: true },
@@ -168,7 +167,7 @@ module.exports.unfollow = async (req, res) => {
 
     try {
         // add to the follower list
-        await UserModel.findByIdAndUpdate(
+        await userModel.findByIdAndUpdate(
             req.params.id,
             { $pull: { following: req.body.idToUnfollow }},
             { new: true, upsert: true },
@@ -178,7 +177,7 @@ module.exports.unfollow = async (req, res) => {
             }
         );
         // add to the follower list
-        await UserModel.findByIdAndUpdate(
+        await userModel.findByIdAndUpdate(
             req.params.id,
             { $pull: { following: req.body.id }},
             { new: true, upsert: true },

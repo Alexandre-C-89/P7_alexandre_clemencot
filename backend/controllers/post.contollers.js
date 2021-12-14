@@ -1,9 +1,9 @@
-const PostModel = require("../models/post.model");
+const postModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
 const ObjectID =require("mongoose").Types.ObjectID;
 
 module.exports.readPost = (req, res) => {
-    PostModel.find((err, docs) => {
+    postModel.find((err, docs) => {
         if (!err) res.send(docs);
         else console.log("Error to get data " + err);
     })
@@ -77,7 +77,7 @@ module.exports.likePost = async (req, res) => {
         return res.status(400).send("ID unknown : " + req.params.id);
 
     try {
-        await PostModel.findByIdAndUpdate(
+        await postModel.findByIdAndUpdate(
             req.params.id,
             {
                 $addToSet: { likers: req.body.id }
@@ -87,7 +87,7 @@ module.exports.likePost = async (req, res) => {
                 if (err) return res.status(400).send(err);
             }
         );
-        await UserModel.findByIdAndUpdate(
+        await userModel.findByIdAndUpdate(
             req.params.id,
             {
                 $addToSet: { likers: req.body.id }
@@ -108,7 +108,7 @@ module.exports.unlikePost = async (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
 
     try {
-        await PostModel.findByIdAndUpdate(
+        await postModel.findByIdAndUpdate(
             req.params.id,
             {
                 $addToSet: { likers: req.body.id }
@@ -118,7 +118,7 @@ module.exports.unlikePost = async (req, res) => {
                 if (err) return res.status(400).send(err);
             }
         );
-        await UserModel.findByIdAndUpdate(
+        await userModel.findByIdAndUpdate(
             req.params.id,
             {
                 $addToSet: { likers: req.body.id }
@@ -139,7 +139,7 @@ module.exports.commentPost = async (req, res) => {
         return res.status(400).send("ID unknown : " + req.params.id);
     
     try {
-        return PostModel.findByIdAndUpdate(
+        return postModel.findByIdAndUpdate(
             req.params.id,
             {
                 $push: {
@@ -167,7 +167,7 @@ module.exports.editCommentPost = async (req, res) => {
         return res.status(400).send("ID unknown : " + req.params.id);
 
     try {
-        return PostModel.findById(
+        return postModel.findById(
             req.params.id,
             (err, docs) => {
                 const theComment = docs.comments.find((comment) => 
@@ -193,7 +193,7 @@ module.exports.deleteCommentPost = async (req, res) => {
         return res.status(400).send("ID unknown : " + req.params.id);
     
     try {
-        return PostModel.findByIdAndUpdate(
+        return postModel.findByIdAndUpdate(
             req.params.id,
             {
                 $pull: {

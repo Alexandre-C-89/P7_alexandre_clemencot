@@ -1,4 +1,4 @@
-const UserModel = require("../models/user.model");
+const userModel = require("../models/user.model");
 const fs = require("fs");
 const { promisify } = require("util");
 const { uploadErrors } = require("../utils/error.utils");
@@ -28,7 +28,7 @@ module.exports.uploadProfil = async (req, res) => {
     );
 
     try {
-        await UserModel.findByIdAndUpdate(
+        await userModel.findByIdAndUpdate(
             req.body.userId,
             { $set : {picture: "./upload/profil/" + fileName}},
             { new: true, upsert: true, setDefaultsOnInsert: true},
