@@ -10,7 +10,7 @@
 
 <style>
 .footer{
-    background-color: blue;
+    background-color: rgb(84, 119, 235);
     width: 100%;
 }
 </style>

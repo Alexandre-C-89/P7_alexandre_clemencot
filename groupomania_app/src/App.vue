@@ -1,23 +1,20 @@
 <template>
   <div id="app">
     <Header></Header>
-    <Button><Button>
-    <!-- <Body></Body> -->
-    <!-- <Footer></Footer> -->
+    <Body></Body>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Header from "./components/header.vue";
-// import Body from "./components/body.vue";
-// import Footer from "./components/footer.vuse";
-import Button from "./components/button.vue";
+import Body from "./components/body.vue";
+import Footer from "./components/footer.vue";
 export default {
   components: {
     Header,
-    // Body,
-    // Footer,
-    Button,
+    Body,
+    Footer
   },
 };
 </script>
