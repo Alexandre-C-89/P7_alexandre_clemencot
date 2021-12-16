@@ -1,20 +1,19 @@
 <template>
-  <div class="Header">
+  <div class="header">
     <h1>Groupomania</h1>
     <ul>
-      <li><a href="http://google.com">Connection</a></li>
-      <li><a href="http://google.com">Créer un compte</a></li>
-      <li></li>
+      <li>S'incrire</li>
+      <li>Créer un compte</li>
     </ul>
   </div>
 </template>
 
 <script>
-
+  
 </script>
 
 <style>
-.Header {
+.header {
   width: 100%;
   background-color: #3885b1;
   height: 150px;
@@ -31,6 +30,9 @@ img {
 }
 h1 {
   margin: 5px 10px 10px 60px;
+  border: 2px solid white;
+  border-radius: 15px;
+  padding: 10px;
 }
 ul {
   text-decoration: none;
@@ -41,5 +43,9 @@ ul {
 }
 li {
   margin: 10px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  font-weight: 700;
 }
 </style>

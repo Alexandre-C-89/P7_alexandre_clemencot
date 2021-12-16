@@ -17,8 +17,10 @@ export default {
     Footer
   },
 };
-</script>
 
+
+</script>
+  
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
 
