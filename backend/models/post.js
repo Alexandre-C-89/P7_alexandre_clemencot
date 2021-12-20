@@ -1,9 +1,3 @@
-
-
-
-
-
-// const { Module } = require("module");
 // const sequelize = require("sequelize");
 
 // const postSchema = sequelize.postSchema({
