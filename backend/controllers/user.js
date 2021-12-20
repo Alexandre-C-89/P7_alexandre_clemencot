@@ -11,7 +11,7 @@ exports.signup = (req, res, next) => {
           email: req.body.email,
           password: hash
         });
-        user.save()
+        user.save() // J'enregistre l'utilisateur
           .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
           .catch(error => res.status(400).json({ error }));
       })
@@ -19,16 +19,20 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
+    // Je compare l'email de l'utilisateur avec celui de la requête
     User.findOne({ email: req.body.email })
       .then(user => {
-        if (!user) {
+        if (!user) { // Si cela me retourne false alors j'affiche l'erreur
           return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-        }
-        bcrypt.compare(req.body.password, user.password)
+        } // Sinon je passe à l'étape suivante 
+        // Je compare le MDP de l'utilisateur et celui de la requête
+        bcrypt.compare(req.body.password, user.password)  
           .then(valid => {
+              // si cela me retourne false alors j'affiche l'erreur
             if (!valid) {
               return res.status(401).json({ error: 'Mot de passe incorrect !' });
             }
+            // Sinon je log l'utilisateur
             res.status(200).json({
               userId: user._id,
               token: process.env.SECRET_KEY
