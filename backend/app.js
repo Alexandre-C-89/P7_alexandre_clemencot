@@ -1,40 +1,31 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const path = require("path");
-require('dotenv').config();
-const rateLimit = require("express-rate-limit");
-const helmet = require("helmet");
-
-const sauceRoutes = require("./routes/sauce");
-const userRoutes = require('./routes/user');
-const { log } = require('console');
-
-
+const express = require("express");
 const app = express();
+const path = require("path"); // utiliser pour le chemin des images
+require("dotenv").config()
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10 // limit each IP to 5 requests per windowMs
-});
+// Utilisation de body-parser qui lit l'entrée d'un formulaire 
+// et le stocke en tant qu'objet javascript accessible via req.body
+const bodyParser = require("body-parser");
 
+// const postRoute = require("./routes/post");
+const userRoute = require("./routes/user");
 
+// ajout des headers (en-têtes)
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Permet d'accéder à l'API depuis n'importe quelle origine
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS'); // chaque requête qui peuvent être effectué 
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Permet d'accéder à mon API depuis n'importe quelle origine
+  // J'ajoute les headers mentionnés aux requêtes envoyées vers notre API
+  res.setHeader("Access-Control-Allow-Origin", "Origin, X-Requested-With, content, Accept, Content-Type, Atuthorization");
+  // J'envoie des requêtes avec les méthodes indiquées ci-desosus
+  res.setHeader("Access-Control-Allow-Origin", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
   next();
 });
 
-app.use(bodyParser.json());
-
+// J'utilise path pour indiqué ou les images doivent être enregistré 
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-app.use("/api/", limiter);
-app.use(helmet());
 app.use(express.json());
 
-app.use('/api/sauces', sauceRoutes);
-app.use('/api/auth', limiter, userRoutes);
+app.use("/api/auth", userRoute);
+// app.use("/api/post", postRoute);
 
 module.exports = app;
