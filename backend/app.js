@@ -7,7 +7,7 @@ require("dotenv").config()
 const bodyParser = require("body-parser");
 
 
-// const postRoute = require("./routes/post");
+const postRoute = require("./routes/post");
 const userRoute = require("./routes/user");
 
 
@@ -19,12 +19,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// J'utilise path pour indiqué ou les images doivent être enregistré 
+// J'utilise path pour indiqué ou les images doivent être enregistré
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use(express.json());
 
 app.use("/api/auth", userRoute);
-// app.use("/api/post", postRoute);
+app.use("/api/post", postRoute);
 
 module.exports = app;
