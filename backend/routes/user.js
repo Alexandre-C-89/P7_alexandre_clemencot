@@ -1,4 +1,3 @@
-// j'utilise express
 const express = require("express");
 // j'utilise la méthode Router de express pour mes routes
 const router = express.Router();
@@ -7,11 +6,15 @@ const router = express.Router();
 // chemin des fichiers de contrôle des utilisateurs (dossier controllers) 
 const userCtrl = require("../controllers/user");
 
-// Ici je créer ma routes pour l'enregistrements
-// des utilisateurs
+const auth = require("../middleware/auth");
+const multer = require("../middleware/multer-config");
+
+// Ici je créer mes routes pour concernant
+// les utilisateurs
 router.post("/signup", userCtrl.signup);
-// Ici je créer ma routes pour la connexion
-// des utilisateurs
-router.post("/login", userCtrl.login);
+router.get("/login", userCtrl.login);
+router.get("/login", userCtrl.createUser);
+router.put("/login", userCtrl.modifyUser);
+router.delete("/login", userCtrl.deleteUser);
 
 module.exports = router;

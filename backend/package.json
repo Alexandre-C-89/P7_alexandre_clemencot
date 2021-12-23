@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "nodemo server"
+    "start": "nodemon server"
   },
   "author": "",
   "license": "ISC",

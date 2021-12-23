@@ -1,21 +1,14 @@
 const express = require("express");
 const router = express.Router();
- 
+const multer = require("../middleware/multer-config");
+
+// Je récupère le controller pour les post
 const postCtrl = require("../controllers/post");
-router.post("/post", postCtrl);
 
-const post = sequelize.define("post", {
-    id: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    content: Sequelize.STRING(300)
-});
-
-post.associates = function(models) {
-    post.belongsTo(models.user,{as: "user", foreignKey: "userId"})
-}
+router.get("/", postCtrl.getAllPosts);
+router.get("/", postCtrl.getOnePost);
+router.post("/:id", multer, postCtrl.createOnePost);
+router.put("/:id", postCtrl.modifyPost);
+router.delete("/:id", postCtrl.deleteOnePost);
 
 module.exports = router;
