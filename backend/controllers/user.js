@@ -47,22 +47,27 @@ exports.login = (req, res, next) => {
 };
 
 exports.modifyUser = (req, res, next) => {
+  // si l'utilisateur veut modifié sont
+  // compte je vérifie si c'est bien l'utilisateur du même compte
+  // Sinon il ne peut pas supprimer le compte .
   const findUser = await FindUser.findOne({ where: { email: req.body.email } });
   if (findUser === null) {
     console.log("Not found !");
   } else {
     console.log(findUser instanceof FindUser);
     console.log(findUser.title);
+    await findUser.save();
   }
-  // .then((user) => {
-  //   if (!user) {
-  //     // Si l'utilisateur ne correspond pas alors je renvoi une erreur
-  //     return res.status(401).json({ message: "Utilisateur non trouvé !" });
-  //   }
-  // })
-  // .catch((error) =>
-  //   res.status(500).json({ message: "il y une erreur : " + error })
-  // );
 };
 
-exports.deleteUser = (req, res, next) => {};
+exports.deleteUser = (req, res, next) => {
+  // si l'utilisateur veut supprimer sont
+  // compte je vérifie si c'est bien l'utilisateur du même compte
+  // Sinon il ne peut pas supprimer le compte .
+  const findUser = await FindUser.findOne({ where: { email: req.body.email } });
+  if (findUser === null) {
+    console.log("Vous ne pouvez pas supprimé ce compte !");
+  } else {
+    await findUser.destroy();
+  }
+};
