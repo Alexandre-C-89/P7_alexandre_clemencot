@@ -1,9 +1,26 @@
-// const sequelize = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
+const sequelize = new Sequelize("sqlite::memory:");
 
-// const postSchema = sequelize.postSchema({
-//     title: { type: String, require: true },
-//     Champ: { type: String, require: true },
-//     Image: { type: String },
-// });
-
-// Module.exports = sequelize.Model("post", postSchema);
+const Post = sequelize.define(
+  "Post",
+  {
+    // Model attributes are defined here
+    // Les attributs du model sont définit ici
+    Title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      // allowNull defaults to true
+      // Par défaut allowNull est vrai
+    },
+    image: {
+      type: DataTypes.STRING,
+    },
+  },
+  {
+    // Other model options go here
+    // Autre option de model peuvent être placé ici
+  }
+);

@@ -64,3 +64,5 @@ exports.modifyUser = (req, res, next) => {
   //   res.status(500).json({ message: "il y une erreur : " + error })
   // );
 };
+
+exports.deleteUser = (req, res, next) => {};
