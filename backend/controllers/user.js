@@ -2,26 +2,32 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
-exports.createUser = (req, res, next) => {
-  bcrypt.hash(req.body.password, 10); // je veux qu'il sale le mot de passe 10 fois
-  console
-    .log("Je passe à l'étape de création de l'utilisateur !")
-    .then((hash) => {
-      const user = new User({
-        email: req.body.email,
-        password: hash,
-      });
-      user
-        .save() // J'enregistre l'utilisateur
-        .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-        .catch((error) => res.status(400).json({ error }));
-    })
-    .catch((error) => res.status(500).json({ error }));
+exports.createUser = async (req, res, next) => {
+  try {
+    bcrypt;
+    // async / await
+    // await bcrypt
+    // sequelize.User.create car save ne marche pas
+    // ...req.body
+    // changer password par le hash
+    // image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+    const user = await sequelize.User.create({ where: { id: userId } });
+    const newUser = new User({
+      ...req.body,
+      email: req.body.email,
+      password: hash,
+      image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+    });
+    const createUser = await sequelize.User.create({ newUser });
+    res.status(201).json({ post: createUser, message: "Utilisateur créé !" });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };
 
-exports.login = (req, res, next) => {
+exports.login = async (req, res, next) => {
   // Je compare l'email de l'utilisateur avec celui de la requête
-  User.findOne({ email: req.body.email })
+  const user = await sequelize.User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
         // Si cela me retourne false alors j'affiche l'erreur
@@ -46,7 +52,7 @@ exports.login = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-exports.modifyUser = (req, res, next) => {
+exports.modifyUser = async (req, res, next) => {
   // si l'utilisateur veut modifié sont
   // compte je vérifie si c'est bien l'utilisateur du même compte
   // Sinon il ne peut pas supprimer le compte .
@@ -60,7 +66,7 @@ exports.modifyUser = (req, res, next) => {
   }
 };
 
-exports.deleteUser = (req, res, next) => {
+exports.deleteUser = async (req, res, next) => {
   // si l'utilisateur veut supprimer sont
   // compte je vérifie si c'est bien l'utilisateur du même compte
   // Sinon il ne peut pas supprimer le compte .

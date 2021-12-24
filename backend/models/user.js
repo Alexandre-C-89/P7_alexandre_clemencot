@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const { post } = require("../routes/post");
 const sequelize = new Sequelize("sqlite::memory:");
 
 const User = sequelize.define(

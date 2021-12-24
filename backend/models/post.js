@@ -6,7 +6,7 @@ const Post = sequelize.define(
   {
     // Model attributes are defined here
     // Les attributs du model sont définit ici
-    Title: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
