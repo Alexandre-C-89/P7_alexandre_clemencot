@@ -5,12 +5,6 @@ require("dotenv").config();
 exports.createUser = async (req, res, next) => {
   try {
     bcrypt;
-    // async / await
-    // await bcrypt
-    // sequelize.User.create car save ne marche pas
-    // ...req.body
-    // changer password par le hash
-    // image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     const user = await sequelize.User.create({ where: { id: userId } });
     const newUser = new User({
       ...req.body,
