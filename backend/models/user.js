@@ -1,18 +1,7 @@
-const { Sequelize, DataTypes } = require("sequelize");
-
 module.exports = (Sequelize, DataTypes) => {
-  return Sequelize.define(
+  Sequelize.define(
     "User",
     {
-      id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
-        noUpdate: {
-          readOnly: true,
-        },
-      },
       // Model attributes are defined here
       // Les attributs du model sont définit ici
       firstName: {
@@ -29,6 +18,7 @@ module.exports = (Sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         require: true,
+        unique: true
       },
       password: {
         type: DataTypes.STRING,
@@ -36,6 +26,8 @@ module.exports = (Sequelize, DataTypes) => {
       },
     },
     {
+      tableName: "users",
+      timestamps: true,
       // Other model options go here
       // Autre option de model peuvent être placé ici
     }

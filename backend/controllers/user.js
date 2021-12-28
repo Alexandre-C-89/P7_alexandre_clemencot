@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const { User, Post } = require("../models");
+const User = require("../models/user");
 
 require("dotenv").config();
 
@@ -9,14 +9,16 @@ exports.createUser = async (req, res, next) => {
   const hash = await bcrypt.hash(req.body.password, 10);
   // Je stocke dans une variable user la création d'un nouveau modèle
   // à partir de l'id avec lequel j'ai envoyer la requête
-  const user = await User.create({ where: { id: userId } });
-  const newUser = new User({
+  const userExist = await User.findOne({ where: { email: req.body.email } });
+  if (userExist) {
+    return res.status(409).json({ message: "email est déjà utilisé !"})
+  }
+  User.create({
     ...req.body,
     email: req.body.email,
     password: hash,
     image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
   });
-  const createUser = await sequelize.User.create({ newUser });
   res.status(201).json({ post: createUser, message: "Utilisateur créé !" });
   // } catch (error) {
   // res.status(500).json({ error });
