@@ -4,20 +4,6 @@ const path = require("path");
 require("dotenv").config();
 // Utilisation de body-parser qui lit l'entrée d'un formulaire
 // et le stocke en tant qu'objet javascript accessible via req.body
-const bodyParser = require("body-parser");
-
-// Connexion à ma BDD
-const { Sequelize } = require("sequelize");
-
-new Sequelize(
-  process.env.BDD_NAME,
-  process.env.BDD_USER,
-  process.env.BDD_PASSWORD,
-  {
-    host: "localhost",
-    dialect: "mysql",
-  }
-);
 
 const postRoute = require("./routes/post");
 const userRoute = require("./routes/user");

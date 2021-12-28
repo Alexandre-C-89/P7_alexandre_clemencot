@@ -1,6 +1,5 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const { post } = require("../routes/post");
-const sequelize = new Sequelize("sqlite::memory:");
+const { sequelize, DataTypes } = require("sequelize");
+const { Post } = require("../routes/post");
 
 const User = sequelize.define(
   "User",
@@ -16,7 +15,7 @@ const User = sequelize.define(
       // allowNull defaults to true
       // Par défaut allowNull est vrai
     },
-    poste: {
+    isAdmin: {
       type: DataTypes.STRING,
     },
     email: {
@@ -33,3 +32,5 @@ const User = sequelize.define(
     // Autre option de model peuvent être placé ici
   }
 );
+
+module.exports = User;

@@ -24,3 +24,5 @@ const Post = sequelize.define(
     // Autre option de model peuvent être placé ici
   }
 );
+
+module.exports = Post;

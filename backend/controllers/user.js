@@ -1,27 +1,31 @@
-const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const { User, Post } = require("../models");
+
 require("dotenv").config();
 
 exports.createUser = async (req, res, next) => {
-  try {
-    bcrypt;
-    const user = await sequelize.User.create({ where: { id: userId } });
-    const newUser = new User({
-      ...req.body,
-      email: req.body.email,
-      password: hash,
-      image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-    });
-    const createUser = await sequelize.User.create({ newUser });
-    res.status(201).json({ post: createUser, message: "Utilisateur créé !" });
-  } catch (error) {
-    res.status(500).json({ error });
-  }
+  // try {
+  // Je sale le mot de passe 10 fois
+  const hash = await bcrypt.hash(req.body.password, 10);
+  // Je stocke dans une variable user la création d'un nouveau modèle
+  // à partir de l'id avec lequel j'ai envoyer la requête
+  const user = await User.create({ where: { id: userId } });
+  const newUser = new User({
+    ...req.body,
+    email: req.body.email,
+    password: hash,
+    image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+  });
+  const createUser = await sequelize.User.create({ newUser });
+  res.status(201).json({ post: createUser, message: "Utilisateur créé !" });
+  // } catch (error) {
+  // res.status(500).json({ error });
+  // }
 };
 
 exports.login = async (req, res, next) => {
   // Je compare l'email de l'utilisateur avec celui de la requête
-  const user = await sequelize.User.findOne({ email: req.body.email })
+  const user = await User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
         // Si cela me retourne false alors j'affiche l'erreur
