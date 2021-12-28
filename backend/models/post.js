@@ -1,28 +1,42 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("sqlite::memory:");
-
-const Post = sequelize.define(
-  "Post",
-  {
-    // Model attributes are defined here
-    // Les attributs du model sont définit ici
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
+module.exports = (Sequelize, DataTypes) => {
+  return Sequelize.define(
+    "Post",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+        noUpdate: true,
+      },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      content: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      image: {
+        type: DataTypes.STRING.BINARY,
+        allowNull: true,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        noUpdate: {
+          readOnly: true,
+        },
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        noUpdate: true,
+      },
     },
-    description: {
-      type: DataTypes.STRING,
-      // allowNull defaults to true
-      // Par défaut allowNull est vrai
-    },
-    image: {
-      type: DataTypes.STRING,
-    },
-  },
-  {
-    // Other model options go here
-    // Autre option de model peuvent être placé ici
-  }
-);
-
-module.exports = Post;
+    {
+      tableName: "posts",
+      timestamps: true,
+    }
+  );
+};

@@ -35,7 +35,7 @@ sequelize
   .then((connexion) => {
     console.log("✅ Connexion à MySQL");
     sequelize
-      .sync()
+      .sync({ force: true })
       .then((sync) => {
         console.log("All models were synchronized successfully.");
       })
