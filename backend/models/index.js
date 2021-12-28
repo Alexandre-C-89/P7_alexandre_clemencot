@@ -1,6 +1,5 @@
 // Connexion à ma BDD
 const { Sequelize } = require("sequelize");
-const User = require("./user");
 
 const sequelize = new Sequelize(
   process.env.BDD_NAME,

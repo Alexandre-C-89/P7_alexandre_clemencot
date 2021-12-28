@@ -1,7 +1,6 @@
-const { sequelize, DataTypes } = require("sequelize");
-const { Post } = require("../routes/post");
+const { Sequelize, DataTypes } = require("sequelize");
 
-const User = sequelize.define(
+const User = Sequelize.define(
   "User",
   {
     // Model attributes are defined here
