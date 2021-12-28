@@ -1,3 +1,5 @@
+const { Sequelize, DataTypes } = require("sequelize");
+
 module.exports = (Sequelize, DataTypes) => {
   return Sequelize.define(
     "Post",
@@ -9,34 +11,24 @@ module.exports = (Sequelize, DataTypes) => {
         autoIncrement: true,
         noUpdate: true,
       },
+      // Model attributes are defined here
+      // Les attributs du model sont définit ici
       title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      content: {
+      description: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull defaults to true
+        // Par défaut allowNull est vrai
       },
       image: {
-        type: DataTypes.STRING.BINARY,
-        allowNull: true,
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        noUpdate: {
-          readOnly: true,
-        },
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        noUpdate: true,
+        type: DataTypes.STRING,
       },
     },
     {
-      tableName: "posts",
-      timestamps: true,
+      // Other model options go here
+      // Autre option de model peuvent être placé ici
     }
   );
 };

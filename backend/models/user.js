@@ -13,48 +13,31 @@ module.exports = (Sequelize, DataTypes) => {
           readOnly: true,
         },
       },
-      name: {
+      // Model attributes are defined here
+      // Les attributs du model sont définit ici
+      firstName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      firstname: {
+      lastName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      username: {
+      isAdmin: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+        require: true,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
-      },
-      avatar: {
-        type: DataTypes.STRING.BINARY,
-        allowNull: true,
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        noUpdate: {
-          readOnly: true,
-        },
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        noUpdate: true,
+        require: true,
       },
     },
     {
-      tableName: "users",
-      timestamps: true,
+      // Other model options go here
+      // Autre option de model peuvent être placé ici
     }
   );
 };
