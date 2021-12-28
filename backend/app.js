@@ -22,6 +22,24 @@ app.use((req, res, next) => {
   next();
 });
 
+const db = require("./models/index");
+
+db.sequelize.authenticate()
+  .then((connexion) => {
+    console.log("✅ Connexion à MySQL");
+    db.sequelize.sync()
+      .then((sync) => {
+        console.log("All models were synchronized successfully.");
+      })
+      .catch((error) => {
+        console.log("Failed to synchronize the models");
+      });
+  })
+  .catch((error) => {
+    console.log("❌ Connexion à MySQL", error);
+});
+
+
 // J'utilise path pour indiqué ou les images doivent être enregistré
 app.use("/images", express.static(path.join(__dirname, "images")));
 
