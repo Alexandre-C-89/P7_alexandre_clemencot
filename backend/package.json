@@ -1,22 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Back du projet 7 du parcours OpenClassrooms réalisé par Alexandre .",
-  "main": "server.js",
+  "description": "Projet 7 du parcours Développeur Web de alexandre",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm start"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Alexandre Clémençot",
+  "author": "Clémençot Alexandre",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.2",
-    "helmet": "^4.6.0",
-    "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
-    "path": "^0.12.7",
     "sequelize": "^6.12.4",
     "sequelize-cli": "^6.3.0"
   }
