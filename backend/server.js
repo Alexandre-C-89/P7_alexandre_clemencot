@@ -13,11 +13,21 @@ const sequelize = new Sequelize("database", "username", "password", {
 
 // Je test la connection au server
 try {
-    await sequelize.authenticate();
+    sequelize.authenticate();
     console.log("Connection has been established successfully !");
 } catch (err) {
     console.error("Unable to connect to the database:" + err);
 }
+
+const db = require("../models/index");
+db.sequelize.sync({alter: true, force: true})
+.then((sync) => {
+  console.log("All models were synchronized successfully.");
+})
+.catch((error) => {
+  console.log("Failed to synchronize the models");
+});
+
 
 // Je gère les erreurs 
 const errorHandler = error => {
