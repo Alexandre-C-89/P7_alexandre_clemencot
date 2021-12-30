@@ -6,18 +6,20 @@ const app = require("./app");
 // Connection à sequelize
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("database", "username", "password", {
+const sequelize = new Sequelize(process.env.DATABASE, process.env.USER, process.env.PASSWORD, {
     host: "localhost",
     dialect: "mysql",
 });
 
 // Je test la connection au server
-try {
-    sequelize.authenticate();
-    console.log("Connection has been established successfully !");
-} catch (err) {
-    console.error("Unable to connect to the database:" + err);
-}
+sequelize.authenticate()
+  .then(function(err) {
+    if (!!err) {
+      console.log("Unable to connect to the database : ", err);
+    } else {
+      console.log("Connection has been established sucessfully ! ");
+    }
+  });
 
 const db = require("../models/index");
 db.sequelize.sync({alter: true, force: true})

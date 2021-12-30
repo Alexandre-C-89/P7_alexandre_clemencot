@@ -7,8 +7,8 @@ const path = require("path");
 
 // j'importe mes routes que j'utiliserais 
 // par la suite
-// const postRoute = require("./routes/post");
-// const userRoute = require("./routes/user");
+const postRoute = require("./routes/post");
+const userRoute = require("./routes/user");
 
 // les headers pour les différentes requêtes
 app.use((req, res, next) => {
@@ -23,6 +23,18 @@ app.use((req, res, next) => {
       "GET, POST, PUT, DELETE, PATCH, OPTIONS"
     );
     next();
+});
+
+// configuration de connection
+var sequelize = new Sequelize(process.env.DATABASE /*'database'*/,process.env.USER /*'username'*/,process.env.PASSWORD /*'password'*/, {
+  host: 'localhost',
+  dialect: 'mysql'|'mariadb'|'sqlite'|'postgres'|'mssql',
+
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  },
 });
 
 app.use("/images", express.static(path.join(__dirname, "images")));
