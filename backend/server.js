@@ -19,6 +19,7 @@ try {
     console.error("Unable to connect to the database:" + err);
 }
 
+// Je gère les erreurs 
 const errorHandler = error => {
     if (error.syscall !== 'listen') {
       throw error;
@@ -42,6 +43,7 @@ const errorHandler = error => {
 
 const server = http.createServer(app);
 
+// le serveur écoute 
 server.on('error', errorHandler);
 server.on('listening', () => {
   const address = server.address();
