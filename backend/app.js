@@ -4,6 +4,8 @@ const express = require("express");
 const app = express();
 // j'importe path
 const path = require("path");
+// j'importe sequelize
+const { Sequelize } = require("sequelize");
 
 // j'importe mes routes que j'utiliserais 
 // par la suite
@@ -28,7 +30,7 @@ app.use((req, res, next) => {
 // configuration de connection
 var sequelize = new Sequelize(process.env.DATABASE /*'database'*/,process.env.USER /*'username'*/,process.env.PASSWORD /*'password'*/, {
   host: 'localhost',
-  dialect: 'mysql'|'mariadb'|'sqlite'|'postgres'|'mssql',
+  dialect: 'mysql',
 
   pool: {
     max: 5,
@@ -36,6 +38,27 @@ var sequelize = new Sequelize(process.env.DATABASE /*'database'*/,process.env.US
     idle: 10000
   },
 });
+
+// Je test la connection au server
+sequelize.authenticate()
+  .then(function(err) {
+    if (!!err) {
+      console.log("Unable to connect to the database : ", err);
+    } else {
+      console.log("Connection has been established sucessfully ! ");
+    }
+  });
+
+const db = require("./models/index");
+db.sequelize.sync()
+.then((sync) => {
+  console.log("All models were synchronized successfully.");
+})
+.catch((error) => {
+  console.log("Failed to synchronize the models");
+});
+
+
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 

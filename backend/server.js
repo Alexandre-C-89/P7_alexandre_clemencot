@@ -3,34 +3,6 @@ const http = require("http");
 // j'importe mon app (fichier app)
 const app = require("./app");
 
-// Connection à sequelize
-const { Sequelize } = require("sequelize");
-
-const sequelize = new Sequelize(process.env.DATABASE, process.env.USER, process.env.PASSWORD, {
-    host: "localhost",
-    dialect: "mysql",
-});
-
-// Je test la connection au server
-sequelize.authenticate()
-  .then(function(err) {
-    if (!!err) {
-      console.log("Unable to connect to the database : ", err);
-    } else {
-      console.log("Connection has been established sucessfully ! ");
-    }
-  });
-
-const db = require("../models/index");
-db.sequelize.sync()
-.then((sync) => {
-  console.log("All models were synchronized successfully.");
-})
-.catch((error) => {
-  console.log("Failed to synchronize the models");
-});
-
-
 // Je gère les erreurs 
 const errorHandler = error => {
     if (error.syscall !== 'listen') {
