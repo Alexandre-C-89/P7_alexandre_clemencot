@@ -9,8 +9,13 @@
   "author": "Clémençot Alexandre",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "email-validator": "^2.0.4",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
+    "password-validator": "^5.2.1",
     "sequelize": "^6.12.4",
     "sequelize-cli": "^6.3.0"
   }
