@@ -1,6 +1,19 @@
 // J'importe sequelize
 const { Sequelize, DataTypes } = require("sequelize");
 
+// module.exports = function(sequelize, DataTypes) {
+//     const User = sequelize.define("User", {
+//         username: {
+//             type: DataTypes.STRING,
+//         },
+//         {
+//             freezeTableName: true
+//         }
+//     });
+//     return User;
+// };
+
+
 const User = sequelize.define("User", {
     firstName: {
         type: DataTypes.STRING,
