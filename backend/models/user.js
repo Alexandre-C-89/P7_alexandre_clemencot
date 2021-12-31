@@ -1,4 +1,4 @@
-// J'imorte sequelize
+// J'importe sequelize
 const { Sequelize, DataTypes } = require("sequelize");
 
 const User = sequelize.define("User", {
