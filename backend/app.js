@@ -53,7 +53,7 @@ sequelize.authenticate()
       });
       
 const db = require("./models/index");
-db.sequelize.sync({force: true})
+db.sequelize.sync()
   .then((sync) => {
     console.log("All models were synchronized successfully.");
   })
