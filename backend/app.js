@@ -44,8 +44,10 @@ sequelize.authenticate()
   .then(function(err) {
     if (!!err) {
       console.log("Unable to connect to the database : ", err);
+      return false;
     } else {
       console.log("Connection has been established sucessfully ! ");
+      return true;
     }
   });
 
@@ -57,7 +59,6 @@ db.sequelize.sync()
 .catch((error) => {
   console.log("Failed to synchronize the models");
 });
-
 
 
 app.use("/images", express.static(path.join(__dirname, "images")));

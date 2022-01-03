@@ -3,6 +3,23 @@ const http = require("http");
 // j'importe mon app (fichier app)
 const app = require("./app");
 
+const normalizePort = val => {
+  const port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    return val;
+  }
+  if (port >= 0) {
+    return port;
+  }
+  return false;
+};
+
+// Je choisis port je veux utilisé 
+const port = normalizePort(process.env.PORT || '3000'); 
+app.set('port', port);
+
+
 // Je gère les erreurs 
 const errorHandler = error => {
     if (error.syscall !== 'listen') {
