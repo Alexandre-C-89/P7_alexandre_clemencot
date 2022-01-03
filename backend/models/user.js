@@ -16,31 +16,35 @@
 module.exports = function(sequelize, DataTypes) {
     const User = sequelize.define("User", {
         firstName: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.UUID,
+            primaryKey: true
         },
         lastName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        pseudo: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
-        },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
+            require: true,
+            len:[7, 100],
+            isEmail: true
         },
         password: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        poste: {
-            type: DataTypes.STRING,
-            allowNull: false
+        update_at: {
+            type: DataTypes.DATETIME,
         },
-    });
+        delete_at: {
+            type: DataTypes.DATETIME,
+        },
+    },
+        {
+            undescored: true,
+            paranoid:true
+        }
+    );
 };
 // module.exports = User;
