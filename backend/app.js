@@ -4,8 +4,8 @@
 const express = require("express");
 // J'importe path (à voir si je garde path)
 // const path = require("path");
-// J'importe 
-
+// J'importe mon fichier dbConnect
+const db = require("./dbConnect");
 
 // Je stocke express dans une variable "app"
 const app = express();
