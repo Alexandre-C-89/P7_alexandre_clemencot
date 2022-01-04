@@ -1,3 +1,5 @@
+// Le fichier app.js gère l'application 
+
 // J'importe express
 const express = require("express");
 // J'importe path (à voir si je garde path)
@@ -21,7 +23,7 @@ app.use((req, res, next) => {
 // app.use("/images", express.static(path.join(__dirname, "images")));
 
 // app.use("/api/", limiter);
-app.use(helmet());
+// app.use(helmet());
 app.use(express.json());
 
 // app.use('/api/sauces', sauceRoutes);
