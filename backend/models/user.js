@@ -35,10 +35,10 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         update_at: {
-            type: DataTypes.DATETIME,
+            type: DataTypes.DATE,
         },
         delete_at: {
-            type: DataTypes.DATETIME,
+            type: DataTypes.DATE,
         },
     },
         {
