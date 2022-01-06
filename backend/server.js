@@ -4,7 +4,6 @@ const http = require("http");
 // Comme si je le collais tout le fichier
 // app dans ce fichier
 const app = require("./app");
-const mysql = require("mysql");
 
 
 const normalizePort = val => {
@@ -43,21 +42,6 @@ const errorHandler = error => {
       throw error;
   }
 };
-
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "1234",
-  database: "groupomania"
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  con.query("SHOW DATABASES", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-  });
-});
 
 const server = http.createServer(app);
 

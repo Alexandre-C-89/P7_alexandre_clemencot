@@ -1,22 +1,36 @@
 // J'importe la bibliothèque de sequelize
 const { Sequelize, DataTypes } = require("sequelize");
 // Création de la connexion
-const sequelize = new Sequelize("sqlite::memory:");
+// const sequelize = new Sequelize("sqlite::memory:");
+const sequelize = require("../dbConnect");
 
 // Création du modèle en utilisant la connexion
 const User = sequelize.define("User", {
     // Je définis les attributs ici
-    firstName: {
+    firstname: {
         type: DataTypes.STRING,
-        required: true,
+        allowNull: false, // équivalant required
     },
-    lastName: {
+    lastname: {
         type: DataTypes.STRING,
-        required: true,
+        allowNull: false, // équivalant required
     },
-})
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false, // équivalant required
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false, // équivalant required
+    }
+},
+    {
+        tableName: "users",
+        timestamps: true,
+    }
+);
 
 // J'exporte mon modèle 
 // pour pouvoir l'utilisé dans d'autres 
 // fichiers
-module.exports = sequelize;
+module.exports = User;

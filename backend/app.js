@@ -24,10 +24,10 @@ app.use((req, res, next) => {
 // stocké (à voir si je garde pour le P7)
 // app.use("/images", express.static(path.join(__dirname, "images")));
 
-app.use("./api/auth", userRoutes);
+app.use(express.json());
+app.use("/api/auth", userRoutes);
 // app.use("/api/", limiter);
 // app.use(helmet());
-app.use(express.json());
 
 
 // app.use('/api/sauces', sauceRoutes);

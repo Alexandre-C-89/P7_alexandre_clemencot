@@ -9,15 +9,17 @@ const sequelize = new Sequelize(/*"database"*/ "groupomania", /*username*/"root"
     dialect: "mysql"
 });
 
-// Je teste si la connection est Ok ou non 
-// try {
-//     await sequelize.authenticate();
-//     console.log(" Connection has been established successfully !");
-// } catch(error) {
-//     console.log("Unable to connect to the database: " + error);
-// };
-sequelize.authenticate().then(() => {
+sequelize.authenticate()
+    .then(() => {
         console.log("Database Connected !");
+        sequelize.sync()
+            .then( sync => { 
+                    console.log("modèles synchronisé !");
+                }
+            )
+            .catch(error => {
+                console.log("impossible de synchronisé les modèles ! " + error);
+            })
     }).catch(error => {
         console.log("Not connected ! " + error);
     });

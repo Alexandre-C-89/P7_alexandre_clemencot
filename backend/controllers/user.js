@@ -6,24 +6,26 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 // J'importe JWT
 const jwt = require("jsonwebtoken");
+// J'importe sequelize
+const sequelize = require("../dbConnect");
 
 // Partie enregistrement de l'utilisateur
 exports.signup = (req, res, next) => {
     // J'appel la fonction de hashage de bcrypt
-    bcrypt.hash(req.body.password, 10) // Je sale le mot de passe 10 fois
-        .then(hash => {
-            const user = new User({ // Je crée mon utilisateur
-                email: req.body.email,
-                password: hash
-            });
-            user.save() // Je sauvegarde mon utilisateur créér 
-                .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
-                .catch(error => res.status(400).json({ error }));
-        })
-        .catch(error => res.status(500).json({ error }));
+    // const hashPassword = bcrypt.hash(req.body.password, 10) // Je sale le mot de passe 10 fois
+    console.log(req.body);
+    User.create({ // Je crée mon utilisateur
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: req.body.password
+    })
+    // user.save() // Je sauvegarde mon utilisateur créér 
+    .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
+    .catch(error => res.status(400).json({ error }));
 };
 
-
+// User.destroy
 // Partie connexion de l'utilisateur
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email }) // Je compare l'email de la requête avec celui enregistré
