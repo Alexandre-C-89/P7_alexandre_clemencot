@@ -10,10 +10,14 @@ const jwt = require("jsonwebtoken");
 const sequelize = require("../dbConnect");
 
 // Partie enregistrement de l'utilisateur
-exports.signup = (req, res, next) => {
+exports.signup = async (req, res, next) => {
     // J'appel la fonction de hashage de bcrypt
-    // const hashPassword = bcrypt.hash(req.body.password, 10) // Je sale le mot de passe 10 fois
-    // console.log(req.body);
+    // const hashPassword = await bcrypt.hash(req.body.password, 10) // Je sale le mot de passe 10 fois
+    // console.log(bcrypt.hash(req.body.password, 10));
+    const emailExist = await User.findOne({ where: { email: req.body.email } }) // Je cherche l'email de la requête avec celui enregistré
+    if (emailExist) {
+        return res.status(409).json({ message: "Email déjà utilisé !"})
+    }
     User.create({ // Je crée mon utilisateur
         firstname: req.body.firstname,
         lastname: req.body.lastname,
@@ -45,4 +49,36 @@ exports.login = async (req, res, next) => {
                 )
             });
         }
+};
+
+// Partie update d'un utilisateur
+exports.getAllUser = async (req, res, next) => {
+    const user = await User.findAll();
+    if (user) {
+        res.status(200).json({ user })
+    } else {
+        res.status(404).json({ message: "Utilisateur non trouvé !" })
+    }
+};
+
+exports.getOneUser = async (req, res, next) => {
+    const user = await User.findOne({ where: { id: req.params.userId } }) // Je cherche l'email de la requête avec celui enregistré
+    if (user) {
+        res.status(200).json({ user })
+    } else {
+        res.status(404).json({ message: "Utilisateur non trouvé !" })
+    }
+};
+
+exports.modifyUser = async (req, res, next) => {
+    const user = await User.update({ where: { id: req.params.userId } })
+    user
+};
+
+exports.deleteUser = async (req, res, next) => {
+    const user = await User.findOne({ where: { id: req.params.id } })
+    if (!user) {
+        res.status(404).json({ message: "Utilisateur non trouvé !" })
+    }
+    console.log("Utilisateur supprimé !");
 };

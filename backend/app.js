@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 // app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use(express.json());
-app.use("/api/auth", userRoutes);
+app.use("/api/user", userRoutes);
 // app.use("/api/", limiter);
 // app.use(helmet());
 
