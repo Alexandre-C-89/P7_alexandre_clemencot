@@ -7,7 +7,7 @@ const sequelize = require("../dbConnect");
 // Création du modèle en utilisant la connexion
 const Post = sequelize.define("Post", {
     // Je définis les attributs ici
-    Title: {
+    title: {
         type: DataTypes.STRING,
         allowNull: false, // équivalant required
     },
@@ -20,13 +20,13 @@ const Post = sequelize.define("Post", {
         allowNull: false,
         unique: true
     },
-    UserId: {
+    userId: {
         type: DataTypes.STRING,
         allowNull: false, 
     }
 },
     {
-        tableName: "users",
+        tableName: "posts",
         timestamps: false,
     }
 );
