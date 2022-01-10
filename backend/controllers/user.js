@@ -12,21 +12,18 @@ const sequelize = require("../dbConnect");
 // Partie enregistrement de l'utilisateur
 exports.signup = (req, res, next) => {
     // J'appel la fonction de hashage de bcrypt
-    const hashPassword = bcrypt.hash(req.body.password, 10) // Je sale le mot de passe 10 fois
-    // console.log(bcrypt.hash(req.body.password, 10));
-    const emailExist = User.findOne({ where: { email: req.body.email } }) // Je cherche l'email de la requête avec celui enregistré
-    if (emailExist) {
-        return res.status(409).json({ message: "Email déjà utilisé !"})
-    }
-    User.create({ // Je crée mon utilisateur
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        password: hashPassword
+    bcrypt.hash(req.body.password, 10) // Je sale le mot de passe 10 fois
+    .then(hash => {
+        User.create({ // Je crée mon utilisateur
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: hash
+        })
+        .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
+        .catch(error => res.status(400).json({ error }));
     })
-    // user.save() // Je sauvegarde mon utilisateur créér 
-    .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
-    .catch(error => res.status(400).json({ error }));
+    // console.log(bcrypt.hash(req.body.password, 10));
 };
 
 // User.destroy
