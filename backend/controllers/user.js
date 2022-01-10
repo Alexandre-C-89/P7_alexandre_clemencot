@@ -10,11 +10,11 @@ const jwt = require("jsonwebtoken");
 const sequelize = require("../dbConnect");
 
 // Partie enregistrement de l'utilisateur
-exports.signup = async (req, res, next) => {
+exports.signup = (req, res, next) => {
     // J'appel la fonction de hashage de bcrypt
-    // const hashPassword = await bcrypt.hash(req.body.password, 10) // Je sale le mot de passe 10 fois
+    const hashPassword = bcrypt.hash(req.body.password, 10) // Je sale le mot de passe 10 fois
     // console.log(bcrypt.hash(req.body.password, 10));
-    const emailExist = await User.findOne({ where: { email: req.body.email } }) // Je cherche l'email de la requête avec celui enregistré
+    const emailExist = User.findOne({ where: { email: req.body.email } }) // Je cherche l'email de la requête avec celui enregistré
     if (emailExist) {
         return res.status(409).json({ message: "Email déjà utilisé !"})
     }
@@ -22,7 +22,7 @@ exports.signup = async (req, res, next) => {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
-        password: req.body.password
+        password: hashPassword
     })
     // user.save() // Je sauvegarde mon utilisateur créér 
     .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
@@ -51,7 +51,7 @@ exports.login = async (req, res, next) => {
         }
 };
 
-// Partie update d'un utilisateur
+// Partie sur l'affichage de tout les utilisateurs
 exports.getAllUser = async (req, res, next) => {
     const user = await User.findAll();
     if (user) {
@@ -61,6 +61,7 @@ exports.getAllUser = async (req, res, next) => {
     }
 };
 
+// Affichage d'un profil d'utilisateur
 exports.getOneUser = async (req, res, next) => {
     const user = await User.findOne({ where: { id: req.params.userId } }) // Je cherche l'email de la requête avec celui enregistré
     if (user) {
@@ -70,15 +71,26 @@ exports.getOneUser = async (req, res, next) => {
     }
 };
 
-exports.modifyUser = async (req, res, next) => {
-    const user = await User.update({ where: { id: req.params.userId } })
-    user
-};
 
+// Modification d'un profil d'utilisateur
+// exports.modifyUser = async (req, res, next) => {
+//     console.log("fonction modifyUser déclenchée");
+//     // Je récupère l'utilisateur
+//     User.findOne( {_id: req.params.id} )
+//         .then((user) => {
+//             console.log(user);
+//             res.status(200).json({ message: "Utilisateur trouvé !"})
+//         })
+//     User.update({_id: req.params.id})
+//     console.log();
+// };
+
+
+// Suppression d'un profil d'utilisateur
 exports.deleteUser = async (req, res, next) => {
     const user = await User.findOne({ where: { id: req.params.id } })
     if (!user) {
         res.status(404).json({ message: "Utilisateur non trouvé !" })
     }
-    console.log("Utilisateur supprimé !");
+    User.deleteUser({ where: { id: req.params.id }})
 };
