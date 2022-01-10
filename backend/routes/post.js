@@ -6,10 +6,10 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 
 // J'importe mon fichier user
-const userCtrl = require("../controllers/post");
+const postCtrl = require("../controllers/post");
 
 // Ici je créer mes routes pour s'enregistré et ce connecté
-router.post("/signup", auth, postCtrl.createPost);
+router.post("/createPost", auth, postCtrl.createPost);
 router.get("/", postCtrl.getAllPost);
 router.get("/:userId", auth, postCtrl.getOnePost);
 router.put("/:userId", auth, postCtrl.modifyPost);

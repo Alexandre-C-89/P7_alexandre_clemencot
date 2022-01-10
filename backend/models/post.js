@@ -18,7 +18,6 @@ const Post = sequelize.define("Post", {
     media: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
     },
     userId: {
         type: DataTypes.STRING,
