@@ -13,23 +13,24 @@ const sequelize = require("../dbConnect");
 // Partie création de posts
 exports.createPost = (req, res, next) => {
     console.log("Vous avez l'intention de créer un post !");
-    console.log(req.params.userId);
-    // trouvé l'utilisateur qui veut créer le post
-    const findUser = User.findOne({where: { id: req.params.userId}});
-    // Je créer le post si l'utilisateur à été trouvé
-    console.log(findUser);
-    if (findUser) {
-        Post.create({ // Je crée mon utilisateur
-            title: req.body.title,
-            description: req.body.description,
-            media: req.body.media,
-            userId: findUser
-        })
-        .then(
-            res.status(201).json({ message: "Post créer !"})
-        )
-        .catch((error) => console.log( "Erreur lors de la création du post : " + error))
-    }
+    // Je stocke dans ma constante la requête de l'utilisateur
+    const postObject = JSON.parse(req.body.post);
+    // Je supprime l'underscore devant l'id 
+    delete postObject._id;
+    // Je créer le post avec la méthode "create"
+    Post.create({
+        // Je renseigne les champs 
+        title: req.body.title,
+        description: req.body.description,
+        comment: req.body.comment,
+        userId: postObject,
+    })
+    .then( // Si la requête est correcte j'ai un status 201
+        res.status(200).json({ message: "Post créé ! "})
+    )
+    .catch((error) => {// Si j'ai une erreur j'ai un status 401
+        res.status(401).json({ message: "Erreur lors de la création du post ! " + error})
+    });
 };
 
 exports.modifyPost = (req, res, next) => {
@@ -75,7 +76,7 @@ exports.deletePost = async (req, res, next) => {
     console.log("vous avez l'intention de supprimé un post !");
     const post = await Post.findOne({ where: { id: req.params.id } })
     if (post) {
-        User.deletePost({ where: { id: req.params.id }})
+        User.destroy({ where: { id: req.params.id }})
         res.status(404).json({ message: "Post supprimé !" })
     } else {
         res.status(401).json({ message: "Requête non autorisé !"})
