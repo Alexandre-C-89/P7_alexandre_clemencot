@@ -10,19 +10,25 @@ const sequelize = require("../dbConnect");
 // je gère la relation entre les utilisateurs et leurs posts
 
 
-// Partie enregistrement de l'utilisateur
+// Partie création de posts
 exports.createPost = (req, res, next) => {
     console.log("Vous avez l'intention de créer un post !");
-    // trouvé l'uitilisateur qui veut créer le post
-    const findPost = Post.findOne({where: { id:req.params.id }});
+    console.log(req.params.userId);
+    // trouvé l'utilisateur qui veut créer le post
+    const findUser = User.findOne({where: { id: req.params.userId}});
     // Je créer le post si l'utilisateur à été trouvé
-    if (findPost) {
+    console.log(findUser);
+    if (findUser) {
         Post.create({ // Je crée mon utilisateur
             title: req.body.title,
             description: req.body.description,
             media: req.body.media,
             userId: findUser
         })
+        .then(
+            res.status(201).json({ message: "Post créer !"})
+        )
+        .catch((error) => console.log( "Erreur lors de la création du post : " + error))
     }
 };
 
@@ -76,5 +82,5 @@ exports.deletePost = async (req, res, next) => {
     }
 };
 
-// foreignKey pour les posts 
+// foreignKey pour les posts
 // User.belongsToMany(Post);

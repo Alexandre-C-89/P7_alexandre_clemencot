@@ -9,10 +9,10 @@ const auth = require("../middleware/auth");
 const postCtrl = require("../controllers/post");
 
 // Ici je créer mes routes pour s'enregistré et ce connecté
-router.post("/createPost", auth, postCtrl.createPost);
-router.get("/", postCtrl.getAllPost);
+router.post("/", postCtrl.createPost);
+router.get("/", auth, postCtrl.getAllPost)
+router.put("/:userId", postCtrl.modifyPost);
 router.get("/:userId", auth, postCtrl.getOnePost);
-router.put("/:userId", auth, postCtrl.modifyPost);
 router.delete("./:userId", auth, postCtrl.deletePost); 
 
 module.exports = router;

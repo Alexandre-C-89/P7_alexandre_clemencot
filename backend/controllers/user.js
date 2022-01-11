@@ -23,7 +23,6 @@ exports.signup = (req, res, next) => {
         .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
         .catch(error => res.status(400).json({ error }));
     })
-    // console.log(bcrypt.hash(req.body.password, 10));
 };
 
 // User.destroy
