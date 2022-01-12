@@ -6,6 +6,10 @@ const User = require("../models/user");
 require("dotenv").config();
 // J'importe sequelize
 const sequelize = require("../dbConnect");
+// J'importe multer
+const multer = require("multer");
+// J'importe path
+const path = require("path");
 
 // je gère la relation entre les utilisateurs et leurs posts
 
@@ -13,25 +17,37 @@ const sequelize = require("../dbConnect");
 // Partie création de posts
 exports.createPost = (req, res, next) => {
     console.log("Vous avez l'intention de créer un post !");
-    // Je stocke dans ma constante la requête de l'utilisateur
-    const postObject = JSON.parse(req.body.post);
-    // Je supprime l'underscore devant l'id 
-    delete postObject._id;
     // Je créer le post avec la méthode "create"
-    Post.create({
-        // Je renseigne les champs 
-        title: req.body.title,
-        description: req.body.description,
-        comment: req.body.comment,
-        userId: postObject,
-    })
-    .then( // Si la requête est correcte j'ai un status 201
-        res.status(200).json({ message: "Post créé ! "})
-    )
-    .catch((error) => {// Si j'ai une erreur j'ai un status 401
-        res.status(401).json({ message: "Erreur lors de la création du post ! " + error})
-    });
+    if (req.file) {
+        Post.create({
+            // Je renseigne les champs 
+            title: req.body.title,
+            description: req.body.description,
+            userId: req.token.userId,
+            media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+        })
+        .then(() => {
+            return res.status(200).json({ message: "Post créé avec l'image !"})
+        })
+        .catch(() => {
+            return res.status(401).json({ message: "Impossible de créer le post car il y a une erreur !"})
+        })
+    } else {
+        Post.create({
+            // Je renseigne les champs 
+            title: req.body.title,
+            description: req.body.description,
+            userId: req.token.userId
+        })
+        .then(() => { // Si la requête est correcte j'ai un status 201
+            return res.status(200).json({ message: "Post créé ! "})
+        })
+        .catch(() => {// Si j'ai une erreur j'ai un status 401
+            return res.status(401).json({ message: "Impossible de créer le post car il y a une erreur !"})
+        });
+    }
 };
+  
 
 exports.modifyPost = (req, res, next) => {
     console.log("Vous avez l'intention de modifié un post !");
