@@ -8,21 +8,59 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 // J'importe sequelize
 const sequelize = require("../dbConnect");
+// J'importe MaskData
+const MaskData = require("maskdata");
+// J'importe passvalidator
+const passwordValidator = require("password-validator");
+// J'importe emailValidator
+const emailValidator = require("email-validator");
+
+// Je masque l'email pour éviter les intrusions
+const maskEmail2Options = {
+maskWidth: "X",
+unmaskedStartCharacters: 3, // à partir du 4ème charactère je masque l'email
+unmaskedEndCharacters: 20 // je masque jusqu'au 9ème charactère 
+};
+    
+var passwordSchema = new passwordValidator();
+
+passwordSchema
+.is().min(8)                                    // Minimum length 8
+.is().max(100)                                  // Maximum length 100
+.has().uppercase()                              // Must have uppercase letters
+.has().lowercase()                              // Must have lowercase letters
+.has().digits(1)                                // Must have at least 2 digits
+.has().not().spaces()                           // Should not have spaces
+.is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values
+    
 
 // Partie enregistrement de l'utilisateur
 exports.signup = (req, res, next) => {
+    if ((!passwordSchema.validate(req.body.password) || !emailValidator.validate(req.body.email))) {
+        return res.status(400).json({ message: "Password et/ou email n'a pas le format requis"});
+    }
+    const maskedEmail = MaskData.maskEmail2(req.body.email, maskEmail2Options);
+    // Output: TESTXXXXXXXXXXX:CLIENT-A
     // J'appel la fonction de hashage de bcrypt
     bcrypt.hash(req.body.password, 10) // Je sale le mot de passe 10 fois
     .then(hash => {
-        User.create({ // Je crée mon utilisateur
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            email: req.body.email,
-            password: hash
-        })
-        .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
-        .catch(error => res.status(400).json({ error }));
+        console.log(req.body.email);
+        console.log(process.env.SECRET_HASH_EMAIL_KEY);
+        bcrypt(req.body.email, process.env.SECRET_HASH_EMAIL_KEY)
+            .then(hashEmail => {
+                console.log(hashEmail);
+                User.create({ // Je crée mon utilisateur
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    email: maskedEmail,
+                    hashEmail: hashEmail,
+                    password: hash
+                })
+                .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
+                .catch(error => res.status(400).json({ error }));
+            })
     })
+    .catch(error => res.status(500).json({ error }));
 };
 
 // User.destroy
