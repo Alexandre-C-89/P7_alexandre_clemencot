@@ -7,9 +7,9 @@ require("dotenv").config();
 // J'importe sequelize
 const sequelize = require("../dbConnect");
 // J'importe multer
-// const multer = require("multer");
+const multer = require("multer");
 // J'importe path
-// const path = require("path");
+const path = require("path");
 
 // je gère la relation entre les utilisateurs et leurs posts
 
@@ -18,19 +18,20 @@ const sequelize = require("../dbConnect");
 exports.createPost = (req, res, next) => {
     console.log("Vous avez l'intention de créer un post !");
     // Je créer le post avec la méthode "create"
-    if (req.file) {
+    console.log(req.body);
+    if (req.body) {
         Post.create({
             // Je renseigne les champs 
             title: req.body.title,
             description: req.body.description,
-            userId: req.token.userId,
-            media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+            // userId: req.token.userId,
+            media: `${req.protocol}://${req.get("host")}/images/${req.body.filename}`
         })
         .then(() => {
             return res.status(200).json({ message: "Post créé avec l'image !"})
         })
         .catch(() => {
-            return res.status(401).json({ message: "Impossible de créer le post car il y a une erreur !"})
+            return res.status(401).json({ message: "Impossible de créer le post car il y a une erreur ! 1"})
         })
     } else {
         Post.create({
@@ -43,7 +44,7 @@ exports.createPost = (req, res, next) => {
             return res.status(200).json({ message: "Post créé ! "})
         })
         .catch(() => {// Si j'ai une erreur j'ai un status 401
-            return res.status(401).json({ message: "Impossible de créer le post car il y a une erreur !"})
+            return res.status(401).json({ message: "Impossible de créer le post car il y a une erreur ! 2"})
         });
     }
 };
