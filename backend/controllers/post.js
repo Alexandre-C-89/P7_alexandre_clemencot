@@ -7,9 +7,9 @@ require("dotenv").config();
 // J'importe sequelize
 const sequelize = require("../dbConnect");
 // J'importe multer
-const multer = require("multer");
+// const multer = require("multer");
 // J'importe path
-const path = require("path");
+// const path = require("path");
 
 // je gère la relation entre les utilisateurs et leurs posts
 
