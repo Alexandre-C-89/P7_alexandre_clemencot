@@ -26,7 +26,7 @@ const Post = sequelize.define("Post", {
 },
     {
         tableName: "posts",
-        timestamps: false,
+        timestamps: true,
     }
 );
 

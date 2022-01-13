@@ -6,10 +6,6 @@ const User = require("../models/user");
 require("dotenv").config();
 // J'importe sequelize
 const sequelize = require("../dbConnect");
-// J'importe multer
-const multer = require("multer");
-// J'importe path
-const path = require("path");
 
 // je gère la relation entre les utilisateurs et leurs posts
 
@@ -18,14 +14,14 @@ const path = require("path");
 exports.createPost = (req, res, next) => {
     console.log("Vous avez l'intention de créer un post !");
     // Je créer le post avec la méthode "create"
-    console.log(req.body);
-    if (req.body) {
+    console.log();
+    if (req.file) {
         Post.create({
             // Je renseigne les champs 
             title: req.body.title,
             description: req.body.description,
-            // userId: req.token.userId,
-            media: `${req.protocol}://${req.get("host")}/images/${req.body.filename}`
+            userId: req.token.userId,
+            media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
         })
         .then(() => {
             return res.status(200).json({ message: "Post créé avec l'image !"})

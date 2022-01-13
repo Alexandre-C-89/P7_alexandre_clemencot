@@ -12,7 +12,7 @@ const sequelize = new Sequelize(/*"database"*/ "groupomania", /*username*/"root"
 sequelize.authenticate()
     .then(() => {
         console.log("Database Connected !");
-        sequelize.sync()
+        sequelize.sync({ alter: true })
             .then( sync => { 
                     console.log("modèles synchronisé !");
                 }
