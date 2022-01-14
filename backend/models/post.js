@@ -2,7 +2,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 // Création de la connexion
 // const sequelize = new Sequelize("sqlite::memory:");
-const sequelize = require("../dbConnect");
+const sequelize = require("./dbConnect");
 
 // Création du modèle en utilisant la connexion
 const Post = sequelize.define("Post", {

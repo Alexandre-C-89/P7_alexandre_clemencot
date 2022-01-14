@@ -5,7 +5,7 @@ const express = require("express");
 // J'importe path (à voir si je garde path)
 const path = require("path");
 // J'importe mon fichier dbConnect
-const db = require("./dbConnect");
+const db = require("./models/dbConnect");
 
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");

@@ -6,8 +6,6 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 // J'importe JWT
 const jwt = require("jsonwebtoken");
-// J'importe sequelize
-const sequelize = require("../dbConnect");
 
 // Partie enregistrement de l'utilisateur
 exports.signup = (req, res, next) => {
