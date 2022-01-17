@@ -86,7 +86,8 @@ exports.deleteUser = async (req, res, next) => {
     if (!user) {
         res.status(401).json({ message: "Utilisateur non trouvé !" })
     } else {
-        User.destroy({ where: { user: req.params.userId }});
+        User.destroy({ where: { id: req.params.userId }});
         console.log("Utilisateur supprimé !");
+        return res.status(200).json({ mesage: "Utilisateur supprimé !"})
     }
 };
