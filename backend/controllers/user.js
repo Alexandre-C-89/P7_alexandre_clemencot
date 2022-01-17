@@ -82,9 +82,11 @@ exports.getOneUser = async (req, res, next) => {
 
 // Suppression d'un profil d'utilisateur
 exports.deleteUser = async (req, res, next) => {
-    const user = await User.findOne({ where: { id: req.params.id } })
+    const user = await User.findOne({ where: { id: req.params.userId, email: req.body.email } })
     if (!user) {
-        res.status(404).json({ message: "Utilisateur non trouvé !" })
+        res.status(401).json({ message: "Utilisateur non trouvé !" })
+    } else {
+        User.destroy({ where: { user: req.params.userId }});
+        console.log("Utilisateur supprimé !");
     }
-    User.deleteUser({ where: { id: req.params.id }})
 };

@@ -30,6 +30,10 @@ const Post = sequelize.define("Post", {
     }
 );
 
+
+// foreignKey pour les posts
+// User.belongsTo(Post);
+
 // J'exporte mon modèle 
 // pour pouvoir l'utilisé dans d'autres 
 // fichiers

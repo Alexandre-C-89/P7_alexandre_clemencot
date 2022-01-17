@@ -45,30 +45,31 @@ exports.createPost = (req, res, next) => {
     }
 };
 
-exports.modifyPost = async (req, res, next) => {
-    console.log("Vous avez l'intention de modifié un post !");
-    // console.log(req.token.userId);
-    const postId = req.params.postId;
-    const reqUserId = req.body.userId;
-    const dbPost = Post.findOne({where: { id:postId }})
-    // console.log(postId, req.body);
-    if (dbPost) { // Vérifie si le post que je modifie existe
-        console.log("condition vérifié !");
-        const userId = Post.findOne({ where: { id:{postId}, userId:{reqUserId} }});
-        if (userId) { // si l'utilisateur est l'auteur du post 
-            console.log("utilisateur vérifié !");
-            Post.update({ where: {id:postId},
-                title: req.body.title,
-                description: req.body.description,
-                media: req.body.media,
-            })
-            .then(() => res.status(200).json({ message: "post modifié !" }))
-            .catch((error) => res.status(400).json({ error }));
-        }
-    } else {
-        res.status(401).json({ message: "Post non trouvé !"})
-    }
-};
+// exports.modifyPost = (req, res, next) => {
+//     console.log("Vous avez l'intention de modifié un post !");
+//     // console.log(req.token.userId);
+//     const postId = req.params.postId;
+//     const reqUserId = req.body.userId;
+//     const dbPost = Post.findOne({where: { id:postId }})
+//     console.log(postId, reqUserId, dbPost);
+//     if (dbPost) { // Vérifie si le post que je modifie existe
+//         console.log("condition vérifié !");
+//         const userId = Post.findOne({ where: { id:{postId}, userId:{reqUserId} }})
+//         console.log(userId);
+//         if (userId) { // si l'utilisateur est l'auteur du post 
+//             console.log("utilisateur vérifié !");
+//             Post.update({ where: {id:postId},
+//                 title: req.body.title,
+//                 description: req.body.description,
+//                 media: req.body.media,
+//             })
+//             .then(() => res.status(200).json({ message: "post modifié !" }))
+//             .catch((error) => res.status(400).json({ error }));
+//         }
+//     } else {
+//         res.status(401).json({ message: "Post non trouvé !"})
+//     }
+// };
 
 // Partie sur l'affichage de tout les posts
 exports.getAllPost = async (req, res, next) => {
@@ -95,12 +96,9 @@ exports.deletePost = async (req, res, next) => {
     console.log("vous avez l'intention de supprimé un post !");
     const post = await Post.findOne({ where: { id: req.params.postId } })
     if (post) {
-        User.destroy({ where: { id: req.params.id }})
+        User.destroy({ where: { id: req.params.postId }})
         res.status(404).json({ message: "Post supprimé !" })
     } else {
         res.status(401).json({ message: "Requête non autorisé !"})
     }
 };
-
-// foreignKey pour les posts
-// User.belongsToMany(Post);
