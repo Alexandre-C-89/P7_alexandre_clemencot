@@ -94,9 +94,9 @@ exports.getOnePost = async (req, res, next) => {
 // Suppression d'un post de l'utilisateur
 exports.deletePost = async (req, res, next) => {
     console.log("vous avez l'intention de supprimé un post !");
-    const post = await Post.findOne({ where: { id: req.params.postId } })
+    const post = await Post.findOne({ where: { userId: req.params.userId } })
     if (post) {
-        User.destroy({ where: { id: req.params.postId }})
+        Post.destroy({ where: { userid: req.params.userId }})
         res.status(404).json({ message: "Post supprimé !" })
     } else {
         res.status(401).json({ message: "Requête non autorisé !"})
