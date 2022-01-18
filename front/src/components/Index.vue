@@ -2,7 +2,7 @@
   <div class="formulaire">
     <form @submit.prevent="submitComment">
       <div class="firstName">
-        <label for="firstName" v-model:="comment">Prénom :</label>
+        <label for="firstName">Prénom :</label>
         <input type="text" id="firstName" name="first_name" />
       </div>
       <div class="lastName">
@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     submitComment() {
-      console.log(this.comment);
+      console.log("Inscription réussi !");
     },
   },
 };
