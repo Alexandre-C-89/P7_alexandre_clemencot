@@ -1,8 +1,8 @@
 <template>
   <div class="formulaire">
-    <form action="http://localhost:3000/api/user/signup" method="post">
+    <form @submit.prevent="submitComment">
       <div class="firstName">
-        <label for="firstName">Prénom :</label>
+        <label for="firstName" v-model:="comment">Prénom :</label>
         <input type="text" id="firstName" name="first_name" />
       </div>
       <div class="lastName">
@@ -17,6 +17,7 @@
         <label for="Password">Mot de passe :</label>
         <input type="text" id="Password" name="password" />
       </div>
+      <button type="submit">Inscription</button>
     </form>
   </div>
 </template>
@@ -24,8 +25,15 @@
 <script>
 export default {
   name: "Index",
-  props: {
-    msg: String,
+  data() {
+    return {
+      comment: "",
+    };
+  },
+  methods: {
+    submitComment() {
+      console.log(this.comment);
+    },
   },
 };
 </script>
@@ -55,5 +63,8 @@ export default {
 }
 
 .formulaire input {
+  margin-left: 10px;
+  border-radius: 5px;
+  border: solid 1px rgb(171, 213, 214);
 }
 </style>

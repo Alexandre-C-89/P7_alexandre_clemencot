@@ -10,6 +10,7 @@ const User = sequelize.define("User", {
     firstname: {
         type: DataTypes.STRING,
         allowNull: false, // équivalant required
+        unique: true
     },
     lastname: {
         type: DataTypes.STRING,
@@ -18,6 +19,7 @@ const User = sequelize.define("User", {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true
     },
     password: {
         type: DataTypes.STRING,

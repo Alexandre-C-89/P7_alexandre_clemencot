@@ -14,8 +14,9 @@ const multer = require("multer");
 exports.createPost = (req, res, next) => {
     console.log("Vous avez l'intention de créer un post !");
     // Je créer le post avec la méthode "create"
-    console.log();
+    // console.log();
     if (req.file) {
+        console.log("");
         Post.create({
             // Je renseigne les champs 
             title: req.body.title,
