@@ -23,7 +23,16 @@ const routes = [
     name: 'Connexion',
     component: () => import('../views/Connexion.vue'),
   },
+  {
+    path: '/user',
+    name: 'Profil',
+    component: () => import('../views/Profil.vue'),
+  },
 ];
+
+// const User = {
+//   template: `<div>User {{ $route.params.id }}</div>`,
+// };
 
 const router = new VueRouter({
   mode: 'history',

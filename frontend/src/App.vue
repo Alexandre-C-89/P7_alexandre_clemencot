@@ -1,37 +1,33 @@
 <template>
   <div id="app">
-    <img
-      src="/assets/logo/icon-left-font-monochrome-white"
-      alt="logo Groupomania"
-    />
-    <div id="nav">
-      <router-link to="/">Accueil</router-link> |
-      <router-link to="/signup">Inscription</router-link> |
-      <router-link to="/login">Connexion</router-link>
-    </div>
+    <Header />
     <router-view />
   </div>
 </template>
 
+<script>
+import Header from '@/components/Header.vue';
+
+export default {
+  components: {
+    Header,
+  },
+};
+</script>
+
 <style lang="scss">
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #a3dac1;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-  background-color: #35495e;
-  a {
-    font-weight: bold;
-    color: #fff;
-    text-decoration: none;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>

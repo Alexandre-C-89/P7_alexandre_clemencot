@@ -1,27 +1,18 @@
 <template>
   <div class="signup">
-    <h1>Inscription</h1>
-    <form action="" class="signup__form">
-      <div></div>
-      <input type="text" />
-    </form>
+    <Formulaire />
   </div>
 </template>
 
 <script>
+import Formulaire from '@/components/Formulaire.vue';
+
 export default {
   name: 'Inscription',
-  components: {},
+  components: {
+    Formulaire,
+  },
 };
 </script>
 
-<style scoped lang="scss">
-.signup {
-  width: 400px;
-  height: 400px;
-  background-color: #6c86a3;
-  &__form {
-    width: 400px;
-  }
-}
-</style>
+<style lang="scss"></style>

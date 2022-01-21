@@ -1,15 +1,18 @@
 <template>
   <div class="login">
-    <h1>Connexion</h1>
-    <p>Coucou je suis la page de connexion!</p>
+    <Formulaire />
   </div>
 </template>
 
 <script>
+import Formulaire from '@/components/Formulaire.vue';
+
 export default {
   name: 'Connexion',
-  components: {},
+  components: {
+    Formulaire,
+  },
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss"></style>

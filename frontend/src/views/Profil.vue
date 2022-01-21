@@ -1,30 +1,27 @@
 <template>
-  <div class="home">
-    <div class="home__page">
-      <h2>Nouveau posts !</h2>
-      <!-- <Post /> -->
-    </div>
+  <div class="profil">
+    <Formulaire />
   </div>
 </template>
 
 <script>
-// import Post from '@/components/Post.vue';
+import Formulaire from '@/components/Formulaire.vue';
 
 export default {
-  name: 'Accueil',
+  name: 'Profil',
   components: {
-    // Post,
+    Formulaire,
   },
 };
 </script>
 
 <style lang="scss">
-.home {
+.profil {
   display: flex;
   justify-content: center;
   align-items: center;
   &__page {
-    width: 550px;
+    width: 450px;
     height: 100vh;
     background-color: #35495e;
     border-radius: 8px;
