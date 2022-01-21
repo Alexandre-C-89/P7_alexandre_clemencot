@@ -2,8 +2,15 @@
   <div class="container">
     <form action="" class="container__form">
       <p>Bienvenue</p>
-      <input type="email" name="email" placeholder="Email" />
-      <input type="password" name="password" placeholder="Mot de passe" />
+      <label>Identifiant</label>
+      <input type="text" name="email" placeholder="Email" v-model="password" />
+      <label>Mot de passe</label>
+      <input
+        type="text"
+        name="password"
+        placeholder="Mot de passe"
+        v-model="Identifiant"
+      />
       <button type="submit" placeholder="Inscription">S'inscrire</button>
     </form>
   </div>
@@ -46,6 +53,10 @@ export default {
   align-items: center;
   margin-top: 80px;
   &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 300px;
     height: 300px;
     font-family: arial, sans-serif;
@@ -84,6 +95,9 @@ export default {
     font-weight: 500;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     transition: all 0.3s;
+    margin-bottom: 10px;
+  }
+  & label {
     margin-bottom: 10px;
   }
   & button {
