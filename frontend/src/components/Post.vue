@@ -1,27 +1,22 @@
 <template>
-  <div class="hello">
-    <div :key="index" v-for="(pays, index) in pays"></div>
-    <h1>{{ pays.name }}</h1>
+  <div id="posts">
+    {{ message }} /* Je veux injecté dans cette balise mes posts */
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: 'Post',
-  data() {
-    return {
-      pays: null,
-    };
-  },
-  mounted() {
-    axios.get('https://restcountries.com/v3.1/all').then((response) => {
-      this.pays = response;
-      console.log(this.pays);
-    });
-  },
+  components: {},
 };
+// J'aimerais afficher tous mes posts de ma BDD
+// eslint-disable-next-line no-unused-vars
+// const posts = new Vue({
+//   el: '#posts',
+//   data: {
+//     message: 'Hello Vue !',
+//   },
+// });
 </script>
 
 <style scoped></style>

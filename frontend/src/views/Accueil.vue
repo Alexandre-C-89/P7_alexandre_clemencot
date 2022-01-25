@@ -1,36 +1,21 @@
 <template>
   <div class="home">
     <div class="home__page">
-      <h2>Nouveau posts !</h2>
-      <!-- <Post /> -->
+      <h2>Nouveaux posts !</h2>
+      <Post />
     </div>
   </div>
 </template>
 
 <script>
-// import Post from '@/components/Post.vue';
+import Post from '@/components/Post.vue';
 
 export default {
   name: 'Accueil',
   components: {
-    // Post,
+    Post,
   },
 };
 </script>
 
-<style lang="scss">
-.home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &__page {
-    width: 550px;
-    height: 100vh;
-    background-color: #35495e;
-    border-radius: 8px;
-    box-shadow: 2px 2px 2px -8px rgba(255, 255, 255, 1);
-    padding: 5px;
-    margin-top: 80px;
-  }
-}
-</style>
+<style lang="scss"></style>

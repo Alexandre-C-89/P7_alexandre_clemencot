@@ -1,16 +1,19 @@
 <template>
   <div class="profil">
-    <Formulaire />
+    <Signup />
+    <Login />
   </div>
 </template>
 
 <script>
-import Formulaire from '@/components/Formulaire.vue';
+import Login from '@/components/Login.vue';
+import Signup from '@/components/Signup.vue';
 
 export default {
   name: 'Profil',
   components: {
-    Formulaire,
+    Signup,
+    Login,
   },
 };
 </script>

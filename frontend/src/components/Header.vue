@@ -7,9 +7,6 @@
       />
     </div>
     <ul class="nav__link">
-      <!-- {{
-        link
-      }} -->
       <router-link to="/">Accueil</router-link>
       <router-link to="/signup">Inscription</router-link>
       <router-link to="/login">Connexion</router-link>
@@ -23,13 +20,6 @@ export default {
   name: 'Header',
   components: {},
 };
-
-// new Vue({
-//   el: '.nav',
-//   data: {
-//     links: ['Inscription', 'Connexion', 'Profil'],
-//   },
-// });
 </script>
 
 <style lang="scss">
@@ -42,8 +32,8 @@ export default {
   &__logo {
     margin-left: 20px;
     & img {
-      width: 100px;
-      height: 100px;
+      width: 150px;
+      height: 150px;
     }
   }
   &__link {
