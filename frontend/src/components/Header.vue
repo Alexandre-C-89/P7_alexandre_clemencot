@@ -1,50 +1,30 @@
-<template>
-  <nav class="nav">
-    <div class="nav__logo">
-      <img
-        src="../assets/logo/icon-left-font-monochrome-white.png"
-        alt="logo Groupomania"
-      />
-    </div>
-    <ul class="nav__link">
-      <router-link to="/">Accueil</router-link>
-      <router-link to="/signup">Inscription</router-link>
-      <router-link to="/login">Connexion</router-link>
-      <router-link to="/user">Profil</router-link>
-    </ul>
-  </nav>
-</template>
+<template></template>
 
 <script>
 export default {
   name: 'Header',
-  components: {},
+  data() {
+    return {
+      message: '',
+    };
+  },
 };
 </script>
 
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.nav {
-  background-color: #35495e;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  &__logo {
-    margin-left: 20px;
-    & img {
-      width: 150px;
-      height: 150px;
-    }
-  }
-  &__link {
-    & a {
-      margin: 0px 10px 0px 10px;
-      text-decoration: none;
-      color: white;
-    }
-    &.router-link:active {
-      color: #41b883;
-    }
-  }
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
 }
 </style>
