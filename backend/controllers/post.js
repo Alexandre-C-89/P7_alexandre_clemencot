@@ -81,7 +81,6 @@ exports.createPost = (req, res, next) => {
 exports.getAllPost = async (req, res, next) => {
   const post = await Post.findAll();
   if (post) {
-    console.log({ post });
     res.status(200).json({ post });
   } else {
     res.status(404).json({ message: "Voici les posts !" });

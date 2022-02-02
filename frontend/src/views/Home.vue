@@ -22,17 +22,6 @@ export default {
       posts: '',
     };
   },
-  // methods: {
-  //   showPosts() {
-  //     this.axios
-  //       .get('http://localhost:3000/api/post')
-  //       .then((response) => {
-  //         this.posts = response.data.post;
-  //       })
-  //       // eslint-disable-next-line no-console
-  //       .then((error) => console.log(error));
-  //   },
-  // },
   mounted() {
     this.axios
       .get('http://localhost:3000/api/post')

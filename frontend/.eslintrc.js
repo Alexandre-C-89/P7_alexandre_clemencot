@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
   root: true,
@@ -7,19 +7,19 @@ module.exports = {
     node: true,
   },
   parserOptions: {
-    parser: "babel-eslint",
+    parser: 'babel-eslint',
   },
-  extends: ["plugin:vue/essential", "airbnb-base"],
-  plugins: ["prettier"],
+  extends: ['plugin:vue/essential', 'airbnb-base'],
+  plugins: ['prettier'],
   // add your custom rules here
   rules: {},
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       alias: {
-        extensions: [".js", ".vue", ".json"],
+        extensions: ['.js', '.vue', '.json'],
         map: [
-          ["~", path.resolve(__dirname, "./src/")],
-          ["@", path.resolve(__dirname, "./src/")],
+          ['~', path.resolve(__dirname, './src/')],
+          ['@', path.resolve(__dirname, './src/')],
         ],
       },
     },
