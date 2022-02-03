@@ -31,6 +31,10 @@ const routes = [
     name: 'Signup',
     component: () => import('../views/Signup.vue'),
   },
+  {
+    path: '/login',
+    redirect: '/',
+  },
 ];
 
 const router = new VueRouter({

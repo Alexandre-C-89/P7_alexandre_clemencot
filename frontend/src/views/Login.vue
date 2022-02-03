@@ -1,16 +1,21 @@
 <template>
   <div>
     <h1>Connexion</h1>
-    <form v-on:submit.prevent="onSubmit" class="form">
+    <form v-on:submit.prevent="Submit" class="form">
       <div>
         <label for="email">Email</label>
-        <input type="email" name="email" />
+        <input type="email" name="email" v-model="email" placeholder="Email" />
       </div>
       <div>
         <label for="password">Mot de passe</label>
-        <input type="password" name="password" v-model="password" />
+        <input
+          type="password"
+          name="password"
+          v-model="password"
+          placeholder="mot de passe"
+        />
       </div>
-      <button>Connexion</button>
+      <button @click.prevent="submit()" type="submit">Connexion</button>
     </form>
   </div>
 </template>
@@ -22,17 +27,38 @@ export default {
     return {
       email: '',
       password: '',
-      user: '',
-      errorLogin: '',
-      info: null,
-      posts: ['post 1', 'post 2', 'post 3'],
+      user: {},
     };
   },
   methods: {
-    updatePost() {
-      this.posts = ['post 5', 'post 6'];
+    submit() {
+      const data = {
+        email: this.email,
+        password: this.password,
+      };
+      this.axios
+        .post('http://localhost:3000/api/user/login', data)
+        .then((response) => console.log(response))
+        .then((response) => {
+          if (response) {
+            console.log('Utilisateur connecté !');
+            console.log(response.data.token);
+          }
+        });
     },
   },
+  // mounted() {
+  //   if (localStorage.email) this.email = localStorage.email;
+  //   if (localStorage.password) this.password = localStorage.password;
+  // },
+  // watch: {
+  //   email(newEmail) {
+  //     localStorage.email = newEmail;
+  //   },
+  //   password(newPassword) {
+  //     localStorage.password = newPassword;
+  //   },
+  // },
 };
 </script>
 

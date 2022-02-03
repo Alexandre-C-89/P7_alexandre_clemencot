@@ -29,7 +29,7 @@ export default {
         this.posts = response.data.post;
       })
       // eslint-disable-next-line no-console
-      .then((error) => console.log(error));
+      .catch((error) => console.log(error));
   },
 };
 </script>

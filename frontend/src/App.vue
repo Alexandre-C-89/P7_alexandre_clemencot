@@ -5,10 +5,8 @@
         <img src="./assets/logo.png" alt="logo groupomania" />
       </div>
       <div>
-        <router-link to="/">Accueil</router-link> |
         <router-link to="/login">Connexion</router-link> |
-        <router-link to="/signup">S'enregistré</router-link> |
-        <router-link to="/profil">Profil</router-link>
+        <router-link to="/signup">S'enregistré</router-link>
       </div>
     </div>
     <router-view />
