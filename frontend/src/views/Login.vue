@@ -38,13 +38,13 @@ export default {
       };
       this.axios
         .post('http://localhost:3000/api/user/login', data)
-        .then((response) => console.log(response))
         .then((response) => {
           if (response) {
             console.log('Utilisateur connecté !');
             console.log(response.data.token);
           }
-        });
+        })
+        .catch((error) => console.log(error));
     },
   },
   // mounted() {
