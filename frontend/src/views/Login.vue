@@ -42,6 +42,8 @@ export default {
           if (response) {
             console.log('Utilisateur connecté !');
             console.log(response.data.token);
+            // window.location.href('http://localhost:8080/');
+            this.$router.push({ name: 'Home' });
           }
         })
         .catch((error) => console.log(error));
@@ -53,7 +55,7 @@ export default {
 <style lang="scss">
 .form {
   width: 320px;
-  height: 200px;
+  height: 160px;
   background-color: #62929e;
   border-radius: 15px;
   display: flex;

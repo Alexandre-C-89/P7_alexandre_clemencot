@@ -1,7 +1,7 @@
 <template>
   <div id="nav" class="header">
     <div class="header__logo">
-      <img src="../assets/logo.png" alt="logo groupomania" />
+      <img src="../assets/logo_blanc_recadre.png" alt="logo groupomania" />
     </div>
     <div>
       <router-link to="/login">Connexion</router-link> |
@@ -18,8 +18,8 @@
   background-color: #1f2232;
   &__logo {
     & img {
-      width: 80px;
-      height: 80px;
+      width: 150px;
+      height: 35px;
     }
   }
 }

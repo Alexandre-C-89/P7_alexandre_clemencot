@@ -2,11 +2,11 @@
   <div>
     <h1>Créer un compte</h1>
     <form v-on:submit.prevent="submit" class="form">
-      <div class="form__firstName">
+      <div class="form__firstname">
         <label for="firstname">Prénom :</label>
         <input type="firstname" name="firstname" v-model="firstname" />
       </div>
-      <div class="form__lastName">
+      <div class="form__lastname">
         <label for="lastname">Nom :</label>
         <input type="lastname" name="lastname" v-model="lastname" />
       </div>
@@ -64,15 +64,18 @@ export default {
 
 <style lang="scss">
 .form {
-  width: 300px;
-  height: 200px;
+  width: 320px;
+  height: 265px;
   background-color: #62929e;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
-  &__firstName {
+  align-items: center;
+  justify-content: center;
+  &__firstname {
     margin: 10px;
   }
-  &__lastName {
+  &__lastname {
     margin: 10px;
   }
   &__email {
@@ -81,9 +84,18 @@ export default {
   &__password {
     margin: 10px;
   }
-  &__button {
-    width: 200px;
-    height: 10px;
+  & button {
+    width: 130px;
+    height: 28px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.541);
+    font-weight: bold;
+    color: black;
+    border: 2px solid white;
+    &:hover {
+      background-color: #084b5c;
+    }
   }
 }
 </style>
