@@ -44,7 +44,7 @@ export default {
         email: this.email,
         password: this.password,
       };
-      console.log(data);
+      // console.log(data);
       this.axios
         .post('http://localhost:3000/api/user/signup', data)
         .then((response) => console.log(response))

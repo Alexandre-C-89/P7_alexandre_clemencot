@@ -2,12 +2,12 @@
   <div>
     <h1>Connexion</h1>
     <form v-on:submit.prevent="Submit" class="form">
-      <div>
-        <label for="email">Email</label>
+      <div class="form__email">
+        <label for="email">Email : </label>
         <input type="email" name="email" v-model="email" placeholder="Email" />
       </div>
-      <div>
-        <label for="password">Mot de passe</label>
+      <div class="form__password">
+        <label for="password">Mot de passe : </label>
         <input
           type="password"
           name="password"
@@ -47,25 +47,35 @@ export default {
         .catch((error) => console.log(error));
     },
   },
-  // mounted() {
-  //   if (localStorage.email) this.email = localStorage.email;
-  //   if (localStorage.password) this.password = localStorage.password;
-  // },
-  // watch: {
-  //   email(newEmail) {
-  //     localStorage.email = newEmail;
-  //   },
-  //   password(newPassword) {
-  //     localStorage.password = newPassword;
-  //   },
-  // },
 };
 </script>
 
 <style lang="scss">
 .form {
-  width: 300px;
+  width: 320px;
   height: 200px;
   background-color: #62929e;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &__email {
+    margin: 10px;
+  }
+  &__password {
+    margin: 10px;
+  }
+  & button {
+    width: 100px;
+    height: 28px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.541);
+    border: 2px solid white;
+    &:hover {
+      background-color: #62929e;
+    }
+  }
 }
 </style>

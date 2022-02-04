@@ -10,19 +10,21 @@ const jwt = require("jsonwebtoken");
 // Partie enregistrement de l'utilisateur
 exports.signup = (req, res, next) => {
   // J'appel la fonction de hashage de bcrypt
-  bcrypt
-    .hash(req.body.password, 10) // Je sale le mot de passe 10 fois
-    .then((hash) => {
-      User.create({
-        // Je crée mon utilisateur
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        password: hash,
-      })
-        .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-        .catch((error) => res.status(400).json({ error }));
+  bcrypt.hash(req.body.password, 10); // Je sale le mot de passe 10 fois
+  if (hash) {
+    User.create({
+      // Je crée mon utilisateur
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      password: hash,
     });
+    res.status(201).json({ message: "Utilisateur crée !" });
+    // .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
+    // .catch((error) => res.status(400).json({ error }));
+  } else {
+    res.status(400).json({ message: "Erreur lors de la création de compte !" });
+  }
 };
 
 // Partie connexion de l'utilisateur

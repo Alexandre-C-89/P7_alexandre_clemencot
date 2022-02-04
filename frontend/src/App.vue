@@ -1,17 +1,21 @@
 <template>
   <div id="app">
-    <div id="nav" class="header">
-      <div class="header__logo">
-        <img src="./assets/logo.png" alt="logo groupomania" />
-      </div>
-      <div>
-        <router-link to="/login">Connexion</router-link> |
-        <router-link to="/signup">S'enregistré</router-link>
-      </div>
+    <Header />
+    <div class="container">
+      <router-view />
     </div>
-    <router-view />
   </div>
 </template>
+
+<script>
+import Header from './components/Header.vue';
+
+export default {
+  components: {
+    Header,
+  },
+};
+</script>
 
 <style lang="scss">
 body {
@@ -30,7 +34,9 @@ body {
 
 #nav {
   padding: 30px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   a {
     font-weight: bold;
     color: white;
@@ -41,16 +47,9 @@ body {
   }
 }
 
-.header {
+.container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: #1f2232;
-  &__logo {
-    & img {
-      width: 80px;
-      height: 80px;
-    }
-  }
+  justify-content: center;
 }
 </style>
