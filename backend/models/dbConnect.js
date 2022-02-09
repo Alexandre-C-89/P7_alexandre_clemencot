@@ -1,29 +1,34 @@
 // J'importe Sequelize
 const { Sequelize } = require("sequelize");
 
-
-// J'utilise un modèle de Sequelize 
+// J'utilise un modèle de Sequelize
 // puis j'indique mes paramètre de connection
-const sequelize = new Sequelize(/*"database"*/ "groupomania", /*username*/"root", /*password*/ "1234", {
+const sequelize = new Sequelize(
+  /*"database"*/ "groupomania",
+  /*username*/ "root",
+  /*password*/ "1234",
+  {
     host: "localhost",
-    dialect: "mysql"
-});
+    dialect: "mysql",
+  }
+);
 
-sequelize.authenticate()
-    .then(() => {
-        console.log("Database Connected !");
-        sequelize.sync({ alter: true })
-            .then( sync => { 
-                    console.log("modèles synchronisé !");
-                }
-            )
-            .catch(error => {
-                console.log("impossible de synchronisé les modèles ! " + error);
-            })
-    }).catch(error => {
-        console.log("Not connected ! " + error);
-    });
-
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Database Connected !");
+    sequelize
+      .sync()
+      .then((sync) => {
+        console.log("modèles synchronisé !");
+      })
+      .catch((error) => {
+        console.log("impossible de synchronisé les modèles ! " + error);
+      });
+  })
+  .catch((error) => {
+    console.log("Not connected ! " + error);
+  });
 
 // J'exporte ma connexion à ma BDD
 module.exports = sequelize;

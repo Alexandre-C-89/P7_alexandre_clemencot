@@ -21,7 +21,7 @@ exports.createPost = (req, res, next) => {
       title: req.body.title,
       description: req.body.description,
       userId: req.token.userId,
-      media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+      media: `/images/${req.file.filename}`,
     })
       .then(() => {
         return res.status(200).json({ message: "Post créé avec l'image !" });

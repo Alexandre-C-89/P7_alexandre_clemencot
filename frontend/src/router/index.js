@@ -35,6 +35,11 @@ const routes = [
     path: '/login',
     redirect: '/',
   },
+  {
+    path: '/createPost',
+    name: 'createPost',
+    component: () => import('../views/Signup.vue'),
+  },
 ];
 
 const router = new VueRouter({

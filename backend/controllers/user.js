@@ -10,21 +10,24 @@ const jwt = require("jsonwebtoken");
 // Partie enregistrement de l'utilisateur
 exports.signup = (req, res, next) => {
   // J'appel la fonction de hashage de bcrypt
-  bcrypt.hash(req.body.password, 10); // Je sale le mot de passe 10 fois
-  if (hash) {
-    User.create({
-      // Je crée mon utilisateur
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      email: req.body.email,
-      password: hash,
+  bcrypt
+    .hash(req.body.password, 10) // Je sale le mot de passe 10 fois
+    .then((hash) => {
+      User.create({
+        // Je crée mon utilisateur
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        pseudo: req.body.pseudo,
+        email: req.body.email,
+        password: hash,
+      })
+        .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
+        .catch((error) =>
+          res
+            .status(400)
+            .json({ message: "Erreur lors de la création de compte !" })
+        );
     });
-    res.status(201).json({ message: "Utilisateur crée !" });
-    // .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-    // .catch((error) => res.status(400).json({ error }));
-  } else {
-    res.status(400).json({ message: "Erreur lors de la création de compte !" });
-  }
 };
 
 // Partie connexion de l'utilisateur
@@ -33,20 +36,23 @@ exports.login = async (req, res, next) => {
   if (!user) {
     console.log("Utilisateur non trouvé !");
   } else {
-    const comparePassword = bcrypt.compare(req.body.password, user.password);
-    if (!comparePassword) {
-      // Si ce n'est pas valide je retourne une erreur
-      return res.status(401).json({ error: "Mot de passe incorrect !" });
-    }
-    res.status(200).json({
-      user,
-      token: jwt.sign(
-        // J'utilise la méthode sign de JWT pour encodé l'id
-        { userId: user.id }, // clé de l'id de l'utilisateur
-        "RANDOM_TOKEN_SECRET",
-        { expiresIn: "12h" } // la clé expire dans 12h
-      ),
-    });
+    console.log("condition false");
+    bcrypt
+      .compare(req.body.password, user.password)
+      .then((valid) => {
+        if (!valid) {
+          return res
+            .status(401)
+            .json({ error: "Mot de passe et/ou email incorrect !" });
+        }
+        res.status(200).json({
+          userId: user._id,
+          token: jwt.sign({ userId: user._id }, process.env.SECRET_key, {
+            expiresIn: "24h",
+          }),
+        });
+      })
+      .catch((error) => res.status(500).json({ error }));
   }
 };
 

@@ -5,34 +5,40 @@ const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("./dbConnect");
 
 // Création du modèle en utilisant la connexion
-const User = sequelize.define("User", {
+const User = sequelize.define(
+  "User",
+  {
     // Je définis les attributs ici
     firstname: {
-        type: DataTypes.STRING,
-        allowNull: false, // équivalant required
-        unique: true
+      type: DataTypes.STRING,
+      allowNull: false, // équivalant required
+      unique: true,
     },
     lastname: {
-        type: DataTypes.STRING,
-        allowNull: false, 
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    pseudo: {
+      type: DataTypes.STRING,
+      unique: true,
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    }
-},
-    {
-        tableName: "users",
-        timestamps: true,
-    }
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "users",
+    timestamps: true,
+  }
 );
 
-// J'exporte mon modèle 
-// pour pouvoir l'utilisé dans d'autres 
+// J'exporte mon modèle
+// pour pouvoir l'utilisé dans d'autres
 // fichiers
 module.exports = User;

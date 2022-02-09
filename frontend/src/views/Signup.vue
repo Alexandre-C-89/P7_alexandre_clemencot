@@ -10,6 +10,10 @@
         <label for="lastname">Nom :</label>
         <input type="lastname" name="lastname" v-model="lastname" />
       </div>
+      <div class="form__pseudo">
+        <label for="pseudo">pseudo :</label>
+        <input type="pseudo" name="pseudo" v-model="pseudo" />
+      </div>
       <div class="form__email">
         <label for="email">Email :</label>
         <input type="email" name="email" v-model="email" />
@@ -19,7 +23,7 @@
         <input type="password" name="password" v-model="password" />
       </div>
       <div class="form__button">
-        <button @click="submit()" type="submit">Créer un compte</button>
+        <button type="submit">Créer un compte</button>
       </div>
     </form>
   </div>
@@ -29,8 +33,10 @@
 export default {
   data() {
     return {
+      // isAdmin: null,
       firstname: '',
       lastname: '',
+      pseudo: '',
       email: '',
       password: '',
       user: {},
@@ -39,23 +45,27 @@ export default {
   methods: {
     submit() {
       const data = {
+        // isAdmin = this.isAdmin,
         firstname: this.firstname,
         lastname: this.lastname,
+        pseudo: this.pseudo,
         email: this.email,
         password: this.password,
       };
       // console.log(data);
       this.axios
         .post('http://localhost:3000/api/user/signup', data)
-        .then((response) => console.log(response))
-        .then((result) => {
-          if (result) {
-            console.log('Utilisateur créé !');
+        .then((response) => {
+          if (response) {
+            console.log('Utilisateur créer !');
+          } else {
+            console.log("l'utilisateur n'a pas été créé !");
           }
         })
         .catch((error) => {
-          console.log(error);
-          console.log('erreur lors de la création de compte !');
+          if (error) {
+            console.log('erreur lors de la création de compte !');
+          }
         });
     },
   },
@@ -65,7 +75,7 @@ export default {
 <style lang="scss">
 .form {
   width: 320px;
-  height: 265px;
+  height: 300px;
   background-color: #62929e;
   border-radius: 15px;
   display: flex;
