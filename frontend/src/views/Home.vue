@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home__icone">
-      <button>Créér un post</button>
+      <button @click.prevent="goToCreatePost()">Créér un post</button>
     </div>
     <div class="home__card" v-for="post in posts" :key="post.card" :post="post">
       <div class="home__card__img">
@@ -44,6 +44,11 @@ export default {
       })
       // eslint-disable-next-line no-console
       .catch((error) => console.log(error));
+  },
+  methods: {
+    goToCreatePost() {
+      this.$router.push({ name: 'createPost' });
+    },
   },
 };
 </script>

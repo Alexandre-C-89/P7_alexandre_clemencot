@@ -1,36 +1,105 @@
 <template>
   <div class="post">
+    <div class="post__title">
+      <p>Création de post :</p>
+    </div>
     <form action="" class="post__form">
-      <div class="post__form__info">
+      <div class="post__form__title">
         <label for="">Titre : </label>
-        <input type="text" />
+        <input type="text" placeholder="Choisissez un titre à votre post !" />
+      </div>
+      <div class="post__form__description">
         <label for="">Description : </label>
-        <input type="text" />
+        <textarea type="text" placeholder="Décrivez votre post !" />
+      </div>
+      <div class="post__form__img">
+        <label for="">image : </label>
+        <input type="file" placeholder="Vous pouvez importez une image !" />
       </div>
       <div class="post__form__name">
         <label for="">Nom : </label>
-        <input type="text" />
+        <input type="text" placeholder="Indiquez votre pseudo ..." />
       </div>
-      <div class="post__form__password">
-        <label for=""></label>
-        <input type="text" />
+      <div class="post__form__btn">
+        <button>Créer</button>
       </div>
     </form>
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  name: 'Login',
+  data() {
+    return {
+      title: '',
+      description: '',
+      media: '',
+      userId: '',
+    };
+  },
+  methods: {
+    submit() {
+      const data = {
+        title: this.title,
+        description: this.description,
+        media: this.media,
+        userId: this.userId,
+      };
+      this.axios
+        .post('http://localhost:3000/api/post', data)
+        .then((response) => {
+          if (response) {
+            // Si j'ai une réponse
+            console.log('Post créer !');
+            console.log(response.data.token);
+            this.$router.push({ name: 'Home' });
+          }
+        })
+        .catch((error) => console.log(error));
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 .post {
   width: 320px;
-  height: 160px;
+  height: 400px;
   background-color: #62929e;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 30px;
+  &__title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  &__form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px;
+    &__title {
+      margin: 10px;
+    }
+    &__description {
+      margin: 10px;
+      & label {
+        margin-bottom: 5px;
+      }
+    }
+    &__img {
+      margin: 10px;
+    }
+    &__name {
+      margin: 10px;
+    }
+  }
   & button {
     width: 100px;
     height: 28px;

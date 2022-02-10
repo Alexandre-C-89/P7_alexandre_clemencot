@@ -38,7 +38,7 @@ const routes = [
   {
     path: '/createPost',
     name: 'createPost',
-    component: () => import('../views/Signup.vue'),
+    component: () => import('../views/CreatePost.vue'),
   },
 ];
 
