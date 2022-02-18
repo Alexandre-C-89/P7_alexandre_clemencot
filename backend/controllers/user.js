@@ -33,10 +33,11 @@ exports.signup = (req, res, next) => {
 // Partie connexion de l'utilisateur
 exports.login = async (req, res, next) => {
   const user = await User.findOne({ where: { email: req.body.email } }); // Je cherche l'email de la requête avec celui enregistré
+  // console.log("");
   if (!user) {
     console.log("Utilisateur non trouvé !");
   } else {
-    console.log("condition false");
+    console.log("utilisateur trouvé !");
     bcrypt
       .compare(req.body.password, user.password)
       .then((valid) => {
@@ -48,12 +49,13 @@ exports.login = async (req, res, next) => {
         res.status(200).json({
           userId: user._id,
           token: jwt.sign({ userId: user._id }, process.env.SECRET_key, {
-            expiresIn: "24h",
+            expiresIn: "8h",
           }),
         });
       })
       .catch((error) => res.status(500).json({ error }));
   }
+  console.log("Utilisateur connecté !");
 };
 
 // Partie sur l'affichage de tout les utilisateurs

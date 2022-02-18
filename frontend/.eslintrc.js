@@ -12,7 +12,9 @@ module.exports = {
   extends: ['plugin:vue/essential', 'airbnb-base'],
   plugins: ['prettier'],
   // add your custom rules here
-  rules: {},
+  rules: {
+    'no-param-reassign': [2, { props: false }],
+  },
   settings: {
     'import/resolver': {
       alias: {

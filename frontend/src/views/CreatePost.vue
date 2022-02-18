@@ -50,9 +50,10 @@ export default {
         .post('http://localhost:3000/api/post', data)
         .then((response) => {
           if (response) {
-            // Si j'ai une réponse
-            console.log('Post créer !');
-            console.log(response.data.token);
+            // Si j'ai une réponse alors ...
+            console.log('Post créer !'); // J'indique dans la console que le post est créé
+            // if (response.data.token == localeStorage.getIem('userToken')) {
+            // }
             this.$router.push({ name: 'Home' });
           }
         })

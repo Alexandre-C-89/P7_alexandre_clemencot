@@ -1,17 +1,23 @@
 <template>
   <div>
     <h1>Connexion</h1>
+    {{ form }}
     <form v-on:submit.prevent="Submit" class="form">
       <div class="form__email">
         <label for="email">Email : </label>
-        <input type="email" name="email" v-model="email" placeholder="Email" />
+        <input
+          type="email"
+          name="email"
+          v-model="form.email"
+          placeholder="Email"
+        />
       </div>
       <div class="form__password">
         <label for="password">Mot de passe : </label>
         <input
           type="password"
           name="password"
-          v-model="password"
+          v-model="form.password"
           placeholder="mot de passe"
         />
       </div>
@@ -21,33 +27,44 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
-  name: 'Login',
+  name: 'Signin',
   data() {
     return {
-      email: '',
-      password: '',
-      user: {},
+      form: {
+        email: '',
+        password: '',
+      },
     };
   },
   methods: {
     submit() {
-      const data = {
-        email: this.email,
-        password: this.password,
-      };
-      this.axios
-        .post('http://localhost:3000/api/user/login', data)
-        .then((response) => {
-          if (response) {
-            console.log('Utilisateur connecté !');
-            console.log(response.data.token);
-            // window.location.href('http://localhost:8080/');
-            this.$router.push({ name: 'Home' });
-          }
-        })
-        .catch((error) => console.log(error));
+      // const form = {
+      //   email: this.email,
+      //   password: this.password,
+      // };
+      // this.axios
+      //   .post('http://localhost:3000/api/user/login', form)
+      //   .then((response) => {
+      //     if (response) {
+      //       console.log('Utilisateur connecté !');
+      //       console.log(response.data.token);
+      //       localStorage.setItem('userToken', response.data.token);
+      //       this.$router.push({ name: 'Home' });
+      //     }
+      //   })
+      //   .catch((error) => console.log(error));
+      this.signIn(this.form).then(() => {
+        this.$router.replace({
+          name: 'dashboard',
+        });
+      });
     },
+    ...mapActions({
+      signIn: 'auth/signIn',
+    }),
   },
 };
 </script>

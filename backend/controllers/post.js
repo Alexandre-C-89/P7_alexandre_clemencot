@@ -12,10 +12,13 @@ const multer = require("multer");
 // Partie création de posts
 exports.createPost = (req, res, next) => {
   console.log("Vous avez l'intention de créer un post !");
+  const user = User.findOne({ where: { email: req.body.email } }); // Je cherche l'email de la requête avec celui enregistré
   // Je créer le post avec la méthode "create"
   // console.log();
-  if (req.file) {
-    console.log("");
+  if (req.file && user) {
+    console.log(
+      "il y a un fichié et j'ai trouvé l'utilisateur correspondant à l'email"
+    );
     Post.create({
       // Je renseigne les champs
       title: req.body.title,

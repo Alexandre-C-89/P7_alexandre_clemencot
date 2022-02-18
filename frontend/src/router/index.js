@@ -1,7 +1,11 @@
 /* eslint-disable implicit-arrow-linebreak */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from '@/store';
 import Home from '../views/Home.vue';
+import SignIn from '../views/SignIn.vue';
+import Dashboard from '../views/Dashboard.vue';
+import SignUp from '../views/Signup.vue';
 
 Vue.use(VueRouter);
 
@@ -12,33 +16,37 @@ const routes = [
     component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Login.vue'),
+    path: '/signin',
+    name: 'signin',
+    component: SignIn,
   },
   {
     path: '/signup',
     name: 'Signup',
-    component: () => import('../views/Signup.vue'),
+    component: SignUp,
   },
   {
-    path: '/login',
+    path: '/signin',
     redirect: '/',
   },
+  // {
+  //   path: '/createPost',
+  //   name: 'createPost',
+  //   component: () => import('../views/CreatePost.vue'),
+  // },
   {
-    path: '/createPost',
-    name: 'createPost',
-    component: () => import('../views/CreatePost.vue'),
+    path: '/dashboard',
+    name: 'dashboard',
+    component: Dashboard,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['auth/authenticated']) {
+        return next({
+          name: 'signin',
+        });
+      }
+      next();
+      return false;
+    },
   },
 ];
 
