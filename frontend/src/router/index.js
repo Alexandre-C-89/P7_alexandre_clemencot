@@ -5,14 +5,15 @@ import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import SignUp from '../views/Signup.vue';
 import CreatePost from '../views/CreatePost.vue';
+import Profil from '../views/Profil.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home,
+    path: '/', // URL correspondant au composant
+    name: 'Home', // le nom de cette route pour l'étiquetage et ke débuggage
+    component: Home, // le composant qui doit s'afficher lorsque le path est trouvé
   },
   {
     path: '/login',
@@ -25,9 +26,14 @@ const routes = [
     component: SignUp,
   },
   {
-    path: '/createPost',
+    path: '/createpost',
     name: 'createPost',
     component: CreatePost,
+  },
+  {
+    path: '/user/:name',
+    name: 'Profil',
+    component: Profil,
   },
 ];
 

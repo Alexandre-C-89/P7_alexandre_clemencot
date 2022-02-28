@@ -4,9 +4,9 @@
       <img src="../assets/logo_blanc_recadre.png" alt="logo groupomania" />
     </div>
     <div class="header__link">
-      <router-link to="/signin">Connexion</router-link> |
-      <router-link to="/home">Accueil</router-link> |
-      <router-link to="/dashboard">Profil</router-link> |
+      <router-link to="/login">Connexion</router-link> |
+      <router-link to="/">Accueil</router-link> |
+      <router-link to="/user/:name">Profil</router-link> |
       <router-link to="/signup">S'enregistré</router-link> |
     </div>
   </div>
