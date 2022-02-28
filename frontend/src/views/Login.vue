@@ -42,6 +42,7 @@ export default {
           if (response) {
             console.log('Utilisateur connecté !');
             console.log(response.data.token);
+            localStorage.setItem('userToken', response.data.token);
             // window.location.href('http://localhost:8080/');
             this.$router.push({ name: 'Home' });
           }
