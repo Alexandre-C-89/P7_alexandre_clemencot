@@ -1,11 +1,10 @@
 /* eslint-disable */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import store from '@/store';
 import Home from '../views/Home.vue';
-import SignIn from '../views/SignIn.vue';
-import Dashboard from '../views/Dashboard.vue';
+import Login from '../views/Login.vue';
 import SignUp from '../views/Signup.vue';
+import CreatePost from '../views/CreatePost.vue';
 
 Vue.use(VueRouter);
 
@@ -16,9 +15,9 @@ const routes = [
     component: Home,
   },
   {
-    path: '/signin',
-    name: 'signin',
-    component: SignIn,
+    path: '/login',
+    name: 'Login',
+    component: Login,
   },
   {
     path: '/signup',
@@ -26,33 +25,14 @@ const routes = [
     component: SignUp,
   },
   {
-    path: '/signin',
-    redirect: '/',
-  },
-  // {
-  //   path: '/createPost',
-  //   name: 'createPost',
-  //   component: () => import('../views/CreatePost.vue'),
-  // },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: Dashboard,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/authenticated']) {
-        return next({
-          name: 'signin',
-        });
-      }
-      next();
-      return false;
-    },
+    path: '/createPost',
+    name: 'createPost',
+    component: CreatePost,
   },
 ];
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes,
 });
 

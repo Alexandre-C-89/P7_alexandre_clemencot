@@ -3,27 +3,27 @@
     <h1>Créer un compte</h1>
     <form v-on:submit.prevent="submit" class="form">
       <div class="form__firstname">
-        <label for="firstname">Prénom :</label>
+        <label for="firstname">Prénom : </label>
         <input type="firstname" name="firstname" v-model="firstname" />
       </div>
       <div class="form__lastname">
-        <label for="lastname">Nom :</label>
+        <label for="lastname">Nom : </label>
         <input type="lastname" name="lastname" v-model="lastname" />
       </div>
-      <div class="form__pseudo">
-        <label for="pseudo">pseudo :</label>
-        <input type="pseudo" name="pseudo" v-model="pseudo" />
-      </div>
       <div class="form__email">
-        <label for="email">Email :</label>
+        <label for="email">Email : </label>
         <input type="email" name="email" v-model="email" />
       </div>
+      <div class="form__pseudo">
+        <label for="pseudo">Pseudo : </label>
+        <input type="pseudo" name="pseudo" v-model="pseudo" />
+      </div>
       <div class="form__password">
-        <label for="password">Mot de passe :</label>
+        <label for="password">Mot de passe : </label>
         <input type="password" name="password" v-model="password" />
       </div>
       <div class="form__button">
-        <button type="submit">Créer un compte</button>
+        <button @click="submit()" type="submit">Créer un compte</button>
       </div>
     </form>
   </div>
@@ -33,7 +33,6 @@
 export default {
   data() {
     return {
-      // isAdmin: null,
       firstname: '',
       lastname: '',
       pseudo: '',
@@ -45,7 +44,6 @@ export default {
   methods: {
     submit() {
       const data = {
-        // isAdmin = this.isAdmin,
         firstname: this.firstname,
         lastname: this.lastname,
         pseudo: this.pseudo,
@@ -55,17 +53,19 @@ export default {
       // console.log(data);
       this.axios
         .post('http://localhost:3000/api/user/signup', data)
-        .then((response) => {
-          if (response) {
-            console.log('Utilisateur créer !');
-          } else {
-            console.log("l'utilisateur n'a pas été créé !");
+        .then((response) => console.log(response + data))
+        .then((result) => {
+          if (result) {
+            // eslint-disable-next-line
+            console.log('Utilisateur créé !');
+            this.$router.push({ name: 'Login' });
           }
         })
         .catch((error) => {
-          if (error) {
-            console.log('erreur lors de la création de compte !');
-          }
+          console.log(
+            "Problème lors de la création de l'utilisateur ! ",
+            +error,
+          );
         });
     },
   },
@@ -75,7 +75,7 @@ export default {
 <style lang="scss">
 .form {
   width: 320px;
-  height: 300px;
+  height: 265px;
   background-color: #62929e;
   border-radius: 15px;
   display: flex;

@@ -21,7 +21,7 @@
         <input type="text" placeholder="Indiquez votre pseudo ..." />
       </div>
       <div class="post__form__btn">
-        <button>Créer</button>
+        <button @click.prevent="submit()">Créer</button>
       </div>
     </form>
   </div>

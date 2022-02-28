@@ -32,21 +32,6 @@ body {
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  a {
-    font-weight: bold;
-    color: white;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-
 .container {
   display: flex;
   align-items: center;

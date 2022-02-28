@@ -3,61 +3,52 @@
     <div class="header__logo">
       <img src="../assets/logo_blanc_recadre.png" alt="logo groupomania" />
     </div>
-    <div><router-link to="/signin">Connexion</router-link></div>
-    <template v-if="authenticated">
-      {{ user }}
-      <router-link to="/home">Home</router-link> |
-      <router-link to="/dashboard">Dashboard</router-link> |
-      <router-link to="/signout" @click.prevent="signOut"
-        >Déconnecté</router-link
-      >
-    </template>
-    <template v-else>
+    <div class="header__link">
+      <router-link to="/signin">Connexion</router-link> |
+      <router-link to="/home">Accueil</router-link> |
+      <router-link to="/dashboard">Profil</router-link> |
       <router-link to="/signup">S'enregistré</router-link> |
-    </template>
+    </div>
   </div>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex';
-
-export default {
-  computed: {
-    ...mapGetters({
-      authenticated: 'auth/authenticated', // je vérifie authenticated qui vient
-      // de "auth/authenticated"
-      user: 'auth/user', // Je saisie les informations de l'utilisateur
-      // qui viennent de "auth/user"
-    }),
-  },
-
-  methods: {
-    ...mapActions({
-      signOutAction: 'auth/signOut',
-    }),
-
-    signOut() {
-      this.signOutAction().then(() => {
-        this.$router.replace({
-          name: 'home',
-        });
-      });
-    },
-  },
-};
-</script>
+<script></script>
 
 <style lang="scss">
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   background-color: #1f2232;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  &__link {
+    & a {
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      width: 100px;
+      height: 20px;
+      &.router-link-exact-active {
+        color: #42b983;
+      }
+    }
+  }
   &__logo {
+    margin-left: 15px;
     & img {
       width: 150px;
       height: 35px;
     }
   }
+  & router-link {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+  }
+}
+
+#nav {
 }
 </style>
