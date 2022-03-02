@@ -9,18 +9,18 @@ const User = sequelize.define(
   "User",
   {
     // Je définis les attributs ici
-    firstname: {
-      type: DataTypes.STRING,
-      allowNull: false, // équivalant required
-      unique: true,
-    },
-    lastname: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    // firstname: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false, // équivalant required
+    //   unique: true,
+    // },
+    // lastname: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    // },
     pseudo: {
       type: DataTypes.STRING,
-      unique: true,
+      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,

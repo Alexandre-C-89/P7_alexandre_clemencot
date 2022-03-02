@@ -40,7 +40,7 @@ export default {
       .get('http://localhost:3000/api/post')
       .then((response) => {
         this.posts = response.data.post;
-        console.log(response.data.post);
+        // console.log(response.data.post);
       })
       // eslint-disable-next-line no-console
       .catch((error) => console.log(error));

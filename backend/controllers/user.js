@@ -15,18 +15,21 @@ exports.signup = (req, res, next) => {
     .then((hash) => {
       User.create({
         // Je crée mon utilisateur
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
+        // firstname: req.body.firstname,
+        // lastname: req.body.lastname,
         pseudo: req.body.pseudo,
         email: req.body.email,
         password: hash,
       })
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-        .catch((error) =>
+        .catch(() =>
           res
-            .status(400)
+            .status(401)
             .json({ message: "Erreur lors de la création de compte !" })
         );
+    })
+    .catch((error) => {
+      res.status(400).json({ error, message: "Erreur !" });
     });
 };
 

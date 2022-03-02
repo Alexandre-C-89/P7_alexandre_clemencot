@@ -7,7 +7,7 @@
       <router-link to="/login">Connexion</router-link> |
       <router-link to="/">Accueil</router-link> |
       <router-link to="/user/:name">Profil</router-link> |
-      <router-link to="/signup">S'enregistré</router-link> |
+      <router-link to="/signup">S'enregistré</router-link>
     </div>
   </div>
 </template>
@@ -30,6 +30,7 @@
       text-decoration: none;
       width: 100px;
       height: 20px;
+      margin: 0px 15px 0px 15px;
       &.router-link-exact-active {
         color: #42b983;
       }

@@ -12,7 +12,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/', // URL correspondant au composant
-    name: 'Home', // le nom de cette route pour l'étiquetage et ke débuggage
+    name: 'Home', // le nom de cette route pour l'étiquetage et le débuggage
     component: Home, // le composant qui doit s'afficher lorsque le path est trouvé
   },
   {
