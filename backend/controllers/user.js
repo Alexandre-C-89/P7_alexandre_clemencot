@@ -36,7 +36,7 @@ exports.signup = (req, res, next) => {
 // Partie connexion de l'utilisateur
 exports.login = async (req, res, next) => {
   const user = await User.findOne({ where: { email: req.body.email } }); // Je cherche l'email de la requête avec celui enregistré
-  // console.log("");
+  console.log(req.body.email);
   if (!user) {
     console.log("Utilisateur non trouvé !");
   } else {

@@ -5,36 +5,54 @@ const User = require("../models/user");
 // J'importe dotenv
 require("dotenv").config();
 // J'importe multer
-const multer = require("multer");
+// const multer = require("multer");
 
 // je gère la relation entre les utilisateurs et leurs posts
 
 // Partie création de posts
 exports.createPost = (req, res, next) => {
   console.log("Vous avez l'intention de créer un post !");
-  const user = User.findOne({ where: { email: req.body.email } }) // Je cherche l'email de la requête avec celui enregistré
-    // Je créer le post avec la méthode "create"
-    // console.log();
-    .then(() => {
-      if (user) {
-        console.log(
-          "il y a un fichié et j'ai trouvé l'utilisateur correspondant à l'email"
-        );
-        let newPost = Post.create({
-          // Je renseigne les champs
-          title: req.body.title,
-          description: req.body.description,
-          userId: req.token.userId,
-          media: `/images/${req.file.filename}`,
-        });
-        return res.status(201).json({ message: newPost });
-      } else {
-        return res.status(404).json({ message: newPost });
-      }
+  // Je créer le post avec la méthode "create"
+  // console.log();
+  if (req.file) {
+    console.log("");
+    Post.create({
+      // Je renseigne les champs
+      title: req.body.title,
+      description: req.body.description,
+      pseudo: req.body.pseudo,
+      // userId: req.token.userId,
+      // media: `/images/${req.file.filename}`,
     })
-    .catch(() => {
-      return res.status(400).json({ message: newPost });
-    });
+      .then(() => {
+        return res.status(200).json({ message: "Post créé avec l'image !" });
+      })
+      .catch(() => {
+        return res.status(401).json({
+          message: "Impossible de créer le post car il y a une erreur ! 1",
+        });
+      });
+  } else {
+    console.log(req.body);
+    Post.create({
+      // Je renseigne les champs
+      title: req.body.title,
+      description: req.body.description,
+      pseudo: req.body.pseudo,
+      // userId: req.token.userId,
+    })
+      .then(() => {
+        // Si la requête est correcte j'ai un status 201
+        return res.status(200).json({ message: "Post créé ! " });
+      })
+      .catch((error) => {
+        console.log(error);
+        // Si j'ai une erreur j'ai un status 401
+        return res.status(401).json({
+          message: "Impossible de créer le post car il y a une erreur ! 2",
+        });
+      });
+  }
 };
 
 // exports.modifyPost = (req, res, next) => {

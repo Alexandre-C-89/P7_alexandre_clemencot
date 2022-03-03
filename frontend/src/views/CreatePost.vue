@@ -3,25 +3,37 @@
     <div class="post__title">
       <p>Création de post :</p>
     </div>
-    <form action="" class="post__form">
+    <form class="post__form">
       <div class="post__form__title">
         <label for="">Titre : </label>
-        <input type="text" placeholder="Choisissez un titre à votre post !" />
+        <input
+          type="text"
+          placeholder="Choisissez un titre à votre post !"
+          v-model="title"
+        />
       </div>
       <div class="post__form__description">
         <label for="">Description : </label>
-        <textarea type="text" placeholder="Décrivez votre post !" />
+        <textarea
+          type="text"
+          placeholder="Décrivez votre post !"
+          v-model="description"
+        />
       </div>
       <div class="post__form__img">
         <label for="">image : </label>
         <input type="file" placeholder="Vous pouvez importez une image !" />
       </div>
       <div class="post__form__name">
-        <label for="">Nom : </label>
-        <input type="text" placeholder="Indiquez votre pseudo ..." />
+        <label for="">Pseudo : </label>
+        <input
+          type="text"
+          placeholder="Indiquez votre pseudo ..."
+          v-model="pseudo"
+        />
       </div>
       <div class="post__form__btn">
-        <button @click.prevent="submit()">Créer</button>
+        <button @click.prevent="createPost()">Créer</button>
       </div>
     </form>
   </div>
@@ -34,28 +46,27 @@ export default {
     return {
       title: '',
       description: '',
-      media: '',
-      userId: '',
+      // media: '',
+      pseudo: '',
     };
   },
   methods: {
-    submit() {
-      const data = {
+    createPost() {
+      const newPost = {
         title: this.title,
         description: this.description,
-        media: this.media,
-        userId: this.userId,
+        // media: this.media,
+        pseudo: this.pseudo,
       };
       this.axios
-        .post('http://localhost:3000/api/post', data)
+        .post('http://localhost:3000/api/post/createpost', newPost)
         .then((response) => {
-          if (response) {
-            // Si j'ai une réponse alors ...
-            console.log('Post créer !'); // J'indique dans la console que le post est créé
-            // if (response.data.token == localeStorage.getIem('userToken')) {
-            // }
-            this.$router.push({ name: 'Home' });
-          }
+          console.log('Post créer !'); // J'indique dans la console que le post est créé
+          console.log(response.data);
+          console.log(newPost);
+          // if (response.data.token == localeStorage.getIem('userToken')) {
+          // }
+          this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));
     },
@@ -65,7 +76,6 @@ export default {
 
 <style lang="scss">
 .post {
-  width: 320px;
   height: 400px;
   background-color: #62929e;
   border-radius: 15px;

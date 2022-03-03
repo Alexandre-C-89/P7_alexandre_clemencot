@@ -5,36 +5,37 @@ const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("./dbConnect");
 
 // Création du modèle en utilisant la connexion
-const Post = sequelize.define("Post", {
+const Post = sequelize.define(
+  "Post",
+  {
     // Je définis les attributs ici
     title: {
-        type: DataTypes.STRING,
-        allowNull: false, // équivalant required
+      type: DataTypes.STRING,
+      allowNull: false, // équivalant required
     },
     description: {
-        type: DataTypes.STRING,
-        allowNull: false, 
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    media: {
-        type: DataTypes.STRING,
-        allowNull: true,
+    // media: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    // },
+    pseudo: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    userId: {
-        type: DataTypes.STRING,
-        allowNull: false, 
-    }
-},
-    {
-        tableName: "posts",
-        timestamps: true,
-    }
+  },
+  {
+    tableName: "posts",
+    timestamps: true,
+  }
 );
-
 
 // foreignKey pour les posts
 // User.belongsTo(Post);
 
-// J'exporte mon modèle 
-// pour pouvoir l'utilisé dans d'autres 
+// J'exporte mon modèle
+// pour pouvoir l'utilisé dans d'autres
 // fichiers
 module.exports = Post;

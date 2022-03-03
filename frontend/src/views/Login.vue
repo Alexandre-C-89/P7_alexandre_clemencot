@@ -39,13 +39,11 @@ export default {
       this.axios
         .post('http://localhost:3000/api/user/login', data)
         .then((response) => {
-          if (response) {
-            console.log('Utilisateur connecté !');
-            console.log(response.data.token);
-            localStorage.setItem('userToken', response.data.token);
-            // window.location.href('http://localhost:8080/');
-            this.$router.push({ name: 'Home' });
-          }
+          console.log('Utilisateur connecté !');
+          console.log(response.data.token);
+          localStorage.setItem('userToken', response.data.token);
+          // window.location.href('http://localhost:8080/');
+          this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));
     },
