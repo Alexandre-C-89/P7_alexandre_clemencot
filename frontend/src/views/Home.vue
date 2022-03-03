@@ -5,20 +5,20 @@
     </div>
     <div class="home__card" v-for="post in posts" :key="post.card" :post="post">
       <div class="home__card__img">
-        <img :src="post.media" alt="" />
+        <img :src="post.media" alt="image du post" />
       </div>
       <div class="home__card__content">
-        <div class="home__card__title">
+        <div class="home__card__content__title">
           {{ post.title }}
-        </div>
-        <div class="home__card__content__name">
-          {{ post.pseudo }}
         </div>
         <div class="home__card__content__description">
           {{ post.description }}
         </div>
+        <div class="home__card__content__name">
+          {{ post.pseudo }}
+        </div>
       </div>
-      <div class="home__btn">
+      <div class="home__card__btn">
         <button>modifier</button>
         <button>Supprimer</button>
       </div>
@@ -61,81 +61,78 @@ export default {
   flex-direction: column;
   width: 600px;
   height: auto;
-  background-color: #62929e;
+  background-color: #41b883;
   margin: 40px 10px 10px 10px;
   border-radius: 18px;
-  padding: 20px 10px 10px 10px;
-  &__card {
-    background-color: black;
-    box-sizing: content-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    width: 700px;
-    height: auto;
-    margin: 20px;
-    &__img {
-      background-color: #fff;
-      width: auto;
-      & img {
-        width: 400px;
-        height: 370px;
-      }
+  padding: 20px;
+  &__icone {
+    & button {
+      width: 100px;
+      height: 28px;
+      margin: 10px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.541);
+      border: 2px solid white;
+      margin: 5px;
     }
-    &__icone {
-      background-color: none;
-      background: none;
-      & button {
-        width: 100px;
-        height: 30px;
-        border-radius: 10px;
-        background-color: #ef8354;
-        // position: absolute;
-        // top: 150px;
-        // right: 300px;
-      }
-    }
-    &__title {
-      color: #ef8354;
-      font-size: 1.3rem;
-      font-weight: bolder;
-      font-family: 'Nunito', sans-serif;
-      position: absolute;
-    }
-    .home__card__content {
-      border-color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 250px;
-      height: 280px;
-      &__name {
-        background-color: aqua;
-        font-family: 'Nunito', sans-serif;
-        font-size: 1rem;
-        font-weight: bold;
-      }
-      &__description {
-        width: 200px;
-        height: 300px;
-        background-color: #fff;
-        font-family: 'Merriweather Sans', sans-serif;
-        font-size: 0.7rem;
-        margin-top: 30px;
-      }
-    }
-  }
-  &__btn button {
-    width: 100px;
-    height: 28px;
-    margin: 10px;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.541);
-    border: 2px solid white;
     &:hover {
       background-color: #62929e;
+    }
+  }
+  &__card {
+    width: 530px;
+    height: 280px;
+    background-color: #4c86a8;
+    margin: 10px 0px 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    &__img {
+      background-color: #fff;
+      width: 330px;
+      height: 220px;
+      margin: 10px;
+    }
+    &__content {
+      width: 160px;
+      height: 220px;
+      margin: 10px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      &__title {
+        font-family: 'nunito', sans-serif;
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin: 2px;
+        color: #ef8354;
+      }
+      &__description {
+        background-color: #fff;
+        width: 150px;
+        height: 150px;
+        margin: 5px 0px 5px 0px;
+      }
+      &__name {
+        font-size: 0.8rem;
+        font-family: 'Merriweather Sans', sans-serif;
+      }
+    }
+    &__btn {
+      margin: 0px 0px 10px 0px;
+      & button {
+        width: 100px;
+        height: 28px;
+        margin: 10px;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.541);
+        border: 2px solid white;
+        margin: 5px;
+      }
+      &:hover {
+        background-color: #62929e;
+      }
     }
   }
 }

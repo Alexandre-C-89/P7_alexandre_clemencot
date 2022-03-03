@@ -37,10 +37,10 @@
     }
   }
   &__logo {
-    margin-left: 15px;
+    margin-left: 20px;
     & img {
-      width: 150px;
-      height: 35px;
+      width: 200px;
+      height: 50px;
     }
   }
   & router-link {
