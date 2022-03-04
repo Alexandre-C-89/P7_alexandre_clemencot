@@ -3,6 +3,8 @@ const { Sequelize, DataTypes } = require("sequelize");
 // Création de la connexion
 // const sequelize = new Sequelize("sqlite::memory:");
 const sequelize = require("./dbConnect");
+// J'importe mon modèle User
+const User = require("../models/user");
 
 // Création du modèle en utilisant la connexion
 const Post = sequelize.define(
@@ -16,13 +18,13 @@ const Post = sequelize.define(
       unique: false,
       allowNull: false,
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      autoIncrement: false,
-      primaryKey: false,
-      unique: false,
-      allowNull: false,
-    },
+    // userId: {
+    //   type: DataTypes.INTEGER,
+    //   autoIncrement: false,
+    //   primaryKey: false,
+    //   unique: false,
+    //   allowNull: false,
+    // },
     title: {
       type: DataTypes.STRING,
       allowNull: false, // équivalant required
@@ -46,8 +48,9 @@ const Post = sequelize.define(
   }
 );
 
-// foreignKey pour les posts
-// User.belongsTo(Post);
+// foreignKey pour la relation
+// entre l'utilisateur et son post
+Post.belongsTo(User);
 
 // J'exporte mon modèle
 // pour pouvoir l'utilisé dans d'autres
