@@ -25,13 +25,6 @@ const User = sequelize.define(
       unique: false,
       allowNull: false,
     },
-    // userId: {
-    //   type: DataTypes.INTEGER,
-    //   autoIncrement: false,
-    //   primaryKey: false,
-    //   unique: true,
-    //   allowNull: false,
-    // },
     pseudo: {
       type: DataTypes.STRING,
       allowNull: false,
