@@ -20,10 +20,10 @@
           v-model="description"
         />
       </div>
-      <div class="post__form__img">
+      <!-- <div class="post__form__img">
         <label for="">image : </label>
         <input type="file" placeholder="Vous pouvez importez une image !" />
-      </div>
+      </div> -->
       <div class="post__form__name">
         <label for="">Pseudo : </label>
         <input

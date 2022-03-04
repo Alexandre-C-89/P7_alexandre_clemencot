@@ -4,7 +4,7 @@ const { Sequelize } = require("sequelize");
 // J'utilise un modèle de Sequelize
 // puis j'indique mes paramètre de connection
 const sequelize = new Sequelize(
-  /*"database"*/ "groupomania",
+  /*database*/ "groupomania",
   /*username*/ "root",
   /*password*/ "1234",
   {
@@ -16,7 +16,7 @@ const sequelize = new Sequelize(
 sequelize
   .authenticate()
   .then(() => {
-    console.log("Database Connected !");
+    console.log("je suis connecté à ma base de données : Groupomania !");
     sequelize
       .sync()
       .then((sync) => {

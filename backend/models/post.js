@@ -9,6 +9,20 @@ const Post = sequelize.define(
   "Post",
   {
     // Je définis les attributs ici
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      unique: false,
+      allowNull: false,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: false,
+      primaryKey: false,
+      unique: false,
+      allowNull: false,
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false, // équivalant required

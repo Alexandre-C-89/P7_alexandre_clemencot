@@ -15,9 +15,10 @@ exports.createPost = (req, res, next) => {
   // Je créer le post avec la méthode "create"
   // console.log();
   if (req.file) {
-    console.log("");
+    console.log(req.body, "1");
     Post.create({
       // Je renseigne les champs
+      userId: req.body.userId,
       title: req.body.title,
       description: req.body.description,
       pseudo: req.body.pseudo,
@@ -33,9 +34,10 @@ exports.createPost = (req, res, next) => {
         });
       });
   } else {
-    console.log(req.body);
+    console.log(req.body, "2");
     Post.create({
       // Je renseigne les champs
+      userId: req.body.userId,
       title: req.body.title,
       description: req.body.description,
       pseudo: req.body.pseudo,
