@@ -50,7 +50,7 @@ const Post = sequelize.define(
 
 // foreignKey pour la relation
 // entre l'utilisateur et son post
-Post.belongsTo(User);
+// Post.belongsTo(User);
 
 // J'exporte mon modèle
 // pour pouvoir l'utilisé dans d'autres

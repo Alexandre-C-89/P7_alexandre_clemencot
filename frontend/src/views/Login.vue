@@ -27,6 +27,7 @@ export default {
     return {
       email: '',
       password: '',
+      // userID: '',
       user: {},
     };
   },
@@ -40,10 +41,10 @@ export default {
         .post('http://localhost:3000/api/user/login', data)
         .then((response) => {
           console.log('Utilisateur connecté !');
-          console.log(response.data.token);
+          console.log(response.headers);
           localStorage.setItem('userToken', response.data.token);
-          // window.location.href('http://localhost:8080/');
-          this.$router.push({ name: 'Home' });
+          // localStorage.setItem('userId', response.data.id);
+          // this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));
     },

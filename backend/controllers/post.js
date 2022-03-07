@@ -37,7 +37,7 @@ exports.createPost = (req, res, next) => {
     console.log(req.body, "2");
     Post.create({
       // Je renseigne les champs
-      userId: req.body.userId,
+      userId: req.body.id,
       title: req.body.title,
       description: req.body.description,
       pseudo: req.body.pseudo,
