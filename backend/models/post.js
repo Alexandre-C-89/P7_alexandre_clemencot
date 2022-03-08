@@ -11,46 +11,42 @@ const Post = sequelize.define(
   "Post",
   {
     // Je définis les attributs ici
-    id: {
+    postId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-      unique: false,
+      unique: true,
       allowNull: false,
     },
-    // userId: {
-    //   type: DataTypes.INTEGER,
-    //   autoIncrement: false,
-    //   primaryKey: false,
-    //   unique: false,
-    //   allowNull: false,
-    // },
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false, // équivalant required
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(500),
       allowNull: false,
     },
-    // media: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
+    media: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
     pseudo: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(70),
       allowNull: false,
     },
   },
   {
+    // Other model options go here
+    // sequelize, // We need to pass the connection instance
+    // modelName: "Post",
     tableName: "posts",
-    timestamps: true,
+    timestamps: false,
   }
 );
 
 // foreignKey pour la relation
 // entre l'utilisateur et son post
-// Post.belongsTo(User);
+Post.belongsTo(User);
 
 // J'exporte mon modèle
 // pour pouvoir l'utilisé dans d'autres

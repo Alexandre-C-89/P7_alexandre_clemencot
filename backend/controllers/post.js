@@ -18,12 +18,12 @@ exports.createPost = (req, res, next) => {
     console.log(req.body, "1");
     Post.create({
       // Je renseigne les champs
-      userId: req.body.userId,
       title: req.body.title,
       description: req.body.description,
+      media: `/images/${req.file.filename}`,
       pseudo: req.body.pseudo,
+      UserId: User.id,
       // userId: req.token.userId,
-      // media: `/images/${req.file.filename}`,
     })
       .then(() => {
         return res.status(200).json({ message: "Post créé avec l'image !" });
@@ -37,11 +37,11 @@ exports.createPost = (req, res, next) => {
     console.log(req.body, "2");
     Post.create({
       // Je renseigne les champs
-      userId: req.body.id,
       title: req.body.title,
       description: req.body.description,
+      media: req.body.media,
       pseudo: req.body.pseudo,
-      // userId: req.token.userId,
+      UserId: User.id,
     })
       .then(() => {
         // Si la requête est correcte j'ai un status 201

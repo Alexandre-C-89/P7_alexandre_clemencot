@@ -31,6 +31,7 @@ exports.signup = (req, res, next) => {
     .catch((error) => {
       res.status(400).json({ error, message: "Erreur !" });
     });
+  console.log(req.body.id);
 };
 
 // Partie connexion de l'utilisateur
@@ -50,8 +51,8 @@ exports.login = async (req, res, next) => {
             .json({ error: "Mot de passe et/ou email incorrect !" });
         }
         res.status(200).json({
-          userId: user._id,
-          token: jwt.sign({ userId: user._id }, process.env.SECRET_key, {
+          userId: user.id,
+          token: jwt.sign({ userId: user.id }, process.env.SECRET_key, {
             expiresIn: "8h",
           }),
         });

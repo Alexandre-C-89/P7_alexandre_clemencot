@@ -3,6 +3,8 @@ const { Sequelize, DataTypes } = require("sequelize");
 // Création de la connexion
 // const sequelize = new Sequelize("sqlite::memory:");
 const sequelize = require("./dbConnect");
+// J'importe mon model de post
+// const Post = require("../models/post");
 
 // Création du modèle en utilisant la connexion
 const User = sequelize.define(
@@ -13,7 +15,7 @@ const User = sequelize.define(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-      unique: false,
+      unique: true,
       allowNull: false,
     },
     pseudo: {
