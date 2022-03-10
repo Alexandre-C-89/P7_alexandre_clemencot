@@ -41,10 +41,11 @@ export default {
         .post('http://localhost:3000/api/user/login', data)
         .then((response) => {
           console.log('Utilisateur connecté !');
-          console.log(response.headers);
+          console.log(response.data);
+          console.log(response.data.userId);
           localStorage.setItem('userToken', response.data.token);
-          // localStorage.setItem('userId', response.data.id);
-          // this.$router.push({ name: 'Home' });
+          localStorage.setItem('userId', response.data.userId);
+          this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));
     },

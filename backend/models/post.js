@@ -28,7 +28,7 @@ const Post = sequelize.define(
     },
     media: {
       type: DataTypes.STRING(255),
-      allowNull: true,
+      allowNull: false,
     },
     pseudo: {
       type: DataTypes.STRING(70),

@@ -55,7 +55,7 @@ export default {
         .post('http://localhost:3000/api/user/signup', user)
         .then((response) => {
           console.log(response.data);
-          // console.log('OK', response.data, user, JSON.stringify(user));
+          console.log('Utilisateur enregistré ! ');
           this.$router.push({ name: 'Login' });
         })
         .catch((error) => {

@@ -72,12 +72,6 @@ export default {
         })
         .catch((error) => console.log(error));
     },
-    goModify() {
-      this.$router.push({ name: 'ModifyPost' });
-    },
-    goDelete() {
-      this.$router.push({ name: 'DeletePost' });
-    },
   },
 };
 </script>

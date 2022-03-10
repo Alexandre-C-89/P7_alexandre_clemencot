@@ -5,6 +5,8 @@ import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import SignUp from '../views/Signup.vue';
 import CreatePost from '../views/CreatePost.vue';
+import ModifyPost from '../views/ModifyPost.vue';
+import DeletePost from '../views/DeletePost.vue';
 import Profil from '../views/Profil.vue';
 
 Vue.use(VueRouter);
@@ -29,6 +31,16 @@ const routes = [
     path: '/createpost',
     name: 'createPost',
     component: CreatePost,
+  },
+  {
+    path: '/modifyPost',
+    name: 'ModifyPost',
+    component: ModifyPost,
+  },
+  {
+    path: '/deletePost',
+    name: 'DeletePost',
+    component: DeletePost,
   },
   {
     path: '/user/:name',

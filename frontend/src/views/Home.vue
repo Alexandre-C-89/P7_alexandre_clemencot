@@ -19,8 +19,8 @@
         </div>
       </div>
       <div class="home__card__btn">
-        <button>modifier</button>
-        <button>Supprimer</button>
+        <button @click.prevent="goModify()">modifier</button>
+        <button @click.prevent="goDelete()">Supprimer</button>
       </div>
     </div>
   </div>
@@ -49,6 +49,12 @@ export default {
     goToCreatePost() {
       this.$router.push({ name: 'createPost' });
     },
+    goModify() {
+      this.$router.push({ name: 'ModifyPost' });
+    },
+    goDelete() {
+      this.$router.push({ name: 'DeletePost' });
+    },
   },
 };
 </script>
@@ -74,9 +80,9 @@ export default {
       background-color: rgba(255, 255, 255, 0.541);
       border: 2px solid white;
       margin: 5px;
-    }
-    &:hover {
-      background-color: #62929e;
+      &:hover {
+        background-color: #62929e;
+      }
     }
   }
   &__card {
@@ -129,9 +135,9 @@ export default {
         background-color: rgba(255, 255, 255, 0.541);
         border: 2px solid white;
         margin: 5px;
-      }
-      &:hover {
-        background-color: #62929e;
+        &:hover {
+          background-color: #62929e;
+        }
       }
     }
   }
