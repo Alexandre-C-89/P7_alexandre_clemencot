@@ -48,6 +48,7 @@ export default {
       description: '',
       media: '',
       pseudo: '',
+      userId: localStorage.getItem,
     };
   },
   methods: {
@@ -57,7 +58,7 @@ export default {
         description: this.description,
         media: this.media,
         pseudo: this.pseudo,
-        userId: localStorage.getItem('userId'),
+        userId: this.userId,
         userToken: localStorage.getItem('userToken'),
       };
       this.axios
@@ -66,8 +67,12 @@ export default {
           console.log('Post créer !'); // J'indique dans la console que le post est créé
           console.log(response.data);
           console.log(newPost);
+          console.log(this.userId);
           if (response.data.userId === this.userId) {
-            this.$router.push({ name: 'Home' });
+            console.log(
+              "Condition vérifié, je suis redirigé vers la page d'accueil !!",
+            );
+            // this.$router.push({ name: 'Home' });
           }
         })
         .catch((error) => console.log(error));

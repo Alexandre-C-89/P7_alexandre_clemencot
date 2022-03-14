@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div class="home__title">
+      <h3>{{ content }}</h3>
+    </div>
     <div class="home__icone">
       <button @click.prevent="goToCreatePost()">Créér un post</button>
     </div>
@@ -27,36 +30,61 @@
 </template>
 
 <script>
+import UserService from '../services/user.service';
+
 export default {
   name: 'Home',
-  components: {},
   data() {
     return {
-      posts: '',
+      content: '',
     };
   },
   mounted() {
-    this.axios
-      .get('http://localhost:3000/api/post')
-      .then((response) => {
-        this.posts = response.data.post;
-        // console.log(response.data.post);
-      })
-      // eslint-disable-next-line no-console
-      .catch((error) => console.log(error));
-  },
-  methods: {
-    goToCreatePost() {
-      this.$router.push({ name: 'createPost' });
-    },
-    goModify() {
-      this.$router.push({ name: 'ModifyPost' });
-    },
-    goDelete() {
-      this.$router.push({ name: 'DeletePost' });
-    },
+    UserService.getPublicContent().then(
+      (response) => {
+        this.content = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      },
+    );
   },
 };
+
+// export default {
+//   name: 'Home',
+//   components: {},
+//   data() {
+//     return {
+//       posts: '',
+//     };
+//   },
+//   mounted() {
+//     this.axios
+//       .get('http://localhost:3000/api/post')
+//       .then((response) => {
+//         this.posts = response.data.post;
+//         // console.log(response.data.post);
+//       })
+//       // eslint-disable-next-line no-console
+//       .catch((error) => console.log(error));
+//   },
+//   methods: {
+//     goToCreatePost() {
+//       this.$router.push({ name: 'createPost' });
+//     },
+//     goModify() {
+//       this.$router.push({ name: 'ModifyPost' });
+//     },
+//     goDelete() {
+//       // this.$router.push({ name: 'DeletePost' });
+//       this.axios.delete('http://localhost:3000/api/post');
+//     },
+//   },
+// };
 </script>
 
 <style lang="scss">

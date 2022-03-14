@@ -30,39 +30,82 @@
 </template>
 
 <script>
+import User from '../models/user';
+
 export default {
-  name: 'Signup',
+  name: 'Register',
   data() {
     return {
-      // firstname: '',
-      // lastname: '',
-      pseudo: '',
-      email: '',
-      password: '',
+      user: new User('', '', ''),
+      submitted: false,
+      successful: false,
+      message: '',
     };
   },
-  methods: {
-    submit() {
-      const user = {
-        // firstname: this.firstname,
-        // lastname: this.lastname,
-        pseudo: this.pseudo,
-        email: this.email,
-        password: this.password,
-      };
-      // http://localhost:3000/api/user/signup
-      this.axios
-        .post('http://localhost:3000/api/user/signup', user)
-        .then((response) => {
-          console.log(response.data);
-          console.log('Utilisateur enregistré ! ');
-          this.$router.push({ name: 'Login' });
-        })
-        .catch((error) => {
-          console.log(error, 'Erreur');
-        });
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
     },
   },
+  mounted() {
+    if (this.loggedIn) {
+      this.$router.push('/profile');
+    }
+  },
+  methods: {
+    handleRegister() {
+      this.message = '';
+      this.submitted = true;
+      this.$validator.validate().then((isValid) => {
+        if (isValid) {
+          this.$store.dispatch('auth/register', this.user).then(
+            (data) => {
+              this.message = data.message;
+              this.successful = true;
+            },
+            (error) => {
+              this.message =
+                (error.response && error.response.data) ||
+                error.message ||
+                error.toString();
+              this.successful = false;
+            },
+          );
+        }
+      });
+    },
+  },
+  // data() {
+  //   return {
+  //     // firstname: '',
+  //     // lastname: '',
+  //     pseudo: '',
+  //     email: '',
+  //     password: '',
+  //   };
+  // },
+  // methods: {
+  //   submit() {
+  //     const user = {
+  //       // firstname: this.firstname,
+  //       // lastname: this.lastname,
+  //       pseudo: this.pseudo,
+  //       email: this.email,
+  //       password: this.password,
+  //     };
+  //     // http://localhost:3000/api/user/signup
+  //     this.axios
+  //       .post('http://localhost:3000/api/user/signup', user)
+  //       .then((response) => {
+  //         console.log(response.data);
+  //         console.log('Utilisateur enregistré ! ');
+  //         this.$router.push({ name: 'Login' });
+  //       })
+  //       .catch((error) => {
+  //         console.log(error, 'Erreur');
+  //       });
+  //   },
+  // },
 };
 </script>
 
