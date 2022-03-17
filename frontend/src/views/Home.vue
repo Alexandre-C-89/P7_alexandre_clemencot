@@ -30,61 +30,37 @@
 </template>
 
 <script>
-import UserService from '../services/user.service';
-
 export default {
   name: 'Home',
+  components: {},
   data() {
     return {
-      content: '',
+      posts: '',
     };
   },
   mounted() {
-    UserService.getPublicContent().then(
-      (response) => {
-        this.content = response.data;
-      },
-      (error) => {
-        this.content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-      },
-    );
+    this.axios
+      .get('http://localhost:3000/api/post')
+      .then((response) => {
+        this.posts = response.data.post;
+        // console.log(response.data.post);
+      })
+      // eslint-disable-next-line no-console
+      .catch((error) => console.log(error));
+  },
+  methods: {
+    goToCreatePost() {
+      this.$router.push({ name: 'createPost' });
+    },
+    goModify() {
+      this.$router.push({ name: 'ModifyPost' });
+    },
+    goDelete() {
+      // this.$router.push({ name: 'DeletePost' });
+      this.axios.delete('http://localhost:3000/api/post');
+    },
   },
 };
-
-// export default {
-//   name: 'Home',
-//   components: {},
-//   data() {
-//     return {
-//       posts: '',
-//     };
-//   },
-//   mounted() {
-//     this.axios
-//       .get('http://localhost:3000/api/post')
-//       .then((response) => {
-//         this.posts = response.data.post;
-//         // console.log(response.data.post);
-//       })
-//       // eslint-disable-next-line no-console
-//       .catch((error) => console.log(error));
-//   },
-//   methods: {
-//     goToCreatePost() {
-//       this.$router.push({ name: 'createPost' });
-//     },
-//     goModify() {
-//       this.$router.push({ name: 'ModifyPost' });
-//     },
-//     goDelete() {
-//       // this.$router.push({ name: 'DeletePost' });
-//       this.axios.delete('http://localhost:3000/api/post');
-//     },
-//   },
-// };
 </script>
 
 <style lang="scss">

@@ -40,14 +40,13 @@
 </template>
 
 <script>
+import Post from '../models/post';
+
 export default {
   name: 'Login',
   data() {
     return {
-      title: '',
-      description: '',
-      media: '',
-      pseudo: '',
+      post: Post,
       userId: localStorage.getItem,
     };
   },

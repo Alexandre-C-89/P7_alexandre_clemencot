@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
-import auth from './auth.module';
+// import auth from './auth.module';
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
@@ -25,6 +25,6 @@ export default new Vuex.Store({
   },
   modules: {
     //
-    auth, // J'importe le fichier auth pour utilisé l'authentification
+    // auth, // J'importe le fichier auth pour utilisé l'authentification
   },
 });

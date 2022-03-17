@@ -8,7 +8,12 @@
       </div>
       <div class="form__password">
         <label for="password">Mot de passe : </label>
-        <input type="password" name="password" v-model="password" placeholder="mot de passe" />
+        <input
+          type="password"
+          name="password"
+          v-model="password"
+          placeholder="mot de passe"
+        />
       </div>
       <!-- <Btn /> -->
       <button @click.prevent="submit()" type="submit">Connexion</button>
@@ -22,84 +27,34 @@ import User from '../models/user';
 
 export default {
   name: 'Login',
-  // // components: {
-  // //   Btn,
-  // // },
-  // data() {
-  //   return {
-  //     email: '',
-  //     password: '',
-  //     // userID: '',
-  //     user: {},
-  //   };
-  // },
-  // methods: {
-  //   submit() {
-  //     const data = {
-  //       email: this.email,
-  //       password: this.password,
-  //     };
-  //     this.axios
-  //       .post('http://localhost:3000/api/user/login', data)
-  //       .then((response) => {
-  //         console.log('Utilisateur connecté !');
-  //         console.log(response.data);
-  //         console.log(response.data.userId);
-  //         localStorage.setItem(
-  //           'userToken',
-  //           JSON.stringify(response.data.token),
-  //         );
-  //         localStorage.setItem('userId', JSON.stringify(response.data.userId));
-  //         this.$router.push({ name: 'Home' });
-  //       })
-  //       .catch((error) => console.log(error));
-  //   },
+  // components: {
+  //   Btn,
   // },
   data() {
     return {
-      user: new User('', ''),
-      loading: false,
-      message: '',
+      user: User,
     };
   },
-  computed: {
-    loggedIn() {
-      // Je vérifie le status de l'utilisateur
-      // connecté avec VueX
-      return this.$store.state.auth.status.loggedIn;
-    },
-  },
-  created() {
-    // Si le status est vrai alors
-    // je redirige l'utilisateur vers la page profile
-    if (this.loggedIn) {
-      this.$router.push('/profile');
-    }
-  },
   methods: {
-    handleLogin() {
-      // J'envoi l'action "auth/login" à VueX store
-      // Si la connexion réussit, j'accède à la page profil
-      // Sinon, j'affiche un message d'erreur
-      this.loading = true;
-      this.$validator.validateAll().then((isValid) => {
-        if (!isValid) {
-          this.loading = false;
-          return;
-        }
-        if (this.user.username && this.user.password) {
-          this.$store.dispatch('auth/login', this.user).then(
-            () => {
-              this.$router.push('/profile');
-            },
-            (error) => {
-              this.loading = false;
-              this.message =
-                (error.response && error.response.data) || error.message || error.toString();
-            },
+    submit() {
+      const data = {
+        email: User.email,
+        password: User.password,
+      };
+      this.axios
+        .post('http://localhost:3000/api/user/login', data)
+        .then((response) => {
+          console.log('Utilisateur connecté !');
+          console.log(response.data);
+          console.log(response.data.userId);
+          localStorage.setItem(
+            'userToken',
+            JSON.stringify(response.data.token),
           );
-        }
-      });
+          localStorage.setItem('userId', JSON.stringify(response.data.userId));
+          this.$router.push({ name: 'Home' });
+        })
+        .catch((error) => console.log(error));
     },
   },
 };
