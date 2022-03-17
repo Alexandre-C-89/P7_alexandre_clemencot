@@ -13,7 +13,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/', // URL correspondant au composant
+    path: '/home', // URL correspondant au composant
     name: 'Home', // le nom de cette route pour l'étiquetage et le débuggage
     component: Home, // le composant qui doit s'afficher lorsque le path est trouvé
   },
@@ -51,7 +51,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  // base: process.env.BASE_URL,
   routes,
 });
 

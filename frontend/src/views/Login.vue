@@ -23,7 +23,7 @@
 
 <script>
 // import Btn from '../components/Btn.vue';
-import User from '../models/user';
+// import User from '../models/user';
 
 export default {
   name: 'Login',
@@ -32,17 +32,22 @@ export default {
   // },
   data() {
     return {
-      user: User,
+      // user: User,
+      email: '',
+      password: '',
+      user: {},
     };
   },
   methods: {
     submit() {
-      const data = {
-        email: User.email,
-        password: User.password,
+      const user = {
+        // email: User.email,
+        // password: User.passwords,
+        email: this.email,
+        password: this.password,
       };
       this.axios
-        .post('http://localhost:3000/api/user/login', data)
+        .post('http://localhost:3000/api/user/login', user)
         .then((response) => {
           console.log('Utilisateur connecté !');
           console.log(response.data);

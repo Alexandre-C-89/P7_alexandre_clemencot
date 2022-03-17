@@ -1,8 +1,5 @@
 <template>
   <div class="home">
-    <div class="home__title">
-      <h3>{{ content }}</h3>
-    </div>
     <div class="home__icone">
       <button @click.prevent="goToCreatePost()">Créér un post</button>
     </div>
@@ -30,12 +27,14 @@
 </template>
 
 <script>
+import Posts from '../models/post';
+
 export default {
   name: 'Home',
   components: {},
   data() {
     return {
-      posts: '',
+      posts: Posts,
     };
   },
   mounted() {
