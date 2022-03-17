@@ -14,7 +14,7 @@ exports.createPost = (req, res, next) => {
   console.log("Vous avez l'intention de créer un post !");
   // Je créer le post avec la méthode "create"
   // console.log();
-  console.log(req.file);
+  // console.log(req.file);
   if (req.file) {
     console.log(req.body, "1");
     Post.create({
@@ -45,7 +45,7 @@ exports.createPost = (req, res, next) => {
     })
       .then(() => {
         // Si la requête est correcte j'ai un status 201
-        return res.status(200).json({ message: "Post créé ! " });
+        return res.status(200).json({ message: "Post créé ! " + User.id });
       })
       .catch((error) => {
         console.log(error);

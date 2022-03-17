@@ -40,14 +40,17 @@
 </template>
 
 <script>
-import Post from '../models/post';
+// import Post from '../models/post';
 
 export default {
   name: 'Login',
   data() {
     return {
-      post: Post,
-      userId: localStorage.getItem,
+      title: '',
+      description: '',
+      media: '',
+      pseudo: '',
+      // userId: localStorage.getItem('userId'),
     };
   },
   methods: {
@@ -57,7 +60,8 @@ export default {
         description: this.description,
         media: this.media,
         pseudo: this.pseudo,
-        userId: this.userId,
+        // userId: this.userId,
+        userId: localStorage.getItem('userId'),
         userToken: localStorage.getItem('userToken'),
       };
       this.axios
@@ -71,7 +75,7 @@ export default {
             console.log(
               "Condition vérifié, je suis redirigé vers la page d'accueil !!",
             );
-            // this.$router.push({ name: 'Home' });
+            this.$router.push({ name: 'Home' });
           }
         })
         .catch((error) => console.log(error));

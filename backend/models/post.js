@@ -18,6 +18,9 @@ const Post = sequelize.define(
       unique: true,
       allowNull: false,
     },
+    UserId: {
+      type: DataTypes.NUMBER,
+    },
     title: {
       type: DataTypes.STRING(255),
       allowNull: false, // équivalant required
@@ -46,7 +49,7 @@ const Post = sequelize.define(
 
 // foreignKey pour la relation
 // entre l'utilisateur et son post
-Post.belongsTo(User);
+// Post.belongsTo(User);
 
 // J'exporte mon modèle
 // pour pouvoir l'utilisé dans d'autres
