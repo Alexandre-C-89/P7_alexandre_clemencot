@@ -15,11 +15,11 @@ const Post = sequelize.define(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-      unique: true,
+      unique: false,
       allowNull: false,
     },
     UserId: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
     },
     title: {
       type: DataTypes.STRING(255),

@@ -34,14 +34,14 @@ exports.createPost = (req, res, next) => {
         });
       });
   } else {
-    console.log(req.body, "2");
+    console.log(Number(req.body.userId));
     Post.create({
       // Je renseigne les champs
       title: req.body.title,
       description: req.body.description,
       media: req.body.media,
       pseudo: req.body.pseudo,
-      UserId: User.id,
+      UserId: Number(req.body.userId),
     })
       .then(() => {
         // Si la requête est correcte j'ai un status 201

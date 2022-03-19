@@ -64,12 +64,12 @@ export default {
         userId: localStorage.getItem('userId'),
         userToken: localStorage.getItem('userToken'),
       };
+      console.log(localStorage.getItem('userId'));
       this.axios
         .post('http://localhost:3000/api/post/createpost', newPost)
         .then((response) => {
           console.log('Post créer !'); // J'indique dans la console que le post est créé
-          console.log(response.data);
-          console.log(newPost);
+          // console.log(response.data);
           console.log(this.userId);
           if (response.data.userId === this.userId) {
             console.log(

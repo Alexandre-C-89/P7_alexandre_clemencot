@@ -31,7 +31,7 @@ exports.signup = (req, res, next) => {
     .catch((error) => {
       res.status(400).json({ error, message: "Erreur !" });
     });
-  console.log(req.body.id);
+  console.log(User.id);
 };
 
 // Partie connexion de l'utilisateur
