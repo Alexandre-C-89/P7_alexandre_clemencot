@@ -15,8 +15,6 @@ exports.signup = (req, res, next) => {
     .then((hash) => {
       User.create({
         // Je crée mon utilisateur
-        // firstname: req.body.firstname,
-        // lastname: req.body.lastname,
         pseudo: req.body.pseudo,
         email: req.body.email,
         password: hash,
@@ -31,7 +29,6 @@ exports.signup = (req, res, next) => {
     .catch((error) => {
       res.status(400).json({ error, message: "Erreur !" });
     });
-  console.log(User.id);
 };
 
 // Partie connexion de l'utilisateur

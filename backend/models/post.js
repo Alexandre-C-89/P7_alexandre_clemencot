@@ -20,6 +20,10 @@ const Post = sequelize.define(
     },
     UserId: {
       type: DataTypes.INTEGER,
+      autoIncrement: false,
+      primaryKey: false,
+      unique: true,
+      allowNull: true,
     },
     title: {
       type: DataTypes.STRING(255),
@@ -30,7 +34,7 @@ const Post = sequelize.define(
       allowNull: false,
     },
     media: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     pseudo: {

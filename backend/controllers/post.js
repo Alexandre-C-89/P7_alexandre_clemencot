@@ -16,12 +16,13 @@ exports.createPost = (req, res, next) => {
   // console.log();
   // console.log(req.file);
   if (req.file) {
-    console.log(req.body, "1");
+    console.log(req.body.file, "1");
     Post.create({
       // Je renseigne les champs
       title: req.body.title,
       description: req.body.description,
-      media: `/images/${req.file.filename}`,
+      // media: `images/${req.file.filename}`,
+      media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
       pseudo: req.body.pseudo,
       UserId: User.id,
     })
@@ -33,6 +34,7 @@ exports.createPost = (req, res, next) => {
           message: "Impossible de créer le post car il y a une erreur ! 1",
         });
       });
+    console.log(media);
   } else {
     console.log(Number(req.body.userId));
     Post.create({

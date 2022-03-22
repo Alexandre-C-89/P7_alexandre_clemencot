@@ -1,9 +1,11 @@
+// J'importe multer
 const multer = require("multer");
 
 const MIME_TYPES = {
   "image/jpg": "jpg",
   "image/jpeg": "jpg",
   "image/png": "png",
+  "image/gif": "gif",
 };
 
 const storage = multer.diskStorage({
@@ -12,7 +14,7 @@ const storage = multer.diskStorage({
     console.log(file);
     // première argument est égal à null
     // Ensuite je passe le nom du dossier qui reçoit les images
-    callback(null, "images");
+    callback(null, "./images");
   },
   // j'indique le nom de fichier à utilisé a multer
   // car on ne peut pas utilisé le nom d'origine
@@ -27,4 +29,4 @@ const storage = multer.diskStorage({
   },
 });
 
-module.exports = multer({ storage: storage }).single("media");
+module.exports = multer({ storage: storage }).single("image");

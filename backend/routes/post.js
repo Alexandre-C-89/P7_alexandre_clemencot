@@ -5,13 +5,13 @@ const router = express.Router();
 // J'importe mon fichier authentification
 const auth = require("../middleware/auth");
 // J'importe multer
-// const multer = require("../middleware/multer-config");
+const multer = require("../middleware/multer-config");
 
 // J'importe mon fichier user
 const postCtrl = require("../controllers/post");
 
 // Ici je créer mes routes pour s'enregistré et ce connecté
-router.post("/createpost", postCtrl.createPost);
+router.post("/createpost", multer, postCtrl.createPost);
 router.get("/", postCtrl.getAllPost);
 router.get("/:id", auth, postCtrl.getOnePost);
 // router.put("/:postId", auth, multer, postCtrl.modifyPost);
