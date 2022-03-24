@@ -3,7 +3,7 @@
     <div class="post__title">
       <p>Création de post :</p>
     </div>
-    <form class="post__form">
+    <form class="post__form" enctype="multipart/form-data">
       <div class="post__form__title">
         <label for="">Titre : </label>
         <input

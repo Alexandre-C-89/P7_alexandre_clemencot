@@ -15,14 +15,14 @@ const Post = sequelize.define(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-      unique: false,
+      unique: true,
       allowNull: false,
     },
     UserId: {
       type: DataTypes.INTEGER,
       autoIncrement: false,
       primaryKey: false,
-      unique: true,
+      unique: false,
       allowNull: true,
     },
     title: {
@@ -35,7 +35,11 @@ const Post = sequelize.define(
     },
     media: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+    },
+    mediaImg: {
+      type: DataTypes.BLOB("long"),
+      allowNull: true,
     },
     pseudo: {
       type: DataTypes.STRING(70),
@@ -43,9 +47,6 @@ const Post = sequelize.define(
     },
   },
   {
-    // Other model options go here
-    // sequelize, // We need to pass the connection instance
-    // modelName: "Post",
     tableName: "posts",
     timestamps: false,
   }
