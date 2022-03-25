@@ -21,7 +21,7 @@ exports.createPost = (req, res, next) => {
       // Je renseigne les champs
       title: req.body.title,
       description: req.body.description,
-      media: `images/${req.file.filename}`,
+      mediaImg: `/images/${req.file.filename}`,
       // media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
       pseudo: req.body.pseudo,
       UserId: Number(req.body.userId),
@@ -34,20 +34,20 @@ exports.createPost = (req, res, next) => {
           message: "Impossible de créer le post car il y a une erreur ! 1",
         });
       });
-    console.log(media);
+    // console.log(media);
   } else {
-    console.log(Number(req.body.userId));
+    console.log(Number(req.body.UserId));
     Post.create({
       // Je renseigne les champs
+      UserId: Number(req.body.UserId),
       title: req.body.title,
       description: req.body.description,
       media: req.body.media,
       pseudo: req.body.pseudo,
-      UserId: Number(req.body.userId),
     })
       .then(() => {
         // Si la requête est correcte j'ai un status 201
-        return res.status(200).json({ message: "Post créé ! " + UserId });
+        return res.status(200).json({ message: "Post créé ! " });
       })
       .catch((error) => {
         console.log(error);

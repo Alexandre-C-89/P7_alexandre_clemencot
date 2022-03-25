@@ -15,7 +15,7 @@ const Post = sequelize.define(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-      unique: true,
+      unique: false,
       allowNull: false,
     },
     UserId: {
@@ -23,7 +23,7 @@ const Post = sequelize.define(
       autoIncrement: false,
       primaryKey: false,
       unique: false,
-      allowNull: true,
+      allowNull: false,
     },
     title: {
       type: DataTypes.STRING(255),
@@ -35,7 +35,7 @@ const Post = sequelize.define(
     },
     media: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     mediaImg: {
       type: DataTypes.BLOB("long"),
