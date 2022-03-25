@@ -37,10 +37,10 @@ const Post = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    mediaImg: {
-      type: DataTypes.BLOB("long"),
-      allowNull: true,
-    },
+    // mediaImg: {
+    //   type: DataTypes.BLOB("long"),
+    //   allowNull: true,
+    // },
     pseudo: {
       type: DataTypes.STRING(70),
       allowNull: false,

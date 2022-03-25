@@ -101,6 +101,10 @@ export default {
       width: 330px;
       height: 220px;
       margin: 10px;
+      & img {
+        width: 330px;
+        height: 220px;
+      }
     }
     &__content {
       width: 160px;
