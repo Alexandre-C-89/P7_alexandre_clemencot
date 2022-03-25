@@ -122,12 +122,14 @@ export default {
         color: #ef8354;
       }
       &__description {
-        background-color: #fff;
+        // background-color: #fff;
+        color: #fff;
         width: 150px;
         height: 150px;
         margin: 5px 0px 5px 0px;
       }
       &__name {
+        color: #fff;
         font-size: 0.8rem;
         font-family: 'Merriweather Sans', sans-serif;
       }
