@@ -25,7 +25,7 @@
         <input type="file" placeholder="Vous pouvez importez une image !" />
       </div>
       <div class="post__form__name">
-        <label for="">Pseudo : </label>
+        <label data-id="1" for="">Pseudo : </label>
         <input
           type="text"
           placeholder="Indiquez votre pseudo ..."
@@ -51,6 +51,7 @@ export default {
       media: '',
       pseudo: '',
       userId: '',
+      postId: this.axios.get('http://localhost:3000/api/post'),
     };
   },
   methods: {
@@ -62,6 +63,7 @@ export default {
         media: this.media,
         pseudo: this.pseudo,
         // userId: this.userId,
+        postId: this.postId,
         userId: (this.userId = localStorage.getItem('userId')),
         userToken: (this.userToken = localStorage.getItem('userToken')),
       };
