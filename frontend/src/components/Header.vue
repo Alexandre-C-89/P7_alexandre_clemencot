@@ -6,7 +6,7 @@
     <div class="header__link">
       <router-link to="/login">Connexion</router-link> |
       <router-link to="/">Accueil</router-link> |
-      <router-link to="/user/:name">Profil</router-link> |
+      <router-link to="/api/user/:id">Profil</router-link> |
       <router-link to="/signup">S'enregistré</router-link>
     </div>
   </div>

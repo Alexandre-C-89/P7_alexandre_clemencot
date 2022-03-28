@@ -18,10 +18,10 @@
           {{ post.pseudo }}
         </div>
       </div>
-      <div class="home__card__btn">
+      <!-- <div class="home__card__btn">
         <button @click.prevent="goModify()">modifier</button>
         <button @click.prevent="goDelete()">Supprimer</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

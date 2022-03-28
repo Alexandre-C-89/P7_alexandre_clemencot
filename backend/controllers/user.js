@@ -71,7 +71,7 @@ exports.getAllUser = async (req, res, next) => {
 
 // Affichage d'un profil d'utilisateur
 exports.getOneUser = async (req, res, next) => {
-  const user = await User.findOne({ where: { id: req.params.userId } }); // Je cherche l'email de la requête avec celui enregistré
+  const user = await User.findOne({ where: { id: req.params.id } }); // Je cherche l'email de la requête avec celui enregistré
   if (user) {
     res.status(200).json({ user });
   } else {

@@ -2,14 +2,6 @@
   <div>
     <h1>Créer un compte</h1>
     <form class="form">
-      <!-- <div class="form__firstname">
-        <label for="firstname">Prénom : </label>
-        <input type="firstname" name="firstname" v-model="firstname" />
-      </div>
-      <div class="form__lastname">
-        <label for="lastname">Nom : </label>
-        <input type="lastname" name="lastname" v-model="lastname" />
-      </div> -->
       <div class="form__pseudo">
         <label for="pseudo">Pseudo : </label>
         <input type="pseudo" name="pseudo" v-model="pseudo" />
@@ -30,20 +22,23 @@
 </template>
 
 <script>
-import User from '../models/user';
+// import User from '../models/user';
 
 export default {
   data() {
     return {
-      user: User,
+      // user: User,
+      pseudo: '',
+      email: '',
+      password: '',
     };
   },
   methods: {
     submit() {
       const user = {
-        pseudo: User.pseudo,
-        email: User.email,
-        password: User.password,
+        pseudo: this.pseudo,
+        email: this.email,
+        password: this.password,
       };
       this.axios
         .post('http://localhost:3000/api/user/signup', user)

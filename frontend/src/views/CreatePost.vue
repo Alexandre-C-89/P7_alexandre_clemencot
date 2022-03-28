@@ -50,7 +50,7 @@ export default {
       description: '',
       media: '',
       pseudo: '',
-      // userId: localStorage.getItem('userId'),
+      userId: '',
     };
   },
   methods: {
@@ -58,11 +58,12 @@ export default {
       const newPost = {
         title: this.title,
         description: this.description,
+        // media: (this.media = this.$refs.file.files[0]),
         media: this.media,
         pseudo: this.pseudo,
         // userId: this.userId,
-        userId: localStorage.getItem('userId'),
-        userToken: localStorage.getItem('userToken'),
+        userId: (this.userId = localStorage.getItem('userId')),
+        userToken: (this.userToken = localStorage.getItem('userToken')),
       };
       console.log(localStorage.getItem('userId'));
       this.axios
@@ -70,13 +71,11 @@ export default {
         .then((response) => {
           console.log('Post créer !'); // J'indique dans la console que le post est créé
           // console.log(response.data);
-          console.log(this.userId);
-          if (response.data.userId === this.userId) {
-            console.log(
-              "Condition vérifié, je suis redirigé vers la page d'accueil !!",
-            );
-            this.$router.push({ name: 'Home' });
-          }
+          console.log(this.userId + response);
+          console.log(
+            "Condition vérifié, je suis redirigé vers la page d'accueil !!",
+          );
+          this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));
     },
