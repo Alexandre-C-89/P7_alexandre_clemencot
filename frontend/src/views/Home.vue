@@ -14,9 +14,11 @@
         <div class="home__card__content__description">
           {{ post.description }}
         </div>
-        <div class="home__card__content__name">
+        <!-- <div class="home__card__content__name">
           {{ post.pseudo }}
-        </div>
+        </div> -->
+        <div class="home__card__content__id">pseudo : {{ post.pseudo }}</div>
+        <!-- <div class="home__card__content__id">postId : {{ post.postId }}</div> -->
       </div>
       <!-- <div class="home__card__btn">
         <button @click.prevent="goModify()">modifier</button>

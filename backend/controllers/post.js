@@ -16,15 +16,15 @@ exports.createPost = (req, res, next) => {
   // console.log();
   // console.log(req.file);
   if (req.file) {
-    console.log(req.body.file, "1");
+    console.log("1");
     Post.create({
       // Je renseigne les champs
       title: req.body.title,
       description: req.body.description,
       // media: `/images/${req.file.filename}`,
       media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+      UserId: Number(req.body.UserId),
       pseudo: req.body.pseudo,
-      UserId: Number(req.body.userId),
     })
       .then(() => {
         return res.status(200).json({ message: "Post créé avec l'image !" });
@@ -39,7 +39,7 @@ exports.createPost = (req, res, next) => {
     console.log(Number(req.body.UserId));
     Post.create({
       // Je renseigne les champs
-      UserId: Number(req.body.UserId),
+      UserId: req.body.UserId,
       title: req.body.title,
       description: req.body.description,
       media: req.body.media,
@@ -109,9 +109,11 @@ exports.getOnePost = async (req, res, next) => {
 exports.deletePost = async (req, res, next) => {
   console.log("vous avez l'intention de supprimé un post !");
   const post = await Post.findOne({ where: { postId: req.body.postId } });
-  if (post) {
+  const user = await User.findOne({ where: { UserId: req.body.UserId } });
+  console.log(user);
+  if (post && user) {
     Post.destroy({ where: { postId: req.body.postId } });
-    console.log(post);
+    console.log(post + user);
     res.status(404).json({ message: "Post supprimé !" });
   } else {
     res.status(401).json({ message: "Requête non autorisé !" });

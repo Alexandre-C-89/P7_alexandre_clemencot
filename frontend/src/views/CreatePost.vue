@@ -22,14 +22,14 @@
       </div>
       <div class="post__form__img">
         <label for="">image : </label>
-        <input type="file" placeholder="Vous pouvez importez une image !" />
-      </div>
-      <div class="post__form__name">
-        <label data-id="1" for="">Pseudo : </label>
         <input
-          type="text"
-          placeholder="Indiquez votre pseudo ..."
-          v-model="pseudo"
+          type="file"
+          placeholder="Vous pouvez importez une image !"
+          ref="file"
+          name="file"
+          id="file"
+          class="media"
+          @change="handleFileUpload($event)"
         />
       </div>
       <div class="post__form__btn">
@@ -50,30 +50,43 @@ export default {
       description: '',
       media: '',
       pseudo: '',
-      userId: '',
-      postId: this.axios.get('http://localhost:3000/api/post'),
+      UserId: '',
+      // postId: this.axios.get('http://localhost:3000/api/post'),
     };
   },
   methods: {
+    handleFileUpload(event) {
+      this.media = event.target.files[0];
+    },
     createPost() {
-      const newPost = {
-        title: this.title,
-        description: this.description,
-        // media: (this.media = this.$refs.file.files[0]),
-        media: this.media,
-        pseudo: this.pseudo,
-        // userId: this.userId,
-        postId: this.postId,
-        userId: (this.userId = localStorage.getItem('userId')),
-        userToken: (this.userToken = localStorage.getItem('userToken')),
-      };
+      // const newPost = {
+      //   title: this.title,
+      //   description: this.description,
+      //   // media: (this.media = this.$refs.file.files[0]),
+      //   media: this.media,
+      //   UserId: (this.UserId = localStorage.getItem('userId')),
+      //   // postId: this.postId,
+      //   pseudo: (this.pseudo = localStorage.getItem('pseudo')),
+      //   userToken: (this.userToken = localStorage.getItem('userToken')),
+      // };
+      const fd = new FormData();
+      fd.append('title', this.title);
+      fd.append('description', this.description);
+      fd.append('media', this.media);
+      fd.append('userId', (this.UserId = localStorage.getItem('userId')));
+      fd.append('pseudo', (this.pseudo = localStorage.getItem('pseudo')));
       console.log(localStorage.getItem('userId'));
+
       this.axios
-        .post('http://localhost:3000/api/post/createpost', newPost)
+        .post('http://localhost:3000/api/post/createpost', fd, {
+          headers: {
+            'Content-Type': 'multipart/from-data',
+          },
+        })
         .then((response) => {
           console.log('Post créer !'); // J'indique dans la console que le post est créé
           // console.log(response.data);
-          console.log(this.userId + response);
+          console.log(fd + response);
           console.log(
             "Condition vérifié, je suis redirigé vers la page d'accueil !!",
           );

@@ -14,6 +14,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     'no-param-reassign': [2, { props: false }],
+    'prefer-destructuring': ['error', { object: true, array: false }],
   },
   settings: {
     'import/resolver': {

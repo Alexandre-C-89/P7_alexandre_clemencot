@@ -18,10 +18,6 @@ const Comment = sequelize.define(
       unique: true,
       allowNull: false,
     },
-    pseudo: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
