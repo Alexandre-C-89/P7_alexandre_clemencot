@@ -6,6 +6,8 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 // J'importe JWT
 const jwt = require("jsonwebtoken");
+const Post = require("../models/post");
+const { post } = require("../routes/post");
 
 // Partie enregistrement de l'utilisateur
 exports.signup = (req, res, next) => {
@@ -50,7 +52,7 @@ exports.login = async (req, res, next) => {
         res.status(200).json({
           userId: user.id,
           pseudo: user.pseudo,
-          token: jwt.sign({ userId: user.id }, process.env.SECRET_key, {
+          token: jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
             expiresIn: "8h",
           }),
         });

@@ -20,10 +20,10 @@
         <div class="home__card__content__id">pseudo : {{ post.pseudo }}</div>
         <!-- <div class="home__card__content__id">postId : {{ post.postId }}</div> -->
       </div>
-      <!-- <div class="home__card__btn">
-        <button @click.prevent="goModify()">modifier</button>
+      <div class="home__card__btn">
+        <!-- <button @click.prevent="goModify()">modifier</button> -->
         <button @click.prevent="goDelete()">Supprimer</button>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -58,7 +58,8 @@ export default {
     },
     goDelete() {
       // this.$router.push({ name: 'DeletePost' });
-      this.axios.delete('http://localhost:3000/api/post');
+
+      this.axios.delete('http://localhost:3000/api/deletePost');
     },
   },
 };
