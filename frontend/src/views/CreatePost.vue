@@ -51,7 +51,7 @@ export default {
       media: '',
       pseudo: '',
       UserId: '',
-      // postId: this.axios.get('http://localhost:3000/api/post'),
+      postId: '',
     };
   },
   methods: {
@@ -75,6 +75,7 @@ export default {
       fd.append('media', this.media);
       fd.append('userId', (this.UserId = localStorage.getItem('userId')));
       fd.append('pseudo', (this.pseudo = localStorage.getItem('pseudo')));
+      fd.append('postId', (this.postId = localStorage.getItem('postId')));
       console.log(localStorage.getItem('userId'));
 
       this.axios
@@ -86,7 +87,7 @@ export default {
         .then((response) => {
           console.log('Post créer !'); // J'indique dans la console que le post est créé
           // console.log(response.data);
-          console.log(fd + response);
+          console.log(response.post.postId);
           console.log(
             "Condition vérifié, je suis redirigé vers la page d'accueil !!",
           );

@@ -56,7 +56,6 @@ export default {
             'userToken',
             JSON.stringify(response.data.token),
           );
-          localStorage.setItem('pseudo', JSON.stringify(response.data.pseudo));
           localStorage.setItem('userId', JSON.stringify(response.data.userId));
           this.$router.push({ name: 'Home' });
         })

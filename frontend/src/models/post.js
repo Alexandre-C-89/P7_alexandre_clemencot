@@ -2,7 +2,8 @@
 // que je pourrais réutilisé dans mes méthodes et functions
 
 export default class Post {
-  constructor(title, description, media, pseudo) {
+  constructor(postId, title, description, media, pseudo) {
+    this.postId = postId;
     this.title = title;
     this.description = description;
     this.media = media;
