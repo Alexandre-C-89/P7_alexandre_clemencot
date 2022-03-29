@@ -113,7 +113,7 @@ exports.deletePost = async (req, res, next) => {
   // Je cherche l'utilisateur qui veut supprimé le post
   // const user = await User.findOne({ where: { id: req.body.userId } });
   console.log(post);
-  // Si le post et l'utilisateur sont trouvé alors je supprime le post
+  // Si le post est trouvé alors je supprime le post
   if (post) {
     Post.destroy({ where: { postId: req.body.postId } });
     res.status(201).json({ message: "Post supprimé !" });
