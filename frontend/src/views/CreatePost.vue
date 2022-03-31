@@ -87,19 +87,13 @@ export default {
         .then((response) => {
           console.log('Post créer !'); // J'indique dans la console que le post est créé
           // console.log(response.data);
-          console.log(response.post.postId);
+          console.log(response);
           console.log(
             "Condition vérifié, je suis redirigé vers la page d'accueil !!",
           );
           this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));
-    },
-    goModify() {
-      this.$router.push({ name: 'ModifyPost' });
-    },
-    goDelete() {
-      this.$router.push({ name: 'DeletePost' });
     },
   },
 };

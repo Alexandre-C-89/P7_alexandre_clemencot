@@ -25,6 +25,7 @@ exports.createPost = (req, res, next) => {
       media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
       UserId: Number(req.body.UserId),
       pseudo: req.body.pseudo,
+      postId: req.params.post.postId,
     })
       .then(() => {
         return res.status(200).json({ message: "Post créé avec l'image !" });
@@ -34,7 +35,6 @@ exports.createPost = (req, res, next) => {
           message: "Impossible de créer le post car il y a une erreur ! 1",
         });
       });
-    // console.log(media);
   } else {
     console.log(Number(req.body.UserId));
     Post.create({
@@ -46,8 +46,10 @@ exports.createPost = (req, res, next) => {
       pseudo: req.body.pseudo,
     })
       .then(() => {
-        // Si la requête est correcte j'ai un status 201
-        return res.status(200).json({ message: "Post créé ! " });
+        // Si la requête est correcte j'ai un status 200
+        return res.status(200).json({
+          message: "Post créé ! " + localStorage.setItem(Post.postId),
+        });
       })
       .catch((error) => {
         console.log(error);
