@@ -25,10 +25,18 @@ exports.createPost = (req, res, next) => {
       media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
       UserId: Number(req.body.UserId),
       pseudo: req.body.pseudo,
-      postId: req.params.post.postId,
+      // postId: ,
     })
       .then(() => {
-        return res.status(200).json({ message: "Post créé avec l'image !" });
+        return res.status(200).json({
+          message:
+            "Post créé avec l'image !" +
+            Post.findOne({
+              where: { postId: req.body.postId },
+            }) +
+            localStorage.setItem(Post.postId),
+          /*+ JSON.parse(Post.findOne(Post.postId))*/
+        });
       })
       .catch(() => {
         return res.status(401).json({
@@ -48,7 +56,12 @@ exports.createPost = (req, res, next) => {
       .then(() => {
         // Si la requête est correcte j'ai un status 200
         return res.status(200).json({
-          message: "Post créé ! " + localStorage.setItem(Post.postId),
+          message:
+            "Post créé ! " +
+            Post.findOne({
+              where: { postId: req.body.postId },
+            }) +
+            localStorage.setItem(Post.postId),
         });
       })
       .catch((error) => {

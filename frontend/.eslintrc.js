@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  extends: ['airbnb-base', 'prettier'],
   root: true,
   env: {
     browser: true,

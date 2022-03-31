@@ -3,7 +3,13 @@
     <div class="home__icone">
       <button @click.prevent="goToCreatePost()">Créér un post</button>
     </div>
-    <div class="home__card" v-for="post in posts" :key="post.card" :post="post">
+    <div
+      class="home__card"
+      v-for="post in posts"
+      :key="post.card"
+      :post="post"
+      data-id="${post.postId}"
+    >
       <div class="home__card__img">
         <img :src="post.media" alt="image du post" />
       </div>
@@ -37,7 +43,7 @@ export default {
   data() {
     return {
       posts: Posts,
-      postId: '',
+      // postId: '',
     };
   },
   mounted() {
@@ -54,12 +60,11 @@ export default {
     goToCreatePost() {
       this.$router.push({ name: 'createPost' });
     },
-    goModify() {
-      this.$router.push({ name: 'ModifyPost' });
-    },
     goDelete() {
-      // this.$router.push({ name: 'DeletePost' });
-      this.axios.delete('http://localhost:3000/api/deletePost');
+      const el = document.querySelector('.home__card');
+      console.log(el);
+      console.log('Je veux supprimé le post !');
+      $;
     },
   },
 };
