@@ -18,10 +18,12 @@
         <button @click.prevent="submit()" type="submit">Créer un compte</button>
       </div>
     </form>
+    <!--<p id="error">L'utilisateur existe déjà !</p>-->
   </div>
 </template>
 
 <script>
+// Ancien code
 // import User from '../models/user';
 
 export default {
@@ -31,6 +33,7 @@ export default {
       pseudo: '',
       email: '',
       password: '',
+      // logged: false,
     };
   },
   methods: {
@@ -43,7 +46,7 @@ export default {
       this.axios
         .post('http://localhost:3000/api/user/signup', user)
         .then((response) => {
-          console.log(response.data);
+          console.log(response.data.userId);
           console.log('Utilisateur enregistré ! ');
           this.$router.push({ name: 'Login' });
         })
@@ -52,6 +55,12 @@ export default {
         });
     },
   },
+  // logged() {
+  //   const logged = localStorage.getItem('');
+  //   if (logged) {
+  //     return true;
+  //   }
+  // },
 };
 </script>
 

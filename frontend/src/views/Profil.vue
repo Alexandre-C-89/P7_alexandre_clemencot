@@ -4,6 +4,9 @@
     <div class="profil__description">
       <p>email</p>
     </div>
+    <button class="profil__button" @click.prevent="supp()" type="submit">
+      Supprimer le profil
+    </button>
   </div>
 </template>
 
@@ -14,17 +17,21 @@ export default {
       user: {},
     };
   },
-  mounted: {
-    getUser() {
-      this.axios
-        .get('http://localhost:3000/api/user/')
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  methods: {
+    supp() {
+      console.log('localeStorage');
+      alert('Salut !!');
     },
+    //   getUser() {
+    //     this.axios
+    //       .get('http://localhost:3000/api/user/')
+    //       .then((result) => {
+    //         console.log(result);
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   },
   },
 };
 </script>

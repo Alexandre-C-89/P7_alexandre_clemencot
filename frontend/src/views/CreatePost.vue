@@ -5,19 +5,19 @@
     </div>
     <form class="post__form" enctype="multipart/form-data">
       <div class="post__form__title">
-        <label for="">Titre : </label>
+        <label>Titre : </label>
         <input
           type="text"
           placeholder="Choisissez un titre à votre post !"
-          v-model="title"
+          v-model="form.title"
         />
       </div>
       <div class="post__form__description">
-        <label for="">Description : </label>
+        <label>Description : </label>
         <textarea
           type="text"
           placeholder="Décrivez votre post !"
-          v-model="description"
+          v-model="form.description"
         />
       </div>
       <div class="post__form__img">
@@ -33,70 +33,94 @@
         />
       </div>
       <div class="post__form__btn">
-        <button @click.prevent="createPost()">Créer</button>
+        <button @click.prevent="CreatePost()">Créer</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-// import Post from '../models/post';
-
+// Code tuto
+import { mapGetters, mapActions } from 'vuex';
 export default {
-  name: 'Login',
+  name: 'Posts',
+  components: {},
   data() {
     return {
-      title: '',
-      description: '',
-      media: '',
-      pseudo: '',
-      UserId: '',
-      postId: '',
+      form: {
+        title: '',
+        description: '',
+        media: '',
+      },
     };
   },
+  CreatePost: function () {
+    // a function to call getposts action
+    this.GetPosts();
+  },
+  computed: {
+    ...mapGetters({ Posts: 'StatePosts', User: 'StateUser' }),
+  },
   methods: {
-    handleFileUpload(event) {
-      this.media = event.target.files[0];
-    },
-    createPost() {
-      // const newPost = {
-      //   title: this.title,
-      //   description: this.description,
-      //   // media: (this.media = this.$refs.file.files[0]),
-      //   media: this.media,
-      //   UserId: (this.UserId = localStorage.getItem('userId')),
-      //   // postId: this.postId,
-      //   pseudo: (this.pseudo = localStorage.getItem('pseudo')),
-      //   userToken: (this.userToken = localStorage.getItem('userToken')),
-      // };
-      const fd = new FormData();
-      fd.append('title', this.title);
-      fd.append('description', this.description);
-      fd.append('media', this.media);
-      fd.append('userId', (this.UserId = localStorage.getItem('userId')));
-      fd.append('pseudo', (this.pseudo = localStorage.getItem('pseudo')));
-      fd.append('postId', (this.postId = localStorage.getItem('postId')));
-      console.log(localStorage.getItem('userId'));
-
-      this.axios
-        .post('http://localhost:3000/api/post/createpost', fd, {
-          headers: {
-            'Content-Type': 'multipart/from-data',
-          },
-        })
-        .then((response) => {
-          console.log('Post créer !'); // J'indique dans la console que le post est créé
-          // console.log(response.data);
-          console.log(response);
-          console.log(
-            "Condition vérifié, je suis redirigé vers la page d'accueil !!",
-          );
-          this.$router.push({ name: 'Home' });
-        })
-        .catch((error) => console.log(error));
+    ...mapActions(['CreatePost', 'GetPosts']),
+    async submit() {
+      try {
+        await this.CreatePost(this.form);
+      } catch (error) {
+        console.log("Sorry you can't make a post now!");
+      }
     },
   },
 };
+
+// Ancien code
+// import Post from '../models/post';
+
+// export default {
+//   name: 'Login',
+//   data() {
+//     return {
+//       title: '',
+//       description: '',
+//       media: '',
+//       pseudo: '',
+//       userId: '',
+//       postId: '',
+//     };
+//   },
+//   methods: {
+//     handleFileUpload(event) {
+//       this.media = event.target.files[0];
+//     },
+//     createPost() {
+//       const fd = new FormData();
+//       fd.append('title', this.title);
+//       fd.append('description', this.description);
+//       fd.append('media', this.media);
+//       fd.append('userId', (this.userId = localStorage.getItem('userId')));
+//       fd.append('pseudo', (this.pseudo = localStorage.getItem('pseudo')));
+//       fd.append('postId', (this.postId = localStorage.getItem('postId')));
+//       console.log(localStorage.getItem('userId'));
+
+//       this.axios
+//         .post('http://localhost:3000/api/post/createpost', fd, {
+//           headers: {
+//             'Content-Type': 'multipart/from-data',
+//           },
+//         })
+//         .then((response) => {
+//           console.log('Post créer !'); // J'indique dans la console que le post est créé
+//           // console.log(response.data);
+//           console.log(response);
+//           console.log(
+//             "Condition vérifié, je suis redirigé vers la page d'accueil !!",
+//           );
+//           this.$router.push({ name: 'Home' });
+//         })
+//         .catch((error) => console.log(error));
+//     },
+//   },
+// };
 </script>
 
 <style lang="scss">

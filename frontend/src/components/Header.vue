@@ -4,15 +4,35 @@
       <img src="../assets/logo_blanc_recadre.png" alt="logo groupomania" />
     </div>
     <div class="header__link">
-      <router-link to="/login">Connexion</router-link> |
-      <router-link to="/">Accueil</router-link> |
-      <router-link to="/api/user/:id">Profil</router-link> |
-      <router-link to="/signup">S'enregistrer</router-link>
+      <span v-if="isLoggedIn">
+        <a @click="logout()">Logout</a>
+        <router-link to="/api/user/:id">Profil</router-link> |
+      </span>
+      <span v-else>
+        <router-link to="/">Accueil</router-link> |
+        <router-link to="/signup">S'enregistrer</router-link> |
+        <router-link to="/login">Connexion</router-link> |
+      </span>
     </div>
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  name: 'Header',
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('LogOut');
+      this.$router.push('/login');
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 .header {

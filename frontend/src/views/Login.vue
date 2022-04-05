@@ -15,13 +15,15 @@
           placeholder="mot de passe"
         />
       </div>
-      <!-- <Btn /> -->
       <button @click.prevent="submit()" type="submit">Connexion</button>
     </form>
+    <!--<p v-if="showError" id="error">Username or Password is incorrect</p>-->
   </div>
 </template>
 
 <script>
+// j'importe mapActions pour l'utilisé
+// et importé l'action "login"
 // import Btn from '../components/Btn.vue';
 // import User from '../models/user';
 
@@ -35,7 +37,6 @@ export default {
       // user: User,
       email: '',
       password: '',
-      user: {},
     };
   },
   methods: {
@@ -49,14 +50,10 @@ export default {
       this.axios
         .post('http://localhost:3000/api/user/login', user)
         .then((response) => {
-          console.log('Utilisateur connecté !');
-          console.log(response.data);
-          console.log(response.data.userId);
-          localStorage.setItem(
-            'userToken',
-            JSON.stringify(response.data.token),
-          );
+          console.log('Utilisateur connecté !', response.data);
+          localStorage.setItem('token', JSON.stringify(response.data.token));
           localStorage.setItem('userId', JSON.stringify(response.data.userId));
+          localStorage.setItem('pseudo', JSON.stringify(response.data.pseudo));
           this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));

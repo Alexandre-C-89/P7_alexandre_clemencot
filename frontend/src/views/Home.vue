@@ -24,7 +24,8 @@
           {{ post.pseudo }}
         </div> -->
         <div class="home__card__content__id">pseudo : {{ post.pseudo }}</div>
-        <!-- <div class="home__card__content__id">postId : {{ post.postId }}</div> -->
+        <div class="home__card__content__id">postId : {{ post.postId }}</div>
+        <div class="home__card__content__id">userId : {{ post.userId }}</div>
       </div>
       <div class="home__card__btn">
         <!-- <button @click.prevent="goModify()">modifier</button> -->
@@ -64,7 +65,6 @@ export default {
       const el = document.querySelector('.home__card');
       console.log(el);
       console.log('Je veux supprimé le post !');
-      $;
     },
   },
 };

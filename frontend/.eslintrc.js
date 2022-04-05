@@ -16,6 +16,9 @@ module.exports = {
   rules: {
     'no-param-reassign': [2, { props: false }],
     'prefer-destructuring': ['error', { object: true, array: false }],
+    'object-shorthand': ['error', 'always'],
+    'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }],
+    'import/newline-after-import': ['error', { count: 1 }],
   },
   settings: {
     'import/resolver': {
