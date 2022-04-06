@@ -3,13 +3,7 @@
     <div class="home__icone">
       <button @click.prevent="goToCreatePost()">Créér un post</button>
     </div>
-    <div
-      class="home__card"
-      v-for="post in posts"
-      :key="post.card"
-      :post="post"
-      data-id="${post.postId}"
-    >
+    <div class="home__card" v-for="post in posts" :key="post.card" :post="post">
       <div class="home__card__img">
         <img :src="post.media" alt="image du post" />
       </div>
@@ -24,8 +18,7 @@
           {{ post.pseudo }}
         </div> -->
         <div class="home__card__content__id">pseudo : {{ post.pseudo }}</div>
-        <div class="home__card__content__id">postId : {{ post.postId }}</div>
-        <div class="home__card__content__id">userId : {{ post.userId }}</div>
+        <div>postId : {{ post.postId }}</div>
       </div>
       <div class="home__card__btn">
         <!-- <button @click.prevent="goModify()">modifier</button> -->
@@ -44,7 +37,6 @@ export default {
   data() {
     return {
       posts: Posts,
-      // postId: '',
     };
   },
   mounted() {
@@ -52,7 +44,6 @@ export default {
       .get('http://localhost:3000/api/post')
       .then((response) => {
         this.posts = response.data.post;
-        // console.log(response.data.post.postId);
       })
       // eslint-disable-next-line no-console
       .catch((error) => console.log(error));
@@ -62,9 +53,14 @@ export default {
       this.$router.push({ name: 'createPost' });
     },
     goDelete() {
-      const el = document.querySelector('.home__card');
-      console.log(el);
-      console.log('Je veux supprimé le post !');
+      this.axios
+        .delete('http://localhost:3000/api/post/deletePost')
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

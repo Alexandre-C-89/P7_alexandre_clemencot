@@ -29,12 +29,7 @@ exports.createPost = (req, res, next) => {
     })
       .then(() => {
         return res.status(200).json({
-          message:
-            "Post créé avec l'image !" +
-            Post.findOne({
-              where: { postId: req.body.postId },
-            }) +
-            localStorage.setItem(Post.postId),
+          message: "Post créé avec l'image !",
           /*+ JSON.parse(Post.findOne(Post.postId))*/
         });
       })
@@ -112,7 +107,7 @@ exports.getAllPost = async (req, res, next) => {
 
 // Affichage d'un post
 exports.getOnePost = async (req, res, next) => {
-  const post = await Post.findOne({ where: { id: req.params.postId } }); // Je cherche l'email de la requête avec celui enregistré
+  const post = await Post.findOne({ where: { id: req.body.postId } }); // Je cherche l'email de la requête avec celui enregistré
   if (post) {
     res.status(200).json({ post });
   } else {
@@ -125,6 +120,7 @@ exports.deletePost = async (req, res, next) => {
   console.log("vous avez l'intention de supprimé un post !");
   // Je cherche le post que je veux supprimer
   const post = await Post.findOne({ where: { postId: req.body.postId } });
+  console.log(post);
   // Je cherche l'utilisateur qui veut supprimé le post
   // const user = await User.findOne({ where: { id: req.body.userId } });
   console.log(post);

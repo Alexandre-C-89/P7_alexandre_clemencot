@@ -19,6 +19,7 @@ module.exports = {
     'object-shorthand': ['error', 'always'],
     'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }],
     'import/newline-after-import': ['error', { count: 1 }],
+    'no-underscore-dangle': ['error', { allow: ['foo_', '_bar'] }],
   },
   settings: {
     'import/resolver': {

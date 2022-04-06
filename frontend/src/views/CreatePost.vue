@@ -9,7 +9,7 @@
         <input
           type="text"
           placeholder="Choisissez un titre à votre post !"
-          v-model="form.title"
+          v-model="title"
         />
       </div>
       <div class="post__form__description">
@@ -17,7 +17,7 @@
         <textarea
           type="text"
           placeholder="Décrivez votre post !"
-          v-model="form.description"
+          v-model="description"
         />
       </div>
       <div class="post__form__img">
@@ -40,87 +40,55 @@
 </template>
 
 <script>
-// Code tuto
-import { mapGetters, mapActions } from 'vuex';
-export default {
-  name: 'Posts',
-  components: {},
-  data() {
-    return {
-      form: {
-        title: '',
-        description: '',
-        media: '',
-      },
-    };
-  },
-  CreatePost: function () {
-    // a function to call getposts action
-    this.GetPosts();
-  },
-  computed: {
-    ...mapGetters({ Posts: 'StatePosts', User: 'StateUser' }),
-  },
-  methods: {
-    ...mapActions(['CreatePost', 'GetPosts']),
-    async submit() {
-      try {
-        await this.CreatePost(this.form);
-      } catch (error) {
-        console.log("Sorry you can't make a post now!");
-      }
-    },
-  },
-};
-
 // Ancien code
 // import Post from '../models/post';
 
-// export default {
-//   name: 'Login',
-//   data() {
-//     return {
-//       title: '',
-//       description: '',
-//       media: '',
-//       pseudo: '',
-//       userId: '',
-//       postId: '',
-//     };
-//   },
-//   methods: {
-//     handleFileUpload(event) {
-//       this.media = event.target.files[0];
-//     },
-//     createPost() {
-//       const fd = new FormData();
-//       fd.append('title', this.title);
-//       fd.append('description', this.description);
-//       fd.append('media', this.media);
-//       fd.append('userId', (this.userId = localStorage.getItem('userId')));
-//       fd.append('pseudo', (this.pseudo = localStorage.getItem('pseudo')));
-//       fd.append('postId', (this.postId = localStorage.getItem('postId')));
-//       console.log(localStorage.getItem('userId'));
-
-//       this.axios
-//         .post('http://localhost:3000/api/post/createpost', fd, {
-//           headers: {
-//             'Content-Type': 'multipart/from-data',
-//           },
-//         })
-//         .then((response) => {
-//           console.log('Post créer !'); // J'indique dans la console que le post est créé
-//           // console.log(response.data);
-//           console.log(response);
-//           console.log(
-//             "Condition vérifié, je suis redirigé vers la page d'accueil !!",
-//           );
-//           this.$router.push({ name: 'Home' });
-//         })
-//         .catch((error) => console.log(error));
-//     },
-//   },
-// };
+export default {
+  name: 'Login',
+  data() {
+    return {
+      title: '',
+      description: '',
+      media: '',
+      pseudo: '',
+      userId: '',
+      postId: '',
+    };
+  },
+  methods: {
+    handleFileUpload(event) {
+      this.media = event.target.files[0];
+    },
+    CreatePost() {
+      const fd = new FormData();
+      fd.append('title', this.title);
+      fd.append('description', this.description);
+      fd.append('media', this.media);
+      fd.append('userId', (this.userId = localStorage.getItem('userId')));
+      fd.append('pseudo', (this.pseudo = localStorage.getItem('pseudo')));
+      fd.append('postId', (this.postId = localStorage.getItem('postId')));
+      console.log(localStorage.getItem('userId'));
+      console.log(localStorage.getItem('pseudo'));
+      this.axios
+        .post('http://localhost:3000/api/post/createpost', fd, {
+          headers: {
+            'Content-Type': 'multipart/from-data',
+          },
+        })
+        .then((response) => {
+          // J'indique dans la console que le post est créé
+          console.log('Post créer !');
+          // console.log(response.data);
+          console.log(response);
+          console.log(
+            "Condition vérifié, je suis redirigé vers la page d'accueil !!",
+          );
+          this.$router.push({ name: 'Home' });
+        })
+        .catch((error) => console.log(error));
+    },
+  },
+};
 </script>
 
 <style lang="scss">
