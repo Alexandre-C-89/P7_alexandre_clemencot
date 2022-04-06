@@ -54,7 +54,7 @@ export default {
     },
     goDelete() {
       this.axios
-        .delete('http://localhost:3000/api/post/deletePost')
+        .delete('http://localhost:3000/api/post/deletepost')
         .then((response) => {
           console.log(response);
         })

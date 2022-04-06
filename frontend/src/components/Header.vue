@@ -26,10 +26,10 @@ export default {
   //   },
   // },
   methods: {
-    async logout() {
-      await this.$store.dispatch('LogOut');
-      this.$router.push('/login');
-    },
+    // async logout() {
+    //   await this.$store.dispatch('LogOut');
+    //   this.$router.push('/login');
+    // },
   },
 };
 </script>

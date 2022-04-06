@@ -60,15 +60,17 @@ export default {
       this.media = event.target.files[0];
     },
     CreatePost() {
+      console.log('Je vais créé un post !');
       const fd = new FormData();
       fd.append('title', this.title);
       fd.append('description', this.description);
       fd.append('media', this.media);
       fd.append('userId', (this.userId = localStorage.getItem('userId')));
       fd.append('pseudo', (this.pseudo = localStorage.getItem('pseudo')));
-      fd.append('postId', (this.postId = localStorage.getItem('postId')));
       console.log(localStorage.getItem('userId'));
       console.log(localStorage.getItem('pseudo'));
+      console.log(fd);
+      console.log('Envoie de la requête !');
       this.axios
         .post('http://localhost:3000/api/post/createpost', fd, {
           headers: {
@@ -80,9 +82,7 @@ export default {
           console.log('Post créer !');
           // console.log(response.data);
           console.log(response);
-          console.log(
-            "Condition vérifié, je suis redirigé vers la page d'accueil !!",
-          );
+          console.log("Post créer, je suis redirigé vers la page d'accueil !!");
           this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));
