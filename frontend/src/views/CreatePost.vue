@@ -21,7 +21,7 @@
         />
       </div>
       <div class="post__form__img">
-        <label for="">image : </label>
+        <label>image : </label>
         <input
           type="file"
           placeholder="Vous pouvez importez une image !"
@@ -29,7 +29,7 @@
           name="file"
           id="file"
           class="media"
-          @change="handleFileUpload($event)"
+          @change="handleFileUpload"
         />
       </div>
       <div class="post__form__btn">
@@ -47,34 +47,41 @@ export default {
   name: 'Login',
   data() {
     return {
+      file: null,
       title: '',
       description: '',
       media: '',
       pseudo: '',
       userId: '',
-      postId: '',
+      // postId: '',
     };
   },
   methods: {
-    handleFileUpload(event) {
-      this.media = event.target.files[0];
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+      this.media = URL.createObjectURL(this.file);
     },
     CreatePost() {
       console.log('Je vais créé un post !');
-      const mesDonnees = new FormData();
-      mesDonnees.append('title', this.title);
-      mesDonnees.append('description', this.description);
-      mesDonnees.append('media', this.media);
-      mesDonnees.append(
-        'userId',
-        (this.userId = localStorage.getItem('userId')),
-      );
-      mesDonnees.append(
-        'pseudo',
-        (this.pseudo = localStorage.getItem('pseudo')),
+      const fd = new FormData();
+      fd.append('title', this.title);
+      fd.append('description', this.description);
+      fd.append('media', this.media);
+      fd.append('userId', (this.userId = localStorage.getItem('userId')));
+      fd.append('pseudo', (this.pseudo = localStorage.getItem('pseudo')));
+      console.log(
+        this.title,
+        ':',
+        this.description,
+        ':',
+        this.media,
+        ':',
+        this.pseudo,
+        ':',
+        this.userId,
       );
       this.axios
-        .post('http://localhost:3000/api/post/createpost', mesDonnees, {
+        .post('http://localhost:3000/api/post/createpost', fd, {
           headers: {
             'Content-Type': 'multipart/from-data',
           },

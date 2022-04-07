@@ -22,15 +22,14 @@ exports.createPost = (req, res, next) => {
       title: req.body.title,
       description: req.body.description,
       media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-      // UserId: Number(req.body.UserId),
-      UserId: req.body.UserId,
+      // userId: Number(req.body.userId),
       pseudo: req.body.pseudo,
+      userId: req.body.userId,
       // postId: ,
     })
       .then(() => {
-        return res.status(200).json({
+        return res.status(201).json({
           message: "Post créé avec l'image !",
-          /*+ JSON.parse(Post.findOne(Post.postId))*/
         });
       })
       .catch(() => {
@@ -39,10 +38,10 @@ exports.createPost = (req, res, next) => {
         });
       });
   } else {
-    console.log(Number(req.body.UserId));
+    console.log(Number(req.body.userId));
     Post.create({
       // Je renseigne les champs
-      UserId: req.body.UserId,
+      userId: req.body.userId,
       title: req.body.title,
       description: req.body.description,
       media: req.body.media,
@@ -51,12 +50,7 @@ exports.createPost = (req, res, next) => {
       .then(() => {
         // Si la requête est correcte j'ai un status 200
         return res.status(200).json({
-          message:
-            "Post créé ! " +
-            Post.findOne({
-              where: { postId: req.body.postId },
-            }) +
-            localStorage.setItem(Post.postId),
+          message: "Post créé ! ",
         });
       })
       .catch((error) => {

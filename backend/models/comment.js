@@ -26,7 +26,7 @@ const Comment = sequelize.define(
       type: DataTypes.STRING(255),
       allowNull: false, // équivalant required
     },
-    UserId: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
