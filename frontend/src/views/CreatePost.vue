@@ -8,7 +8,7 @@
         <label>Titre : </label>
         <input
           type="text"
-          placeholder="Choisissez un titre à votre post !"
+          placeholder="Choisissez un titre !"
           v-model="title"
         />
       </div>
@@ -61,18 +61,20 @@ export default {
     },
     CreatePost() {
       console.log('Je vais créé un post !');
-      const fd = new FormData();
-      fd.append('title', this.title);
-      fd.append('description', this.description);
-      fd.append('media', this.media);
-      fd.append('userId', (this.userId = localStorage.getItem('userId')));
-      fd.append('pseudo', (this.pseudo = localStorage.getItem('pseudo')));
-      console.log(localStorage.getItem('userId'));
-      console.log(localStorage.getItem('pseudo'));
-      console.log(fd);
-      console.log('Envoie de la requête !');
+      const mesDonnees = new FormData();
+      mesDonnees.append('title', this.title);
+      mesDonnees.append('description', this.description);
+      mesDonnees.append('media', this.media);
+      mesDonnees.append(
+        'userId',
+        (this.userId = localStorage.getItem('userId')),
+      );
+      mesDonnees.append(
+        'pseudo',
+        (this.pseudo = localStorage.getItem('pseudo')),
+      );
       this.axios
-        .post('http://localhost:3000/api/post/createpost', fd, {
+        .post('http://localhost:3000/api/post/createpost', mesDonnees, {
           headers: {
             'Content-Type': 'multipart/from-data',
           },

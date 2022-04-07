@@ -21,9 +21,9 @@ exports.createPost = (req, res, next) => {
       // Je renseigne les champs
       title: req.body.title,
       description: req.body.description,
-      // media: `/images/${req.file.filename}`,
       media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-      UserId: Number(req.body.UserId),
+      // UserId: Number(req.body.UserId),
+      UserId: req.body.UserId,
       pseudo: req.body.pseudo,
       // postId: ,
     })
