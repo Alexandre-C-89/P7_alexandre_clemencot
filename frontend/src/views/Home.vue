@@ -22,7 +22,7 @@
       </div>
       <div class="home__card__btn">
         <!-- <button @click.prevent="goModify()">modifier</button> -->
-        <button @click.prevent="goDelete()">Supprimer</button>
+        <button @click.prevent="goDelete(post)">Supprimer</button>
       </div>
     </div>
   </div>
@@ -37,6 +37,7 @@ export default {
   data() {
     return {
       posts: Posts,
+      token: localStorage.getItem('token'),
     };
   },
   mounted() {
@@ -52,11 +53,21 @@ export default {
     goToCreatePost() {
       this.$router.push({ name: 'createPost' });
     },
-    goDelete() {
+    goDelete(post) {
+      console.log(post.postId);
       this.axios
-        .delete('http://localhost:3000/api/post/deletepost')
+        .delete('http://localhost:3000/api/post/deletepost', {
+          headers: {
+            Authorization: `bearer ${localStorage.getItem('token')}`,
+          },
+          data: {
+            // userId: post.userId,
+            postId: post.postId,
+          },
+        })
         .then((response) => {
           console.log(response);
+          console.log(post);
         })
         .catch((error) => {
           console.log(error);

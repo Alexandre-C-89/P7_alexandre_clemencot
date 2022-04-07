@@ -84,6 +84,7 @@ export default {
         .post('http://localhost:3000/api/post/createpost', fd, {
           headers: {
             'Content-Type': 'multipart/from-data',
+            Authorization: localStorage.getItem('token', 'userId'),
           },
         })
         .then((response) => {
