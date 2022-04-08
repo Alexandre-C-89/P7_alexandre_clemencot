@@ -48,7 +48,11 @@ export default {
         password: this.password,
       };
       this.axios
-        .post('http://localhost:3000/api/user/login', user)
+        .post('http://localhost:3000/api/user/login', user, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        })
         .then((response) => {
           console.log('Utilisateur connecté !', response.data);
           localStorage.setItem('token', response.data.token);
