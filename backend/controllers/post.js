@@ -13,8 +13,6 @@ const multer = require("multer");
 exports.createPost = (req, res, next) => {
   console.log("Vous avez l'intention de créer un post !");
   // Je créer le post avec la méthode "create"
-  // console.log();
-  // console.log(req.file);
   if (req.file) {
     console.log("1");
     Post.create({
@@ -22,10 +20,8 @@ exports.createPost = (req, res, next) => {
       title: req.body.title,
       description: req.body.description,
       media: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-      // userId: Number(req.body.userId),
       pseudo: req.body.pseudo,
       userId: req.body.userId,
-      // postId: ,
     })
       .then(() => {
         return res.status(201).json({
@@ -113,16 +109,15 @@ exports.getOnePost = async (req, res, next) => {
 exports.deletePost = async (req, res, next) => {
   console.log("vous avez l'intention de supprimé un post !");
   // Je cherche le post que je veux supprimer
-  console.log(req.body);
+  const post = await Post.findOne({ where: { postId: req.body.postId } });
+  console.log(req.body.postId);
   // Je cherche l'utilisateur qui veut supprimé le post
   // const user = await User.findOne({ where: { id: req.body.userId } });
   // Si le post est trouvé alors je supprime le post
-  // if (post) {
-  //   console.log(req.body.postId);
-  // } else {
-  //   res.status(401).json({ message: "Requête non autorisé !" });
-  // }
-  console.log(req.body.postId);
-  Post.destroy({ where: { postId: req.body.postId } });
-  res.status(201).json({ message: "Post supprimé !" });
+  if (post) {
+    Post.destroy({ where: { postId: req.body.postId } });
+    res.status(201).json({ message: "Post supprimé !" });
+  } else {
+    res.status(401).json({ message: "Requête non autorisé !" });
+  }
 };

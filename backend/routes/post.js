@@ -11,7 +11,7 @@ const multer = require("../middleware/multer-config");
 const postCtrl = require("../controllers/post");
 
 // Ici je créer mes routes pour s'enregistré et ce connecté
-router.post("/createpost", multer, postCtrl.createPost);
+router.post("/createpost", auth, multer, postCtrl.createPost);
 router.get("/", postCtrl.getAllPost);
 router.get("/:id", auth, postCtrl.getOnePost);
 // router.put("/:postId", auth, multer, postCtrl.modifyPost);

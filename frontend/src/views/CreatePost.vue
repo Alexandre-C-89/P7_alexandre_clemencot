@@ -29,7 +29,7 @@
           name="file"
           id="file"
           class="media"
-          @change="handleFileUpload"
+          @change="handleFileUpload($event)"
         />
       </div>
       <div class="post__form__btn">
@@ -47,19 +47,16 @@ export default {
   name: 'Login',
   data() {
     return {
-      file: null,
       title: '',
       description: '',
       media: '',
       pseudo: '',
       userId: '',
-      // postId: '',
     };
   },
   methods: {
-    handleFileUpload() {
-      this.file = this.$refs.file.files[0];
-      this.media = URL.createObjectURL(this.file);
+    handleFileUpload(event) {
+      this.media = event.target.files[0];
     },
     CreatePost() {
       console.log('Je vais créé un post !');
@@ -83,9 +80,13 @@ export default {
       this.axios
         .post('http://localhost:3000/api/post/createpost', fd, {
           headers: {
-            'Content-Type': 'multipart/from-data',
-            Authorization: localStorage.getItem('token', 'userId'),
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
+          // data: {
+          // userId: post.userId,
+          // postId: this.postId,
+          // token: localStorage.getItem('token'),
+          // },
         })
         .then((response) => {
           // J'indique dans la console que le post est créé

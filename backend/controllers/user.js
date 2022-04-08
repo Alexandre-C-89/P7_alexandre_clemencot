@@ -7,7 +7,6 @@ const bcrypt = require("bcrypt");
 // J'importe JWT
 const jwt = require("jsonwebtoken");
 const Post = require("../models/post");
-const { post } = require("../routes/post");
 
 // Partie enregistrement de l'utilisateur
 exports.signup = (req, res, next) => {

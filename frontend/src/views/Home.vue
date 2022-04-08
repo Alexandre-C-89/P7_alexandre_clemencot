@@ -56,18 +56,20 @@ export default {
     goDelete(post) {
       console.log(post.postId);
       this.axios
-        .delete('http://localhost:3000/api/post/deletepost', {
+        .delete('http://localhost:3000/api/post/deletePost', {
           headers: {
-            Authorization: `bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
           data: {
             // userId: post.userId,
             postId: post.postId,
+            // token: localStorage.getItem('token'),
           },
         })
         .then((response) => {
           console.log(response);
           console.log(post);
+          window.location.reload();
         })
         .catch((error) => {
           console.log(error);
@@ -111,6 +113,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
     &__img {
       background-color: #fff;
       width: 330px;

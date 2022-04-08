@@ -51,9 +51,9 @@ export default {
         .post('http://localhost:3000/api/user/login', user)
         .then((response) => {
           console.log('Utilisateur connecté !', response.data);
-          localStorage.setItem('token', JSON.stringify(response.data.token));
-          localStorage.setItem('userId', JSON.stringify(response.data.userId));
-          localStorage.setItem('pseudo', JSON.stringify(response.data.pseudo));
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('userId', response.data.userId);
+          localStorage.setItem('pseudo', response.data.pseudo);
           this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));
