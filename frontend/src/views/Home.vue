@@ -61,15 +61,14 @@ export default {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
           data: {
-            // userId: post.userId,
+            userId: post.userId,
             postId: post.postId,
             // token: localStorage.getItem('token'),
           },
         })
-        .then((response) => {
-          console.log(response);
-          console.log(post);
+        .then(() => {
           window.location.reload();
+          console.log(post);
         })
         .catch((error) => {
           console.log(error);

@@ -80,13 +80,13 @@ export default {
       this.axios
         .post('http://localhost:3000/api/post/createpost', fd, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token', 'userId')}`,
           },
-          // data: {
-          // userId: post.userId,
-          // postId: this.postId,
-          // token: localStorage.getItem('token'),
-          // },
+          data: {
+            userId: this.userId,
+            postId: this.postId,
+            // token: localStorage.getItem('token'),
+          },
         })
         .then((response) => {
           // J'indique dans la console que le post est créé
