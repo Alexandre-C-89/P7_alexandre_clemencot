@@ -75,7 +75,7 @@ export default {
         ':',
         this.pseudo,
         ':',
-        this.userId,
+        Number(this.userId),
       );
       this.axios
         .post('http://localhost:3000/api/post/createpost', fd, {
@@ -84,7 +84,7 @@ export default {
           },
           data: {
             userId: this.userId,
-            postId: this.postId,
+            // postId: this.postId,
             // token: localStorage.getItem('token'),
           },
         })
