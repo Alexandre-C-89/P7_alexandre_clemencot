@@ -22,16 +22,16 @@ export default {
       console.log('localeStorage');
       alert('Salut !!');
     },
-    //   getUser() {
-    //     this.axios
-    //       .get('http://localhost:3000/api/user/')
-    //       .then((result) => {
-    //         console.log(result);
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   },
+    getUser() {
+      this.axios
+        .get('http://localhost:3000/api/user/')
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>

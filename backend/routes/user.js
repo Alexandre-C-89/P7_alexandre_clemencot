@@ -10,7 +10,7 @@ const userCtrl = require("../controllers/user");
 
 // Ici je créer mes routes pour s'enregistré et ce connecté
 router.post("/signup", userCtrl.signup);
-router.post("/login", auth, userCtrl.login);
+router.post("/login", userCtrl.login);
 router.get("/allUsers", auth, userCtrl.getAllUser);
 // router.put("/:userId", userCtrl.modifyUser);
 router.get("/", auth, userCtrl.getOneUser);
