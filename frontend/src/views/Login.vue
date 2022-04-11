@@ -58,6 +58,7 @@ export default {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('userId', response.data.userId);
           localStorage.setItem('pseudo', response.data.pseudo);
+          localStorage.setItem('email', response.data.email);
           this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));
