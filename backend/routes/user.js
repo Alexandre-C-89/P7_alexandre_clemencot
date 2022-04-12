@@ -13,7 +13,7 @@ router.post("/signup", userCtrl.signup);
 router.post("/login", userCtrl.login);
 router.get("/allUsers", auth, userCtrl.getAllUser);
 // router.put("/:userId", userCtrl.modifyUser);
-router.get("/", auth, userCtrl.getOneUser);
+router.get("/:id", auth, userCtrl.getOneUser);
 router.delete("/deleteUser/:userId", auth, userCtrl.deleteUser);
 
 module.exports = router;

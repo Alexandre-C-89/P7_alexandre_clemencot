@@ -5,7 +5,7 @@
     </div>
     <div class="header__link">
       <a @click="logout()">Déconnexion</a>
-      <router-link to="/api/user/:id">Profil</router-link> |
+      <router-link :to="`/user/${userId}`">Profil</router-link>
       <router-link to="/">Accueil</router-link> |
       <router-link to="/signup">S'enregistrer</router-link> |
       <router-link to="/login">Connexion</router-link> |
@@ -20,17 +20,12 @@
 <script>
 export default {
   name: 'Header',
-  // computed: {
-  //   isLoggedIn() {
-  //     return this.$store.getters.isAuthenticated;
-  //   },
-  // },
-  methods: {
-    // async logout() {
-    //   await this.$store.dispatch('LogOut');
-    //   this.$router.push('/login');
-    // },
+  data() {
+    return {
+      userId: localStorage.getItem('userId'),
+    };
   },
+  methods: {},
 };
 </script>
 

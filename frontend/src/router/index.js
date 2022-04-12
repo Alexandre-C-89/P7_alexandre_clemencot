@@ -43,7 +43,7 @@ const routes = [
   //   component: DeletePost,
   // },
   {
-    path: '/api/user/:id',
+    path: '/user/:id',
     name: 'Profil',
     component: Profil,
   },

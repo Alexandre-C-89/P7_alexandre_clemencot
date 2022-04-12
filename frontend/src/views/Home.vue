@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <div>Bonjour {{ pseudo }} !</div>
     <div class="home__icone">
       <button @click.prevent="goToCreatePost()">Créér un post</button>
     </div>
@@ -38,6 +39,7 @@ export default {
     return {
       posts: Posts,
       token: localStorage.getItem('token'),
+      pseudo: localStorage.getItem('pseudo'),
     };
   },
   mounted() {

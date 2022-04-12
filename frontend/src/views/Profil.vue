@@ -1,8 +1,9 @@
 <template>
   <div class="profil">
-    <h2>{{ user }}</h2>
+    <h2>Profil</h2>
     <div class="profil__description">
-      <p>email</p>
+      <p>pseudo : {{ pseudo }}</p>
+      <p>email : {{ email }}</p>
     </div>
     <button class="profil__button" @click.prevent="supp()" type="submit">
       Supprimer le profil
@@ -14,7 +15,8 @@
 export default {
   data() {
     return {
-      user: {},
+      pseudo: localStorage.getItem('pseudo'),
+      email: localStorage.getItem('email'),
     };
   },
   methods: {
@@ -22,16 +24,7 @@ export default {
       console.log('localeStorage');
       alert('Salut !!');
     },
-    getUser() {
-      this.axios
-        .get('http://localhost:3000/api/user/')
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+    getUser() {},
   },
 };
 </script>
