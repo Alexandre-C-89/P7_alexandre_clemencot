@@ -17,14 +17,24 @@ export default {
     return {
       pseudo: localStorage.getItem('pseudo'),
       email: localStorage.getItem('email'),
+      userId: localStorage.getItem('userId'),
     };
   },
   methods: {
     supp() {
-      console.log('localeStorage');
-      alert('Salut !!');
+      console.log(' --- je veux supprimé mon compte -----');
+      this.axios
+        .delete(`http://localhost:3000/api/user/deleteUser/${this.userId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          localStorage.clear();
+          this.$router.push({ name: 'Signup' });
+        });
     },
-    getUser() {},
   },
 };
 </script>

@@ -99,8 +99,9 @@ exports.getOneUser = async (req, res, next) => {
 
 // Suppression d'un profil d'utilisateur
 exports.deleteUser = async (req, res, next) => {
+  console.log(" ---- je veux supprimé un compte --------");
   const user = await User.findOne({
-    where: { id: req.params.userId, email: req.body.email },
+    where: { id: req.params.userId },
   });
   if (!user) {
     res.status(401).json({ message: "Utilisateur non trouvé !" });

@@ -46,7 +46,7 @@ export default {
       this.axios
         .post('http://localhost:3000/api/user/signup', user)
         .then((response) => {
-          console.log(response.data.userId);
+          console.log(response.data);
           console.log('Utilisateur enregistré ! ');
           this.$router.push({ name: 'Login' });
         })
