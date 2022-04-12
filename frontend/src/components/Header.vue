@@ -6,7 +6,7 @@
     <div class="header__link">
       <router-link to="/signup">S'enregistrer</router-link> |
       <router-link to="/login">Connexion</router-link>
-      <span v-if="this.userId">
+      <span v-if="this.userId === null">
         <router-link to="/">Accueil</router-link> |
         <router-link :to="`/user/${userId}`">Profil</router-link>
         <a @click="logout()">Déconnexion</a>
