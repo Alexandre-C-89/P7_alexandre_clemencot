@@ -4,15 +4,14 @@
       <img src="../assets/logo_blanc_recadre.png" alt="logo groupomania" />
     </div>
     <div class="header__link">
-      <a @click="logout()">Déconnexion</a>
-      <router-link :to="`/user/${userId}`">Profil</router-link>
-      <router-link to="/">Accueil</router-link> |
       <router-link to="/signup">S'enregistrer</router-link> |
-      <router-link to="/login">Connexion</router-link> |
-      <!--<span v-if="isLoggedIn">
-      </span>-->
-      <!--<span v-else>
-      </span>-->
+      <router-link to="/login">Connexion</router-link>
+      <span v-if="this.userId">
+        <router-link to="/">Accueil</router-link> |
+        <router-link :to="`/user/${userId}`">Profil</router-link>
+        <a @click="logout()">Déconnexion</a>
+      </span>
+      <span v-else> </span>
     </div>
   </div>
 </template>
@@ -25,7 +24,12 @@ export default {
       userId: localStorage.getItem('userId'),
     };
   },
-  methods: {},
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push({ name: 'Signup' });
+    },
+  },
 };
 </script>
 

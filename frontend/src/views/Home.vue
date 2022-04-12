@@ -47,6 +47,9 @@ export default {
       .get('http://localhost:3000/api/post')
       .then((response) => {
         this.posts = response.data.post;
+        if (localStorage.getItem('userId') === null) {
+          this.$router.push({ name: 'Signup' });
+        }
       })
       // eslint-disable-next-line no-console
       .catch((error) => console.log(error));
