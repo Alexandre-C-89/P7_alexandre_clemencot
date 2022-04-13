@@ -18,22 +18,16 @@
         <button @click.prevent="submit()" type="submit">Créer un compte</button>
       </div>
     </form>
-    <!--<p id="error">L'utilisateur existe déjà !</p>-->
   </div>
 </template>
 
 <script>
-// Ancien code
-// import User from '../models/user';
-
 export default {
   data() {
     return {
-      // user: User,
       pseudo: '',
       email: '',
       password: '',
-      // logged: false,
     };
   },
   methods: {
@@ -42,6 +36,7 @@ export default {
         pseudo: this.pseudo,
         email: this.email,
         password: this.password,
+        isAdmin: 0,
       };
       this.axios
         .post('http://localhost:3000/api/user/signup', user)
@@ -55,12 +50,6 @@ export default {
         });
     },
   },
-  // logged() {
-  //   const logged = localStorage.getItem('');
-  //   if (logged) {
-  //     return true;
-  //   }
-  // },
 };
 </script>
 
@@ -74,12 +63,6 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  // &__firstname {
-  //   margin: 10px;
-  // }
-  // &__lastname {
-  //   margin: 10px;
-  // }
   &__pseudo {
     margin: 10px;
   }

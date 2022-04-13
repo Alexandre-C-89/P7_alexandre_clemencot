@@ -19,6 +19,7 @@ exports.signup = (req, res, next) => {
         pseudo: req.body.pseudo,
         email: req.body.email,
         password: hash,
+        isAdmin: 0,
       })
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
         .catch(() =>

@@ -1,0 +1,178 @@
+<template>
+  <div class="home">
+    <div class="home__hello">Bonjour {{ pseudo }} !</div>
+    <div class="home__icone">
+      <button @click.prevent="goToCreatePost()">Créér un post</button>
+    </div>
+    <div class="home__card" v-for="user in users" :key="user.card" :user="user">
+      <div class="home__card__img">
+        <img :src="post.media" alt="image du post" />
+      </div>
+      <div class="home__card__content">
+        <div class="home__card__content__title">
+          {{ user.title }}
+        </div>
+        <div class="home__card__content__description">
+          {{ user.description }}
+        </div>
+        <div class="home__card__content__id">pseudo : {{ user.pseudo }}</div>
+        <div class="home__card__content__date">{{ user.createdAt }}</div>
+      </div>
+      <div class="home__card__btn">
+        <button @click.prevent="deleteUser(user)">Supprimer ce compte</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Admin',
+  components: {},
+  data() {
+    return {
+      token: localStorage.getItem('token'),
+      pseudo: localStorage.getItem('pseudo'),
+    };
+  },
+  mounted() {
+    this.axios
+      .get('http://localhost:3000/api/user/allUsers', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((response) => {
+        this.users = response.data.user;
+        if (localStorage.getItem('userId') === null) {
+          this.$router.push({ name: 'Signup' });
+        }
+      })
+      // eslint-disable-next-line no-console
+      .catch((error) => console.log(error));
+  },
+  methods: {
+    deleteUser(user) {
+      console.log('--- je veux supprimé cette utilisateur !---');
+      this.axios
+        .delete('http://localhost:3000/api/user/deleteUser', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        })
+        .then(() => {
+          window.location.reload();
+          console.log(user);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 600px;
+  height: auto;
+  background-color: #41b883;
+  margin: 40px 10px 10px 10px;
+  border-radius: 18px;
+  padding: 20px;
+  &__hello {
+    font-size: 2.5rem;
+    color: #fff;
+    margin: 20px;
+  }
+  &__icone {
+    & button {
+      width: 100px;
+      height: 28px;
+      margin: 10px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.541);
+      border: 2px solid white;
+      margin: 5px;
+      &:hover {
+        background-color: #62929e;
+      }
+    }
+  }
+  &__card {
+    width: 530px;
+    height: 280px;
+    background-color: #4c86a8;
+    margin: 10px 0px 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    &__img {
+      background-color: #fff;
+      width: 330px;
+      height: 220px;
+      margin: 10px;
+      & img {
+        width: 330px;
+        height: 220px;
+      }
+    }
+    &__content {
+      width: 160px;
+      height: 220px;
+      margin: 10px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      &__title {
+        font-family: 'nunito', sans-serif;
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin: 2px;
+        color: #ef8354;
+      }
+      &__description {
+        font-size: 0.8rem;
+        color: #fff;
+        width: 150px;
+        height: 150px;
+        margin: 5px 0px 5px 0px;
+      }
+      &__id {
+        color: #fff;
+      }
+      &__name {
+        color: #fff;
+        font-size: 0.8rem;
+        font-family: 'Merriweather Sans', sans-serif;
+      }
+      &__date {
+        color: #fff;
+        font-size: 0.7rem;
+      }
+    }
+    &__btn {
+      margin: 0px 0px 10px 0px;
+      & button {
+        width: 100px;
+        height: 28px;
+        margin: 10px;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.541);
+        border: 2px solid white;
+        margin: 5px;
+        &:hover {
+          background-color: #62929e;
+        }
+      }
+    }
+  }
+}
+</style>

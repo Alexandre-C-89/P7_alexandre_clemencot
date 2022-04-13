@@ -6,6 +6,7 @@ import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
 import CreatePost from '../views/CreatePost.vue';
 import ModifyPost from '../views/ModifyPost.vue';
+import getAllUser from '../views/getAllUser.vue';
 // import DeletePost from '../views/DeletePost.vue';
 import Profil from '../views/Profil.vue';
 
@@ -46,6 +47,11 @@ const routes = [
     path: '/user/:id',
     name: 'Profil',
     component: Profil,
+  },
+  {
+    path: '/user/allUsers',
+    name: 'Admin',
+    component: getAllUser,
   },
 ];
 

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div>Bonjour {{ pseudo }} !</div>
+    <div class="home__hello">Bonjour {{ pseudo }} !</div>
     <div class="home__icone">
       <button @click.prevent="goToCreatePost()">Créér un post</button>
     </div>
@@ -15,14 +15,10 @@
         <div class="home__card__content__description">
           {{ post.description }}
         </div>
-        <!-- <div class="home__card__content__name">
-          {{ post.pseudo }}
-        </div> -->
         <div class="home__card__content__id">pseudo : {{ post.pseudo }}</div>
-        <div>postId : {{ post.postId }}</div>
+        <div class="home__card__content__date">{{ post.createdAt }}</div>
       </div>
       <div class="home__card__btn">
-        <!-- <button @click.prevent="goModify()">modifier</button> -->
         <button @click.prevent="goDelete(post)">Supprimer</button>
       </div>
     </div>
@@ -68,7 +64,6 @@ export default {
           data: {
             userId: post.userId,
             postId: post.postId,
-            // token: localStorage.getItem('token'),
           },
         })
         .then(() => {
@@ -95,6 +90,11 @@ export default {
   margin: 40px 10px 10px 10px;
   border-radius: 18px;
   padding: 20px;
+  &__hello {
+    font-size: 2.5rem;
+    color: #fff;
+    margin: 20px;
+  }
   &__icone {
     & button {
       width: 100px;
@@ -117,7 +117,8 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
+    border: 1px solid #fff;
+    border-radius: 5px;
     &__img {
       background-color: #fff;
       width: 330px;
@@ -139,21 +140,28 @@ export default {
       &__title {
         font-family: 'nunito', sans-serif;
         font-weight: bold;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         margin: 2px;
         color: #ef8354;
       }
       &__description {
-        // background-color: #fff;
+        font-size: 0.8rem;
         color: #fff;
         width: 150px;
         height: 150px;
         margin: 5px 0px 5px 0px;
       }
+      &__id {
+        color: #fff;
+      }
       &__name {
         color: #fff;
         font-size: 0.8rem;
         font-family: 'Merriweather Sans', sans-serif;
+      }
+      &__date {
+        color: #fff;
+        font-size: 0.7rem;
       }
     }
     &__btn {

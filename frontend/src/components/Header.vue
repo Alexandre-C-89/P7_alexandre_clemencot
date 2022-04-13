@@ -6,10 +6,13 @@
     <div class="header__link">
       <router-link to="/signup">S'enregistrer</router-link> |
       <router-link to="/login">Connexion</router-link>
-      <span v-if="this.userId === null">
+      <span v-if="this.userId">
         <router-link to="/">Accueil</router-link> |
         <router-link :to="`/user/${userId}`">Profil</router-link>
-        <a @click="logout()">Déconnexion</a>
+        <button @click="logout()">Déconnexion</button>
+      </span>
+      <span v-if="this.userId">
+        <router-link to="/allUsers">Admin</router-link>
       </span>
       <span v-else> </span>
     </div>
@@ -27,7 +30,7 @@ export default {
   methods: {
     logout() {
       localStorage.clear();
-      this.$router.push({ name: 'Signup' });
+      window.location.reload();
     },
   },
 };
@@ -49,7 +52,7 @@ export default {
       text-decoration: none;
       width: 100px;
       height: 20px;
-      margin: 0px 15px 0px 15px;
+      margin: 0px 20px 0px 15px;
       &.router-link-exact-active {
         color: #42b983;
       }
@@ -66,6 +69,13 @@ export default {
     width: 50px;
     height: 50px;
     background-color: white;
+  }
+  & button {
+    background-color: #42b983;
+    color: #fff;
+    border-radius: 5px;
+    border: 1.7px solid #fff;
+    margin: 20px;
   }
 }
 </style>

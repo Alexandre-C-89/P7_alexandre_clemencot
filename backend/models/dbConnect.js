@@ -21,7 +21,7 @@ sequelize
     sequelize
       .sync()
       .then((sync) => {
-        console.log(" ------ modèles synchronisé ! ");
+        console.log(" ------ modèles synchronisé ! ------");
       })
       .catch((error) => {
         console.log("impossible de synchronisé les modèles ! " + error);
