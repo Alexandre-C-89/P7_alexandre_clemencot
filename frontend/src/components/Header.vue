@@ -11,7 +11,7 @@
         <router-link :to="`/user/${userId}`">Profil</router-link>
         <button @click="logout()">Déconnexion</button>
       </span>
-      <span v-if="this.userId">
+      <span v-if="this.isAdmin == 1">
         <router-link to="/allUsers">Admin</router-link>
       </span>
       <span v-else> </span>
@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       userId: localStorage.getItem('userId'),
+      isAdmin: localStorage.getItem('isAdmin'),
     };
   },
   methods: {
@@ -32,6 +33,18 @@ export default {
       localStorage.clear();
       window.location.reload();
     },
+  },
+  mounted() {
+    this.axios
+      .get(`http://localhost:3000/api/user/${this.isAdmin}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        console.log(this.isAdmin);
+      });
   },
 };
 </script>
