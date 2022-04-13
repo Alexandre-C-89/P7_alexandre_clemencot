@@ -42,8 +42,6 @@ export default {
   methods: {
     submit() {
       const user = {
-        // email: User.email,
-        // password: User.passwords,
         email: this.email,
         password: this.password,
       };
@@ -59,6 +57,7 @@ export default {
           localStorage.setItem('userId', response.data.userId);
           localStorage.setItem('pseudo', response.data.pseudo);
           localStorage.setItem('email', response.data.email);
+          localStorage.setItem('isAdmin', response.data.isAdmin);
           this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));

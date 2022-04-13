@@ -6,7 +6,6 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 // J'importe JWT
 const jwt = require("jsonwebtoken");
-const Post = require("../models/post");
 
 // Partie enregistrement de l'utilisateur
 exports.signup = (req, res, next) => {
@@ -53,6 +52,7 @@ exports.login = async (req, res, next) => {
           userId: user.id,
           pseudo: user.pseudo,
           email: user.email,
+          isAdmin: user.isAdmin,
           token: jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
             expiresIn: "8h",
           }),
