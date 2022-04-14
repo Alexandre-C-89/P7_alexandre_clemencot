@@ -4,7 +4,7 @@
     <div class="home__icone">
       <button @click.prevent="goToCreatePost()">Créér un post</button>
     </div>
-    <div class="home__card" v-for="post in posts" :key="post.card" :post="post">
+    <div class="home__card" v-for="post in posts" :key="post.card">
       <div class="home__card__img">
         <img :src="post.media" alt="image du post" />
       </div>
@@ -26,14 +26,12 @@
 </template>
 
 <script>
-import Posts from '../models/post';
-
 export default {
   name: 'Home',
   components: {},
   data() {
     return {
-      posts: Posts,
+      posts: [],
       token: localStorage.getItem('token'),
       pseudo: localStorage.getItem('pseudo'),
     };
