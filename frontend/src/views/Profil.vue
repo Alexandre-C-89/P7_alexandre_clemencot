@@ -1,13 +1,19 @@
 <template>
   <div class="profil">
-    <h2>Profil</h2>
-    <div class="profil__description">
-      <p>pseudo : {{ pseudo }}</p>
-      <p>email : {{ email }}</p>
+    <h1>Profil</h1>
+    <div class="profil__card">
+      <div class="profil__card__description">
+        <p>pseudo : {{ pseudo }}</p>
+        <p>email : {{ email }}</p>
+      </div>
+      <button
+        class="profil__card__button"
+        @click.prevent="supp()"
+        type="submit"
+      >
+        Supprimer le profil
+      </button>
     </div>
-    <button class="profil__button" @click.prevent="supp()" type="submit">
-      Supprimer le profil
-    </button>
   </div>
 </template>
 
@@ -41,15 +47,42 @@ export default {
 
 <style scoped lang="scss">
 .profil {
-  &__description {
-    width: 320px;
-    height: 160px;
-    background-color: #62929e;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 320px;
+  height: auto;
+  background-color: #41b883;
+  color: #fff;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 10px 10px 10px;
+  &__card {
+    width: 280px;
+    background-color: #ef8354;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    &__description {
+      color: #fff;
+    }
+  }
+  &__button {
+    margin: 10px;
+    width: 150px;
+    height: 28px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #41b883;
+    border: 2px solid white;
+    color: #fff;
+    &:hover {
+      background-color: #30805c;
+    }
+  }
+  & h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.5rem;
   }
 }
 </style>
