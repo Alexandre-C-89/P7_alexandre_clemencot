@@ -34,18 +34,6 @@ export default {
       window.location.reload();
     },
   },
-  mounted() {
-    this.axios
-      .get(`http://localhost:3000/api/user/${this.isAdmin}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        console.log(this.isAdmin);
-      });
-  },
 };
 </script>
 

@@ -40,11 +40,8 @@
 </template>
 
 <script>
-// Ancien code
-// import Post from '../models/post';
-
 export default {
-  name: 'Login',
+  name: 'CreatePost',
   data() {
     return {
       title: '',

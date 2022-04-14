@@ -54,6 +54,7 @@ export default {
     },
     goDelete(post) {
       console.log(post.postId);
+      // rajoute une condition
       this.axios
         .delete('http://localhost:3000/api/post/deletePost', {
           headers: {

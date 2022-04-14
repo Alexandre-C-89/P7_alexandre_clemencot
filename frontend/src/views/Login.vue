@@ -59,6 +59,7 @@ export default {
           localStorage.setItem('email', response.data.email);
           localStorage.setItem('isAdmin', response.data.isAdmin);
           this.$router.push({ name: 'Home' });
+          window.location.reload();
         })
         .catch((error) => console.log(error));
     },
