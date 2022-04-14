@@ -2,9 +2,10 @@
 // que je pourrais réutilisé dans mes méthodes et functions
 
 export default class User {
-  constructor(pseudo, email, password) {
+  constructor(pseudo, email, password, isAdmin) {
     this.pseudo = pseudo;
     this.email = email;
     this.password = password;
+    this.isAdmin = isAdmin;
   }
 }

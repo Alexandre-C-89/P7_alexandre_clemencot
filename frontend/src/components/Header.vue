@@ -5,14 +5,14 @@
     </div>
     <div class="header__link">
       <router-link to="/signup">S'enregistrer</router-link> |
-      <router-link to="/login">Connexion</router-link>
+      <router-link to="/login">Connexion</router-link> |
       <span v-if="this.userId">
         <router-link to="/">Accueil</router-link> |
-        <router-link :to="`/user/${userId}`">Profil</router-link>
-        <button @click="logout()">Déconnexion</button>
+        <router-link :to="`/user/allUsers`">Profil</router-link> |
+        <button @click="logout()">Déconnexion</button> |
       </span>
       <span v-if="this.isAdmin == 1">
-        <router-link to="/allUsers">Admin</router-link>
+        <router-link to="/admin">Admin</router-link>
       </span>
       <span v-else> </span>
     </div>

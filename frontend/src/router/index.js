@@ -6,7 +6,7 @@ import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
 import CreatePost from '../views/CreatePost.vue';
 import ModifyPost from '../views/ModifyPost.vue';
-import getAllUser from '../views/getAllUser.vue';
+import Admin from '../views/Admin.vue';
 // import DeletePost from '../views/DeletePost.vue';
 import Profil from '../views/Profil.vue';
 
@@ -38,20 +38,15 @@ const routes = [
     name: 'ModifyPost',
     component: ModifyPost,
   },
-  // {
-  //   path: '/deletePost',
-  //   name: 'DeletePost',
-  //   component: DeletePost,
-  // },
   {
     path: '/user/:id',
     name: 'Profil',
     component: Profil,
   },
   {
-    path: '/user/allUsers',
-    name: 'Admin',
-    component: getAllUser,
+    path: '/admin', // URL correspondant au composant
+    name: 'Admin', // le nom de cette route pour l'étiquetage et le débuggage
+    component: Admin, // le composant qui doit s'afficher lorsque le path est trouvé
   },
 ];
 

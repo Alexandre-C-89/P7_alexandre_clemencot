@@ -65,9 +65,11 @@ exports.login = async (req, res, next) => {
 
 // Partie sur l'affichage de tout les utilisateurs
 exports.getAllUser = async (req, res, next) => {
+  console.log(" ------- Je veux voir tout les utilisateurs ! -------- ");
   const user = await User.findAll();
   if (user) {
     res.status(200).json({ user });
+    console.log(" ------- je vois tout les utilisateurs ! ------- ");
   } else {
     res.status(404).json({ message: "Utilisateur non trouvé !" });
   }
