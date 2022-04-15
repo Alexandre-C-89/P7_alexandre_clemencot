@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: 'CreatePost',
+  name: 'createPost',
   data() {
     return {
       title: '',
@@ -99,10 +99,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .post {
   height: 400px;
-  background-color: #62929e;
+  background-color: #afafb0;
+  color: #132542;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -143,8 +144,10 @@ export default {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.541);
     border: 2px solid white;
+    margin: 5px;
     &:hover {
-      background-color: #62929e;
+      background-color: #132542;
+      color: #fff;
     }
   }
 }
