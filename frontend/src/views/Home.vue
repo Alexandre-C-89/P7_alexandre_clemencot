@@ -18,8 +18,11 @@
         <div class="home__card__content__id">pseudo : {{ post.pseudo }}</div>
         <div class="home__card__content__date">{{ post.createdAt }}</div>
       </div>
-      <div class="home__card__btn" v-if="post.pseudo == pseudo || isAdmin == 1">
+      <div class="home__card__btn" v-if="post.pseudo == pseudo">
         <button @click.prevent="goDelete(post)">Supprimer</button>
+      </div>
+      <div class="home__card__btn" v-if="isAdmin == 1">
+        <button @click.prevent="DeleteWithAdmin(post)">Supprimer</button>
       </div>
     </div>
   </div>
@@ -34,6 +37,7 @@ export default {
       posts: [],
       token: localStorage.getItem('token'),
       pseudo: localStorage.getItem('pseudo'),
+      isAdmin: localStorage.getItem('isAdmin'),
     };
   },
   mounted() {
@@ -63,6 +67,27 @@ export default {
           data: {
             userId: post.userId,
             postId: post.postId,
+          },
+        })
+        .then(() => {
+          window.location.reload();
+          console.log(post);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    DeleteWithAdmin(post) {
+      console.log('Je veux supprimé le post !');
+      this.axios
+        .delete('http://localhost:3000/api/post/deletePost', this.isAdmin, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          data: {
+            userId: post.userId,
+            postId: post.postId,
+            isAdmin: this.isAdmin,
           },
         })
         .then(() => {
