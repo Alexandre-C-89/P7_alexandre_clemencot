@@ -64,7 +64,8 @@ export default {
 .user {
   width: 500px;
   height: auto;
-  background-color: #41b883;
+  background-color: #afafb0;
+  color: #132542;
   padding: 20px;
   margin: 20px;
   font-family: 'Nunito', sans-serif;
@@ -90,9 +91,21 @@ export default {
       font-family: 'Merriweather Sans', sans-serif;
       color: #fff;
     }
-  }
-  &__title {
-    color: #fff;
+    &__button {
+      & button {
+        width: 160px;
+        height: 28px;
+        margin: 10px;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.541);
+        border: 2px solid white;
+        margin: 5px;
+        &:hover {
+          background-color: #132542;
+          color: #fff;
+        }
+      }
+    }
   }
 }
 </style>
