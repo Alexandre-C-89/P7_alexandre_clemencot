@@ -5,20 +5,21 @@
       <div class="profil__card__description">
         <p>pseudo : {{ pseudo }}</p>
         <p>email : {{ email }}</p>
+        <button
+          class="profil__card__button"
+          @click.prevent="supp()"
+          type="submit"
+        >
+          Supprimer le profil
+        </button>
       </div>
-      <button
-        class="profil__card__button"
-        @click.prevent="supp()"
-        type="submit"
-      >
-        Supprimer le profil
-      </button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'Profil',
   data() {
     return {
       pseudo: localStorage.getItem('pseudo'),
@@ -47,9 +48,9 @@ export default {
 
 <style scoped lang="scss">
 .profil {
-  width: 320px;
+  width: 350px;
   height: auto;
-  background-color: #41b883;
+  background-color: #afafb0;
   color: #fff;
   border-radius: 15px;
   display: flex;
@@ -59,25 +60,25 @@ export default {
   margin: 30px 10px 10px 10px;
   &__card {
     width: 280px;
-    background-color: #ef8354;
-    margin: 10px;
+    background-color: #d1515a;
+    margin: 10px 10px 30px 10px;
     padding: 10px;
     border-radius: 5px;
     &__description {
       color: #fff;
     }
-  }
-  &__button {
-    margin: 10px;
-    width: 150px;
-    height: 28px;
-    margin: 10px;
-    border-radius: 10px;
-    background-color: #41b883;
-    border: 2px solid white;
-    color: #fff;
-    &:hover {
-      background-color: #30805c;
+    &__button {
+      width: 125px;
+      height: 28px;
+      margin: 10px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.541);
+      border: 2px solid white;
+      margin: 5px;
+      &:hover {
+        background-color: #132542;
+        color: #fff;
+      }
     }
   }
   & h2 {
