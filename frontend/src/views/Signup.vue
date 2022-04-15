@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  name: 'Signup',
   data() {
     return {
       pseudo: '',
@@ -53,11 +54,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .form {
   width: 320px;
   height: 265px;
-  background-color: #62929e;
+  background-color: #afafb0;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -79,10 +80,10 @@ export default {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.541);
     font-weight: bold;
-    color: black;
+    color: #1f2232;
     border: 2px solid white;
     &:hover {
-      background-color: #084b5c;
+      background-color: #d1515a;
     }
   }
 }
