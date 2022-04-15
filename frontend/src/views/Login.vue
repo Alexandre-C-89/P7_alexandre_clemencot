@@ -22,19 +22,10 @@
 </template>
 
 <script>
-// j'importe mapActions pour l'utilisé
-// et importé l'action "login"
-// import Btn from '../components/Btn.vue';
-// import User from '../models/user';
-
 export default {
   name: 'Login',
-  // components: {
-  //   Btn,
-  // },
   data() {
     return {
-      // user: User,
       email: '',
       password: '',
     };
@@ -71,7 +62,8 @@ export default {
 .form {
   width: 320px;
   height: 160px;
-  background-color: #62929e;
+  background-color: #afafb0;
+  color: #1f2232;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -91,7 +83,8 @@ export default {
     background-color: rgba(255, 255, 255, 0.541);
     border: 2px solid white;
     &:hover {
-      background-color: #62929e;
+      background-color: #132542;
+      color: #fff;
     }
   }
 }

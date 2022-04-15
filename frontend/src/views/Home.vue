@@ -87,6 +87,7 @@ export default {
   width: 600px;
   height: auto;
   background-color: #afafb0;
+  color: #132542;
   margin: 40px 10px 10px 10px;
   border-radius: 18px;
   padding: 20px;
@@ -105,7 +106,8 @@ export default {
       border: 2px solid white;
       margin: 5px;
       &:hover {
-        background-color: #62929e;
+        background-color: #132542;
+        color: #fff;
       }
     }
   }
@@ -170,12 +172,12 @@ export default {
         height: 28px;
         margin: 10px;
         border-radius: 10px;
-        color: #fff;
         background-color: #afafb0;
         border: 2px solid white;
         margin: 5px;
         &:hover {
           background-color: #132542;
+          color: #fff;
         }
       }
     }

@@ -79,11 +79,11 @@ export default {
     margin: 10px;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.541);
-    font-weight: bold;
     color: #1f2232;
     border: 2px solid white;
     &:hover {
-      background-color: #d1515a;
+      background-color: #132542;
+      color: #fff;
     }
   }
 }
