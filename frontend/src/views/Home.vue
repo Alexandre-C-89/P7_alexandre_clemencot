@@ -18,7 +18,7 @@
         <div class="home__card__content__id">pseudo : {{ post.pseudo }}</div>
         <div class="home__card__content__date">{{ post.createdAt }}</div>
       </div>
-      <div class="home__card__btn">
+      <div class="home__card__btn" v-if="post.pseudo == pseudo || isAdmin == 1">
         <button @click.prevent="goDelete(post)">Supprimer</button>
       </div>
     </div>
@@ -34,6 +34,7 @@ export default {
       posts: [],
       token: localStorage.getItem('token'),
       pseudo: localStorage.getItem('pseudo'),
+      isAdmin: localStorage.getItem('isAdmin'),
     };
   },
   mounted() {
@@ -41,6 +42,7 @@ export default {
       .get('http://localhost:3000/api/post')
       .then((response) => {
         this.posts = response.data.post;
+        this.isAdmin = localStorage.getItem('isAdmin');
         if (localStorage.getItem('userId') === null) {
           this.$router.push({ name: 'Signup' });
         }
@@ -53,10 +55,9 @@ export default {
       this.$router.push({ name: 'createPost' });
     },
     goDelete(post) {
-      console.log(post.postId);
-      // rajoute une condition
+      console.log('Je veux supprimé le post !');
       this.axios
-        .delete('http://localhost:3000/api/post/deletePost', {
+        .delete('http://localhost:3000/api/post/deletePost', this.isAdmin, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -85,7 +86,7 @@ export default {
   flex-direction: column;
   width: 600px;
   height: auto;
-  background-color: #41b883;
+  background-color: #afafb0;
   margin: 40px 10px 10px 10px;
   border-radius: 18px;
   padding: 20px;
@@ -111,7 +112,7 @@ export default {
   &__card {
     width: 530px;
     height: 280px;
-    background-color: #4c86a8;
+    background-color: #d1515a;
     margin: 10px 0px 10px 0px;
     display: flex;
     flex-wrap: wrap;
@@ -119,7 +120,6 @@ export default {
     border: 1px solid #fff;
     border-radius: 5px;
     &__img {
-      background-color: #fff;
       width: 330px;
       height: 220px;
       margin: 10px;
@@ -141,7 +141,7 @@ export default {
         font-weight: bold;
         font-size: 1.5rem;
         margin: 2px;
-        color: #ef8354;
+        color: #fff;
       }
       &__description {
         font-size: 0.8rem;
@@ -170,11 +170,12 @@ export default {
         height: 28px;
         margin: 10px;
         border-radius: 10px;
-        background-color: rgba(255, 255, 255, 0.541);
+        color: #fff;
+        background-color: #afafb0;
         border: 2px solid white;
         margin: 5px;
         &:hover {
-          background-color: #62929e;
+          background-color: #132542;
         }
       }
     }

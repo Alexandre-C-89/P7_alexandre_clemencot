@@ -55,7 +55,7 @@ export default {
       height: 20px;
       margin: 0px 20px 0px 15px;
       &.router-link-exact-active {
-        color: #42b983;
+        color: #d1515a;
       }
     }
   }
@@ -72,7 +72,7 @@ export default {
     background-color: white;
   }
   & button {
-    background-color: #42b983;
+    background-color: #d1515a;
     color: #fff;
     border-radius: 5px;
     border: 1.7px solid #fff;

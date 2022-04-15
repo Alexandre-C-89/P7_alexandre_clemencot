@@ -106,7 +106,8 @@ exports.deleteUser = async (req, res, next) => {
   const user = await User.findOne({
     where: { id: req.params.userId },
   });
-  if (!user || isAdmin == 0) {
+  const admin = await User.findOne({ where: { isAdmin: req.params.isAdmin } });
+  if (!user || admin == 0) {
     res.status(401).json({ message: "Utilisateur non trouvé !" });
   } else {
     User.destroy({ where: { id: req.params.userId } });

@@ -11,14 +11,9 @@
         <p>email : {{ user.email }}</p>
       </div>
       <div class="user__card__button">
-        <button>Supprimer cette utilisateur</button>
+        <button @click="deleteUser()">Supprimer cet utilisateur</button>
       </div>
     </div>
-    <!--<div class="user__card" v-for="user in users" :key="user.card">
-      <div class="user__card__pseudo">
-        {{ user.pseudo }}
-      </div>
-    </div>-->
   </div>
 </template>
 
@@ -28,6 +23,7 @@ export default {
   data() {
     return {
       users: [],
+      isAdmin: localStorage.getItem('isAdmin'),
     };
   },
   mounted() {
@@ -46,6 +42,20 @@ export default {
         console.log(error);
         console.log('Erreur !!');
       });
+  },
+  methods: {
+    deleteUser() {
+      this.axios
+        .delete(`http://localhost:3000/api/user/deleteUser/${this.isAdmin}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data.user);
+          console.log('Je supprime ce compte utilisateur !');
+        });
+    },
   },
 };
 </script>
