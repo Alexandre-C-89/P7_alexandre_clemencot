@@ -34,7 +34,6 @@ exports.createPost = (req, res, next) => {
         });
       });
   } else {
-    console.log(Number(req.body.userId));
     Post.create({
       // Je renseigne les champs
       userId: req.body.userId,
@@ -110,9 +109,6 @@ exports.deletePost = async (req, res, next) => {
   console.log("vous avez l'intention de supprimé un post !");
   // Je cherche le post que je veux supprimer
   const post = await Post.findOne({ where: { postId: req.body.postId } });
-  console.log(req.body.postId);
-  // Je cherche l'utilisateur qui veut supprimé le post
-  // const user = await User.findOne({ where: { id: req.body.userId } });
   // Si le post est trouvé alors je supprime le post
   if (post) {
     Post.destroy({ where: { postId: req.body.postId } });

@@ -34,7 +34,6 @@ export default {
       posts: [],
       token: localStorage.getItem('token'),
       pseudo: localStorage.getItem('pseudo'),
-      isAdmin: localStorage.getItem('isAdmin'),
     };
   },
   mounted() {
@@ -57,7 +56,7 @@ export default {
     goDelete(post) {
       console.log('Je veux supprimé le post !');
       this.axios
-        .delete('http://localhost:3000/api/post/deletePost', this.isAdmin, {
+        .delete('http://localhost:3000/api/post/deletePost', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
