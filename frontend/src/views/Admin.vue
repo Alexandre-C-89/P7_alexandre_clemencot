@@ -46,13 +46,18 @@ export default {
   methods: {
     deleteUser() {
       this.axios
-        .delete(`http://localhost:3000/api/user/deleteUser/${this.isAdmin}`, {
+        .delete('http://localhost:3000/api/user/deleteUser', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          data: {
+            isAdmin: this.isAdmin,
+            userId: this.users.userId,
           },
         })
         .then((response) => {
           console.log(response.data.user);
+          console.log(this.isAdmin);
           console.log('Je supprime ce compte utilisateur !');
         });
     },
@@ -77,7 +82,7 @@ export default {
   &__card {
     width: 350px;
     height: 200px;
-    background-color: #ef8354;
+    background-color: #d1515a;
     border: 1px solid #fff;
     font-family: 'Merriweather Sans', sans-serif;
     padding: 10px;

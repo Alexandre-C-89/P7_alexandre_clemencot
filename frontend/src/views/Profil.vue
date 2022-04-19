@@ -25,6 +25,7 @@ export default {
       pseudo: localStorage.getItem('pseudo'),
       email: localStorage.getItem('email'),
       userId: localStorage.getItem('userId'),
+      isAdmin: localStorage.getItem('isAdmin'),
     };
   },
   methods: {
@@ -35,12 +36,17 @@ export default {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
+          data: {
+            isAdmin: this.isAdmin,
+          },
         })
         .then((response) => {
           console.log(response.data);
           localStorage.clear();
           this.$router.push({ name: 'Signup' });
-        });
+          window.location.reload();
+        })
+        .catch((error) => console.log(error, 'Erreur'));
     },
   },
 };

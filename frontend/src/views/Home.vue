@@ -71,7 +71,6 @@ export default {
         })
         .then(() => {
           window.location.reload();
-          console.log(post);
         })
         .catch((error) => {
           console.log(error);

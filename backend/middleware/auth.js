@@ -11,7 +11,11 @@ module.exports = (req, res, next) => {
     const userId = decodedToken.userId; // Je stock l'id d'écoder
     // console.log(User.isAdmin);
     if (req.body.userId && req.body.userId !== userId) {
-      throw "User ID non valable !";
+      // Si l'utilisateur n'est pas admin
+      // alors je renvoi une erreur
+      if (req.body.isAdmin != 1) {
+        throw "User ID non valable !";
+      }
     } else {
       next();
     }
