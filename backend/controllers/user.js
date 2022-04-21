@@ -37,7 +37,7 @@ exports.login = async (req, res, next) => {
   const user = await User.findOne({ where: { email: req.body.email } }); // Je cherche l'email de la requête avec celui enregistré
   console.log(req.body.email);
   if (!user) {
-    console.log("Utilisateur non trouvé !");
+    return res.status(401).json({ error: "Utilisateur non trouvé" });
   } else {
     console.log("utilisateur trouvé !");
     bcrypt

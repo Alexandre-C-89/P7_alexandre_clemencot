@@ -3,7 +3,7 @@
     <div class="user__title">
       <p>Voici les utilisateurs !!</p>
     </div>
-    <div class="user__card" v-for="user in users" :key="user.card">
+    <div class="user__card" v-for="user in user" :key="user.card">
       <div class="user__card__name">
         <p>pseudo : {{ user.pseudo }}</p>
       </div>
@@ -11,7 +11,7 @@
         <p>email : {{ user.email }}</p>
       </div>
       <div class="user__card__button">
-        <button @click="deleteUser()">Supprimer cet utilisateur</button>
+        <button @click="deleteUser(user)">Supprimer cet utilisateur</button>
       </div>
     </div>
   </div>
@@ -22,8 +22,11 @@ export default {
   name: 'Admin',
   data() {
     return {
-      users: [],
-      isAdmin: localStorage.getItem('isAdmin'),
+      user: {
+        email: '',
+        password: '',
+        id: '',
+      },
     };
   },
   mounted() {
@@ -35,7 +38,8 @@ export default {
       })
       .then((response) => {
         // console.log(response.data.user);
-        this.users = response.data.user;
+        this.user = response.data.user;
+        this.user.id = localStorage.getItem('userId');
         console.log('Je veux voir les utilisateurs !');
       })
       .catch((error) => {
@@ -44,21 +48,26 @@ export default {
       });
   },
   methods: {
-    deleteUser() {
+    deleteUser(user) {
+      console.log(user.id);
       this.axios
-        .delete(`http://localhost:3000/api/user/deleteUser/${this.userId}`, {
+        .delete(`http://localhost:3000/api/user/deleteUser/${user.id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
           data: {
             isAdmin: localStorage.getItem('isAdmin'),
-            userId: this.users.userId,
+            userId: this.userId,
           },
         })
         .then((response) => {
           console.log(response.data.user);
           console.log(this.isAdmin);
           console.log('Je supprime ce compte utilisateur !');
+          window.location.reload();
+          if (localStorage.getItem('userId') == null) {
+            this.$router.push({ name: 'Signup' });
+          }
         });
     },
   },
