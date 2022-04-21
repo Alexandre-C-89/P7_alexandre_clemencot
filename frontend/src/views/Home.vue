@@ -42,7 +42,11 @@ export default {
   },
   mounted() {
     this.axios
-      .get('http://localhost:3000/api/post')
+      .get('http://localhost:3000/api/post/', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
       .then((response) => {
         this.posts = response.data.post;
         this.isAdmin = localStorage.getItem('isAdmin');
