@@ -14,7 +14,6 @@ exports.createPost = (req, res, next) => {
   console.log("Vous avez l'intention de créer un post !");
   // Je créer le post avec la méthode "create"
   if (req.file) {
-    console.log("1");
     Post.create({
       // Je renseigne les champs
       title: req.body.title,

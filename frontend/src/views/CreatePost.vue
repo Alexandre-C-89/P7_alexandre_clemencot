@@ -86,9 +86,7 @@ export default {
           },
         })
         .then((response) => {
-          // J'indique dans la console que le post est créé
           console.log('Post créer !');
-          // console.log(response.data);
           console.log(response);
           console.log("Post créer, je suis redirigé vers la page d'accueil !!");
           this.$router.push({ name: 'Home' });

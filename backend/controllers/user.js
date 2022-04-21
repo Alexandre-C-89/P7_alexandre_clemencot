@@ -53,9 +53,13 @@ exports.login = async (req, res, next) => {
           pseudo: user.pseudo,
           email: user.email,
           isAdmin: user.isAdmin,
-          token: jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
-            expiresIn: "8h",
-          }),
+          token: jwt.sign(
+            { userId: user.id, isAdmin: user.isAdmin },
+            process.env.SECRET_KEY,
+            {
+              expiresIn: "8h",
+            }
+          ),
         });
       })
       .catch((error) => res.status(500).json({ error }));
@@ -104,14 +108,15 @@ exports.getOneUser = async (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
   console.log(" ---- je veux supprimé un compte --------");
   const user = await User.findOne({
-    where: { id: req.params.userId },
+    where: { id: req.params.id },
   });
+  console.log(user);
   // const admin = await User.findOne({ where: { isAdmin: req.body.isAdmin } });
   if (!user) {
     res.status(401).json({ message: "Utilisateur non trouvé !" });
   } else {
-    User.destroy({ where: { id: req.params.userId } });
-    console.log("Utilisateur supprimé !");
+    User.destroy({ where: { id: req.params.id } });
+    console.log(" ---- Utilisateur supprimé ! -------");
     return res.status(200).json({ mesage: "Utilisateur supprimé !" });
   }
 };

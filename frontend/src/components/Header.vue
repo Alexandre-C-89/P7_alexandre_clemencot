@@ -8,7 +8,7 @@
       <router-link to="/login">Connexion</router-link> |
       <span v-if="this.userId">
         <router-link to="/">Accueil</router-link> |
-        <router-link :to="`/user/allUsers`">Profil</router-link> |
+        <router-link :to="`/user/profil`">Profil</router-link> |
         <button @click="logout()">Déconnexion</button> |
       </span>
       <span v-if="this.isAdmin == 1">
@@ -31,6 +31,7 @@ export default {
   methods: {
     logout() {
       localStorage.clear();
+      this.$router.push({ name: 'Signup' });
       window.location.reload();
     },
   },

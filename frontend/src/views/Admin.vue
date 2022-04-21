@@ -46,12 +46,12 @@ export default {
   methods: {
     deleteUser() {
       this.axios
-        .delete('http://localhost:3000/api/user/deleteUser', {
+        .delete(`http://localhost:3000/api/user/deleteUser/${this.userId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
           data: {
-            isAdmin: this.isAdmin,
+            isAdmin: localStorage.getItem('isAdmin'),
             userId: this.users.userId,
           },
         })
