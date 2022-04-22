@@ -33,7 +33,7 @@ Maintenant vous vous trouvez dans le dossier backend et vous pouvez lancé le ba
 
 - nodemon server
 
-# Branche présente sur le projet
+# Branche utilisé pour mené à bien le projet
 
 - Main
 - branchOne
