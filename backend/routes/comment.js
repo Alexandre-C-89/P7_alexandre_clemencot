@@ -4,22 +4,15 @@ const express = require("express");
 const router = express.Router();
 // J'importe mon fichier authentification
 const auth = require("../middleware/auth");
-// J'importe multer
-const multer = require("../middleware/multer-config");
 
 // J'importe mon fichier user
-const postCtrl = require("../controllers/post");
+const commentCtrl = require("../controllers/comment");
 
 // Ici je créer mes routes pour s'enregistré et ce connecté
-router.post("/createpost", auth.token, multer, postCtrl.createPost);
-router.get("/", auth.token, postCtrl.getAllPost);
-router.get("/:id", auth.token, postCtrl.getOnePost);
+router.post("/createcomment", commentCtrl.createComment);
+// router.get("/", postCtrl.getAllComment);
+router.get("/:id", auth.token, commentCtrl.getOneComment);
 // router.put("/:postId", auth, multer, postCtrl.modifyPost);
-router.delete(
-  "/deletePost/:id",
-  auth.token,
-  auth.adminPost,
-  postCtrl.deletePost
-);
+router.delete("/deletePost", auth.token, commentCtrl.deleteComment);
 
 module.exports = router;
