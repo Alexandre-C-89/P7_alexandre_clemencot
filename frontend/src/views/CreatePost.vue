@@ -88,7 +88,6 @@ export default {
         .then((response) => {
           console.log('Post créer !');
           console.log(response);
-          console.log("Post créer, je suis redirigé vers la page d'accueil !!");
           this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));

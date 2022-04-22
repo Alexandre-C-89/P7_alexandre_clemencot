@@ -4,7 +4,7 @@
     <div class="home__icone">
       <button @click.prevent="goToCreatePost()">Créér un post</button>
     </div>
-    <div class="home__card" v-for="post in posts" :key="post.card">
+    <div class="home__card" v-for="post in post" :key="post.card">
       <div class="home__card__img">
         <img :src="post.media" alt="image du post" />
       </div>
@@ -18,11 +18,8 @@
         <div class="home__card__content__id">pseudo : {{ post.pseudo }}</div>
         <div class="home__card__content__date">{{ post.createdAt }}</div>
       </div>
-      <div class="home__card__btn" v-if="post.pseudo == pseudo">
+      <div class="home__card__btn" v-if="post.pseudo == pseudo || isAdmin == 1">
         <button @click.prevent="goDelete(post)">Supprimer</button>
-      </div>
-      <div class="home__card__btn" v-if="isAdmin == 1">
-        <button @click.prevent="DeleteWithAdmin(post)">Supprimer</button>
       </div>
     </div>
   </div>
@@ -34,10 +31,18 @@ export default {
   components: {},
   data() {
     return {
-      posts: [],
+      post: {
+        postId: '',
+        userId: '',
+        title: '',
+        description: '',
+        media: '',
+        pseudo: '',
+        createdAt: '',
+      },
       token: localStorage.getItem('token'),
       pseudo: localStorage.getItem('pseudo'),
-      isAdmin: localStorage.getItem('isAdmin'),
+      isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
     };
   },
   mounted() {
@@ -48,7 +53,7 @@ export default {
         },
       })
       .then((response) => {
-        this.posts = response.data.post;
+        this.post = response.data.post;
         this.isAdmin = localStorage.getItem('isAdmin');
         if (localStorage.getItem('userId') === null) {
           this.$router.push({ name: 'Signup' });
@@ -62,40 +67,18 @@ export default {
       this.$router.push({ name: 'createPost' });
     },
     goDelete(post) {
-      console.log('Je veux supprimé le post !');
       this.axios
-        .delete('http://localhost:3000/api/post/deletePost', {
+        .delete(`http://localhost:3000/api/post/deletePost/${post.postId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
           data: {
-            userId: post.userId,
-            postId: post.postId,
+            isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
+            userId: this.post.userId,
           },
         })
         .then(() => {
           window.location.reload();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    DeleteWithAdmin(post) {
-      console.log('Je veux supprimé le post !');
-      this.axios
-        .delete('http://localhost:3000/api/post/deletePost', this.isAdmin, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-          data: {
-            userId: post.userId,
-            postId: post.postId,
-            isAdmin: this.isAdmin,
-          },
-        })
-        .then(() => {
-          window.location.reload();
-          console.log(post);
         })
         .catch((error) => {
           console.log(error);

@@ -95,24 +95,21 @@ exports.getAllPost = async (req, res, next) => {
 
 // Affichage d'un post
 exports.getOnePost = async (req, res, next) => {
-  const post = await Post.findOne({ where: { id: req.body.postId } }); // Je cherche l'email de la requête avec celui enregistré
+  const post = await Post.findOne({ where: { postId: req.params.id } }); // Je cherche l'email de la requête avec celui enregistré
   if (post) {
     res.status(200).json({ post });
   } else {
-    res.status(404).json({ message: "post trouvé !" });
+    res.status(404).json({ message: "post non trouvé !" });
   }
 };
 
 // Suppression d'un post de l'utilisateur
 exports.deletePost = async (req, res, next) => {
-  console.log("vous avez l'intention de supprimé un post !");
-  // Je cherche le post que je veux supprimer
-  const post = await Post.findOne({ where: { postId: req.body.postId } });
-  // Si le post est trouvé alors je supprime le post
+  const post = await Post.findOne({ where: { postId: req.params.id } }); // Je cherche l'email de la requête avec celui enregistré
   if (post) {
-    Post.destroy({ where: { postId: req.body.postId } });
-    res.status(201).json({ message: "Post supprimé !" });
+    Post.destroy({ where: { postId: req.params.id } });
+    res.status(200).json({ post });
   } else {
-    res.status(401).json({ message: "Requête non autorisé !" });
+    res.status(404).json({ message: "post non trouvé !" });
   }
 };

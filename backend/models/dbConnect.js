@@ -1,14 +1,16 @@
 // J'importe Sequelize
 const { Sequelize } = require("sequelize");
+// J'importe dotenv
+require("dotenv").config();
 
 // J'utilise un modèle de Sequelize
 // puis j'indique mes paramètre de connection
 const sequelize = new Sequelize(
-  /*database*/ "groupomania",
-  /*username*/ "root",
-  /*password*/ "1234",
+  /*database*/ process.env.BDD_NAME,
+  /*username*/ process.env.BDD_USERNAME,
+  /*password*/ process.env.PASSWORD,
   {
-    host: "localhost",
+    host: process.env.NET,
     dialect: "mysql",
     omitNull: false,
   }
