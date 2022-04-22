@@ -28,6 +28,9 @@ Vous devez avoir un message qui apparaît dans le terminal comme suit :
 Ouvrez un nouvel onglet dans le terminal avec le sigle "+" sur la droite de la fenêtre, puis entrez les commandes suivantes :
 
 - cd backend
+
+Maintenant vous vous trouvez dans le dossier backend et vous pouvez lancé le backend et votre base de données avec la commande suivante :
+
 - nodemon server
 
 # Branche présente sur le projet
@@ -35,4 +38,4 @@ Ouvrez un nouvel onglet dans le terminal avec le sigle "+" sur la droite de la f
 - Main
 - branchOne
 - branchTwo
-- frontend (branche utilisé actuellement !)
+- frontend
