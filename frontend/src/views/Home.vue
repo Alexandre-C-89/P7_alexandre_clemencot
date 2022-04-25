@@ -249,4 +249,48 @@ export default {
     }
   }
 }
+
+@media all and (min-width: 350px) and (max-width: 700px) {
+  .home {
+    font-size: 0.8rem;
+    width: 300px;
+    &__card {
+      align-items: center;
+      flex-direction: column;
+      width: 280px;
+      height: 300px;
+      &__img {
+        width: 200px;
+        height: 130px;
+        & img {
+          width: 200px;
+          height: 130px;
+        }
+      }
+      &__content {
+        width: 200px;
+        height: 80px;
+        margin: 10px;
+        &__title {
+          font-size: 0.6rem;
+          margin: 2px;
+          color: #fff;
+        }
+        &__description {
+          font-size: 0.5rem;
+          color: #fff;
+          width: 80px;
+          height: 100px;
+          margin: 5px 0px 5px 0px;
+        }
+        &__date {
+          font-size: 0.6rem;
+        }
+        &__id {
+          font-size: 0.6rem;
+        }
+      }
+    }
+  }
+}
 </style>

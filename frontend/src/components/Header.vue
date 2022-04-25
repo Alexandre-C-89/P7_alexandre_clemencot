@@ -86,4 +86,34 @@ export default {
     font-size: 0.8rem;
   }
 }
+
+@media all and (min-width: 350px) and (max-width: 700px) {
+  .header {
+    height: 150px;
+    font-size: 0.6rem;
+    &__link {
+      width: 220px;
+      height: 50px;
+      & a {
+        width: 80px;
+        height: 80px;
+        margin: 15px;
+      }
+      & button {
+        background-color: #d1515a;
+        color: #fff;
+        border-radius: 5px;
+        border: 1.7px solid #fff;
+        margin: 5px;
+      }
+    }
+    &__logo {
+      margin-left: 15px;
+      & img {
+        width: 120px;
+        height: 50px;
+      }
+    }
+  }
+}
 </style>
