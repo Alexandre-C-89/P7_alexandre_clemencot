@@ -122,4 +122,41 @@ export default {
     }
   }
 }
+
+@media all and (min-width: 350px) and (max-width: 700px) {
+  .user {
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    margin: 20px;
+    font-size: 1rem;
+    border-radius: 15px;
+    &__card {
+      width: 250px;
+      height: 130px;
+      background-color: #d1515a;
+      border: 1px solid #fff;
+      font-family: 'Merriweather Sans', sans-serif;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 8px;
+      &__name {
+      }
+      &__email {
+      }
+      &__button {
+        & button {
+          width: 160px;
+          height: 28px;
+          margin: 10px;
+          border-radius: 10px;
+          border: 2px solid white;
+          margin: 5px;
+          &:hover {
+          }
+        }
+      }
+    }
+  }
+}
 </style>
