@@ -193,4 +193,60 @@ export default {
     }
   }
 }
+
+@media all and (min-width: 700px) and (max-width: 900px) {
+  .home {
+    font-size: 0.8rem;
+    width: 550px;
+    &__card {
+      width: 470px;
+      height: 260px;
+      background-color: #d1515a;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      border: 1px solid #fff;
+      border-radius: 5px;
+      &__img {
+        background-color: #fff;
+        width: 220px;
+        height: 160px;
+        & img {
+          width: 220px;
+          height: 180px;
+        }
+      }
+      &__content {
+        width: 160px;
+        height: 180px;
+        margin: 10px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        &__title {
+          font-family: 'nunito', sans-serif;
+          font-weight: bold;
+          font-size: 1rem;
+          margin: 2px;
+          color: #fff;
+        }
+        &__description {
+          font-size: 0.6rem;
+          color: #fff;
+          width: 80px;
+          height: 120px;
+          margin: 5px 0px 5px 0px;
+        }
+        &__name {
+          font-size: 0.6rem;
+          font-family: 'Merriweather Sans', sans-serif;
+        }
+        &__date {
+          font-size: 0.6rem;
+        }
+      }
+    }
+  }
+}
 </style>

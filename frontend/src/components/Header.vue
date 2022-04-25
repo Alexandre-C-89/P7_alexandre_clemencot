@@ -80,4 +80,10 @@ export default {
     margin: 20px;
   }
 }
+
+@media all and (min-width: 700px) and (max-width: 900px) {
+  .header {
+    font-size: 0.8rem;
+  }
+}
 </style>
