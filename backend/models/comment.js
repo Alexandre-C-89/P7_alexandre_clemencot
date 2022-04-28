@@ -18,10 +18,6 @@ const Comment = sequelize.define(
       unique: true,
       allowNull: false,
     },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     comment: {
       type: DataTypes.STRING(255),
       allowNull: false, // équivalant required

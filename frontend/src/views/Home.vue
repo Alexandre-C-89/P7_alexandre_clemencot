@@ -46,21 +46,25 @@ export default {
     };
   },
   mounted() {
-    this.axios
-      .get('http://localhost:3000/api/post/', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      })
-      .then((response) => {
-        this.post = response.data.post;
-        this.isAdmin = localStorage.getItem('isAdmin');
-        if (localStorage.getItem('userId') === null) {
-          this.$router.push({ name: 'Signup' });
-        }
-      })
-      // eslint-disable-next-line no-console
-      .catch((error) => console.log(error));
+    if (this.token == null) {
+      this.$router.push({ name: 'Login' });
+    } else {
+      this.axios
+        .get('http://localhost:3000/api/post/', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        })
+        .then((response) => {
+          this.post = response.data.post;
+          this.isAdmin = localStorage.getItem('isAdmin');
+          if (localStorage.getItem('userId') === null) {
+            this.$router.push({ name: 'Signup' });
+          }
+        })
+        // eslint-disable-next-line no-console
+        .catch((error) => console.log(error));
+    }
   },
   methods: {
     goToCreatePost() {
@@ -149,7 +153,7 @@ export default {
       align-items: center;
       flex-direction: column;
       &__title {
-        font-family: 'nunito', sans-serif;
+        font-family: 'Nunito Sans', sans-serif;
         font-weight: bold;
         font-size: 1.5rem;
         margin: 2px;

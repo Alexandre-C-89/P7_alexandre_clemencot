@@ -49,7 +49,6 @@ export default {
           localStorage.setItem('email', response.data.email);
           localStorage.setItem('isAdmin', response.data.isAdmin);
           this.$router.push({ name: 'Home' });
-          console.log("Je suis sur la page d'accueil !");
           window.location.reload();
         })
         .catch((error) => console.log(error));
