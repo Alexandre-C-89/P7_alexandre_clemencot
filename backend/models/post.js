@@ -27,7 +27,7 @@ const Post = sequelize.define(
     },
     title: {
       type: DataTypes.STRING(255),
-      allowNull: false, // équivalant required
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING(500),
@@ -37,10 +37,6 @@ const Post = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // mediaImg: {
-    //   type: DataTypes.BLOB("long"),
-    //   allowNull: true,
-    // },
     pseudo: {
       type: DataTypes.STRING(70),
       allowNull: false,

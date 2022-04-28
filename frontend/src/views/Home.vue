@@ -18,8 +18,21 @@
         <div class="home__card__content__id">pseudo : {{ post.pseudo }}</div>
         <div class="home__card__content__date">{{ post.createdAt }}</div>
       </div>
-      <div class="home__card__btn" v-if="post.pseudo == pseudo || isAdmin == 1">
-        <button @click.prevent="goDelete(post)">Supprimer</button>
+      <div class="home__card__btn">
+        <div
+          class="home__card__btn__delete"
+          v-if="post.pseudo == pseudo || isAdmin == 1"
+        >
+          <button @click.prevent="goDelete(post)">Supprimer ce post</button>
+        </div>
+        <button :postId="post.postId" @click.prevent="goComment()">
+          Commentez
+        </button>
+      </div>
+      <div class="home__card__comment">
+        <p>{{ comment.userId }}</p>
+        <p>{{ comment.pseudo }}</p>
+        <p>{{ comment.description }}</p>
       </div>
     </div>
   </div>
@@ -40,6 +53,13 @@ export default {
         pseudo: '',
         createdAt: '',
       },
+      comment: {
+        userId: '',
+        pseudo: '',
+        description: '',
+        createdAt: '',
+      },
+      userId: localStorage.getItem('userId'),
       token: localStorage.getItem('token'),
       pseudo: localStorage.getItem('pseudo'),
       isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
@@ -88,6 +108,9 @@ export default {
           console.log(error);
         });
     },
+    goComment() {
+      this.$router.push({ name: 'createComment' });
+    },
   },
 };
 </script>
@@ -127,7 +150,7 @@ export default {
   }
   &__card {
     width: 530px;
-    height: 280px;
+    height: auto;
     background-color: #d1515a;
     margin: 10px 0px 10px 0px;
     display: flex;
@@ -180,9 +203,13 @@ export default {
       }
     }
     &__btn {
-      margin: 0px 0px 10px 0px;
+      margin: 0px 0px 10px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
       & button {
-        width: 100px;
+        width: 150px;
         height: 28px;
         margin: 10px;
         border-radius: 10px;
@@ -194,6 +221,12 @@ export default {
           color: #fff;
         }
       }
+    }
+    &__comment {
+      width: 200px;
+      height: auto;
+      background-color: #fff;
+      margin: 10px 0px 10px 0px;
     }
   }
 }

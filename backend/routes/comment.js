@@ -9,7 +9,7 @@ const auth = require("../middleware/auth");
 const commentCtrl = require("../controllers/comment");
 
 // Ici je créer mes routes pour s'enregistré et ce connecté
-router.post("/createcomment", commentCtrl.createComment);
+router.post("/createcomment", auth.token, commentCtrl.createComment);
 router.delete("/deletePost", auth.token, commentCtrl.deleteComment);
 
 module.exports = router;

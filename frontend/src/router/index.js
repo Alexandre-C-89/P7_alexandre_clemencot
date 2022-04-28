@@ -9,6 +9,7 @@ import ModifyPost from '../views/ModifyPost.vue';
 import Admin from '../views/Admin.vue';
 // import DeletePost from '../views/DeletePost.vue';
 import Profil from '../views/Profil.vue';
+import createComment from '../views/CreateComment.vue';
 
 Vue.use(VueRouter);
 
@@ -32,6 +33,11 @@ const routes = [
     path: '/createpost',
     name: 'createPost',
     component: CreatePost,
+  },
+  {
+    path: '/createcomment',
+    name: 'createComment',
+    component: createComment,
   },
   {
     path: '/modifyPost',

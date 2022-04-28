@@ -18,28 +18,30 @@ const Comment = sequelize.define(
       unique: true,
       allowNull: false,
     },
-    comment: {
+    description: {
       type: DataTypes.STRING(255),
       allowNull: false, // équivalant required
     },
     userId: {
       type: DataTypes.INTEGER,
+      autoIncrement: false,
+      primaryKey: false,
+      unique: false,
       allowNull: false,
     },
-    PostId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+    // PostId: {
+    //   type: DataTypes.INTEGER,
+    //   autoIncrement: false,
+    //   primaryKey: false,
+    //   unique: false,
+    //   allowNull: false,
+    // },
   },
   {
     tableName: "comments",
     timestamps: true,
   }
 );
-
-// foreignKey pour la relation
-// entre le commentaire et le post
-// Post.belongsTo(User);
 
 // J'exporte mon modèle
 // pour pouvoir l'utilisé dans d'autres

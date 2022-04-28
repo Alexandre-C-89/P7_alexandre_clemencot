@@ -12,16 +12,12 @@ const multer = require("multer");
 // Partie création de posts
 exports.createComment = (req, res, next) => {
   console.log("Vous avez l'intention de créer un commentaire !");
-  // Je créer le post avec la méthode "create"
-  // console.log();
-  // console.log(req.file);
-  console.log(Number(req.body.userId));
+  // Je créer le commentaire avec la méthode "create"
   Comment.create({
     // Je renseigne les champs
-    title: req.body.title,
     description: req.body.description,
-    UserId: Number(req.body.userId),
-    PostId: Number(req.body.userId),
+    userId: req.body.userId,
+    // postId: req.body.userId,
   })
     .then(() => {
       // Si la requête est correcte j'ai un status 201
