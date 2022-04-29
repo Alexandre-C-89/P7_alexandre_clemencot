@@ -29,13 +29,13 @@ const Comment = sequelize.define(
       unique: false,
       allowNull: false,
     },
-    // PostId: {
-    //   type: DataTypes.INTEGER,
-    //   autoIncrement: false,
-    //   primaryKey: false,
-    //   unique: false,
-    //   allowNull: false,
-    // },
+    postId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: false,
+      primaryKey: false,
+      unique: false,
+      allowNull: false,
+    },
   },
   {
     tableName: "comments",

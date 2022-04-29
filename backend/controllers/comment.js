@@ -1,5 +1,6 @@
 // J'importe mon fichier modèle de post
 const Comment = require("../models/comment");
+const Post = require("../models/post");
 // J'importe mon fichier modèle utilisateur
 // const User = require("../models/user");
 // J'importe dotenv
@@ -10,19 +11,26 @@ const multer = require("multer");
 // je gère la relation entre les utilisateurs et leurs posts
 
 // Partie création de posts
-exports.createComment = (req, res, next) => {
+exports.createComment = async (req, res, next) => {
   console.log("Vous avez l'intention de créer un commentaire !");
+  const post = await Post.findOne({ where: { postId: req.params.id } }).then(
+    (post) => {
+      // Si la requête est correcte j'ai un status 201
+      if (!post) {
+        return res.status(401).json({ message: "post introuvable" });
+      }
+    }
+  );
   // Je créer le commentaire avec la méthode "create"
   console.log(req.body);
   Comment.create({
     // Je renseigne les champs
     description: req.body.description,
     userId: req.body.userId,
-    // postId: req.body.userId,
+    postId: req.params.id,
   })
     .then(() => {
-      // Si la requête est correcte j'ai un status 201
-      return res.status(200).json({ message: "Commentaire créé ! " });
+      res.status(200).json({ message: "Commentaire ajouté !" });
     })
     .catch((error) => {
       console.log(error);

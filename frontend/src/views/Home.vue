@@ -213,7 +213,7 @@ export default {
       }
     }
     &__btn {
-      margin: 0px 0px 10px 20px;
+      margin: 10px 10px 10px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -233,10 +233,10 @@ export default {
       }
     }
     &__comment {
-      width: 200px;
+      width: 400px;
       height: auto;
       background-color: #fff;
-      margin: 10px 0px 10px 0px;
+      margin: 10px 20px 10px 20px;
     }
   }
 }
