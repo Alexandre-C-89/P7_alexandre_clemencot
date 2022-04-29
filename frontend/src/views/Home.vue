@@ -29,10 +29,10 @@
           Commentez
         </button>
       </div>
-      <div class="home__card__comment">
+      <div class="home__card__comment" :key="comment.card">
         <p>{{ comment.userId }}</p>
         <p>{{ comment.pseudo }}</p>
-        <p>{{ comment.description }}</p>
+        <p>Commentaire : {{ comment.description }}</p>
       </div>
     </div>
   </div>
@@ -84,6 +84,16 @@ export default {
         })
         // eslint-disable-next-line no-console
         .catch((error) => console.log(error));
+      this.axios
+        .get('http://localhost:3000/api/comment/', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data.comment);
+          this.comment = response.data.comment;
+        });
     }
   },
   methods: {

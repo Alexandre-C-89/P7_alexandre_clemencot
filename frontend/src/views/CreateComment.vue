@@ -7,9 +7,9 @@
       <div class="post__form__description">
         <label>Description : </label>
         <textarea
-          type="description"
+          type="text"
           placeholder="Décrivez votre post !"
-          v-model="description"
+          v-model="form.description"
         />
       </div>
       <div class="post__form__btn">
@@ -24,28 +24,30 @@ export default {
   name: 'createComment',
   data() {
     return {
-      pseudo: '',
-      description: '',
+      form: {
+        description: '',
+        userId: localStorage.getItem('userId'),
+      },
+      // pseudo: '',
+      // description: '',
       // postId: '',
-      userId: '',
+      // userId: '',
     };
   },
   methods: {
     CreateComment() {
       console.log('Je vais créé un post !');
-      const fd = new FormData();
-      fd.append('pseudo', this.pseudo);
-      fd.append('description', this.description);
-      // fd.append('postId', this.postId);
-      fd.append('userId', (this.userId = localStorage.getItem('userId')));
-      console.log(this.userId);
+      // const form = {
+      //   descritpion: this.description,
+      //   userId: this.userId,
+      // };
       this.axios
-        .post('http://localhost:3000/api/comment/createcomment', fd, {
+        .post('http://localhost:3000/api/comment/createcomment', this.form, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token', 'userId')}`,
           },
           data: {
-            userId: this.userId,
+            userId: localStorage.getItem('userId'),
           },
         })
         .then((response) => {

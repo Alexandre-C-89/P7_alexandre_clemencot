@@ -13,6 +13,7 @@ const multer = require("multer");
 exports.createComment = (req, res, next) => {
   console.log("Vous avez l'intention de créer un commentaire !");
   // Je créer le commentaire avec la méthode "create"
+  console.log(req.body);
   Comment.create({
     // Je renseigne les champs
     description: req.body.description,
@@ -37,6 +38,16 @@ exports.getOneComment = async (req, res, next) => {
   const comment = await Comment.findOne({
     where: { id: req.params.commentId },
   }); // Je cherche l'email de la requête avec celui enregistré
+  if (comment) {
+    res.status(200).json({ comment });
+  } else {
+    res.status(404).json({ message: "Commentaire non trouvé !" });
+  }
+};
+
+// Affiché les commentaires
+exports.getAllComment = async (req, res, next) => {
+  const comment = await Comment.findAll();
   if (comment) {
     res.status(200).json({ comment });
   } else {

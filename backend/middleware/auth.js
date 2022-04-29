@@ -14,7 +14,7 @@ exports.token = (req, res, next) => {
     console.log(userId);
     if (req.body.userId && req.body.userId !== userId) {
       // alors je renvoi une erreur
-      console.log(" -------- Je vérifie si c'est l'admin ! --------");
+      console.log(" -------- Utilisateur trouvé !! --------");
       throw "User ID non valable !";
     } else {
       next();
