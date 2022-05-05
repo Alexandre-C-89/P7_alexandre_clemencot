@@ -25,6 +25,18 @@
         >
           <button @click.prevent="goDelete(post)">Supprimer ce post</button>
         </div>
+        <button :postId="post.postId" @click.prevent="goComment(post)">
+          Commentez
+        </button>
+      </div>
+      <div
+        class="home__card__comment"
+        v-for="comment in comments"
+        :key="comment.id"
+      >
+        <p>userId : {{ comment.userId }}</p>
+        <p>pseudo : {{ comment.pseudo }}</p>
+        <p>Commentaire : {{ comment.description }}</p>
       </div>
     </div>
   </div>
@@ -52,7 +64,7 @@ export default {
         description: '',
         createdAt: '',
       },
-      // ArrayFilter: this.comments.commentId,
+      ArrayFilter: this.comments.commentId,
       userId: localStorage.getItem('userId'),
       token: localStorage.getItem('token'),
       pseudo: localStorage.getItem('pseudo'),
@@ -75,6 +87,24 @@ export default {
           if (localStorage.getItem('userId') === null) {
             this.$router.push({ name: 'Signup' });
           }
+          this.axios
+            .get('http://localhost:3000/api/comment/', {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            })
+            .then((res) => {
+              this.comments = res.data.comment;
+              // const posts = response.data.post;
+              // function postArray(commentId) {
+              //   return commentId === posts.postId;
+              // }
+              // const filtre = posts.filter(postArray);
+              // this.ArrayFilter = filtre;
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         // eslint-disable-next-line no-console
         .catch((error) => console.log(error));
@@ -101,6 +131,11 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    goComment(post) {
+      console.log(post.postId);
+      localStorage.setItem('postId', post.postId);
+      this.$router.push({ name: 'createComment' });
     },
   },
 };
