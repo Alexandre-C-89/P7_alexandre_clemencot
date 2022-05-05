@@ -4,7 +4,7 @@
     <div class="home__icone">
       <button @click.prevent="goToCreatePost()">Créér un post</button>
     </div>
-    <div class="home__card" v-for="post in post" :key="post.card">
+    <div class="home__card" v-for="post in posts" :key="post.postId">
       <div class="home__card__img">
         <img :src="post.media" alt="image du post" />
       </div>
@@ -25,14 +25,6 @@
         >
           <button @click.prevent="goDelete(post)">Supprimer ce post</button>
         </div>
-        <button :postId="post.postId" @click.prevent="goComment()">
-          Commentez
-        </button>
-      </div>
-      <div class="home__card__comment" :key="comment.card">
-        <p>{{ comment.userId }}</p>
-        <p>{{ comment.pseudo }}</p>
-        <p>Commentaire : {{ comment.description }}</p>
       </div>
     </div>
   </div>
@@ -44,7 +36,7 @@ export default {
   components: {},
   data() {
     return {
-      post: {
+      posts: {
         postId: '',
         userId: '',
         title: '',
@@ -53,12 +45,14 @@ export default {
         pseudo: '',
         createdAt: '',
       },
-      comment: {
+      comments: {
         userId: '',
         pseudo: '',
+        postId: '',
         description: '',
         createdAt: '',
       },
+      // ArrayFilter: this.comments.commentId,
       userId: localStorage.getItem('userId'),
       token: localStorage.getItem('token'),
       pseudo: localStorage.getItem('pseudo'),
@@ -76,7 +70,7 @@ export default {
           },
         })
         .then((response) => {
-          this.post = response.data.post;
+          this.posts = response.data.post;
           this.isAdmin = localStorage.getItem('isAdmin');
           if (localStorage.getItem('userId') === null) {
             this.$router.push({ name: 'Signup' });
@@ -84,16 +78,6 @@ export default {
         })
         // eslint-disable-next-line no-console
         .catch((error) => console.log(error));
-      this.axios
-        .get('http://localhost:3000/api/comment/', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        })
-        .then((response) => {
-          console.log(response.data.comment);
-          this.comment = response.data.comment;
-        });
     }
   },
   methods: {
@@ -117,9 +101,6 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    },
-    goComment() {
-      this.$router.push({ name: 'createComment' });
     },
   },
 };

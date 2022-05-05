@@ -10,6 +10,6 @@ const commentCtrl = require("../controllers/comment");
 
 // Ici je créer mes routes pour s'enregistré et ce connecté
 router.post("/:id/createcomment", commentCtrl.createComment);
-router.get("/:id", commentCtrl.getAllComment);
+router.get("/", commentCtrl.getAllComment);
 
 module.exports = router;

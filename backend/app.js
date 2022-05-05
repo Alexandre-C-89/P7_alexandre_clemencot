@@ -10,7 +10,7 @@ const db = require("./models/dbConnect");
 
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
-const postComment = require("./routes/comment");
+// const postComment = require("./routes/comment");
 
 // Je stocke express dans une variable "app"
 const app = express();
@@ -36,7 +36,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(express.json());
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
-app.use("/api/post", postComment);
+// app.use("/api/comment", postComment);
 // app.use("/api/", limiter);
 // app.use(helmet());
 

@@ -27,6 +27,7 @@ export default {
       form: {
         description: '',
         userId: localStorage.getItem('userId'),
+        postId: localStorage.getItem('postId'),
       },
       // pseudo: '',
       // description: '',
@@ -36,23 +37,27 @@ export default {
   },
   methods: {
     CreateComment() {
-      console.log('Je vais créé un post !');
-      // const form = {
-      //   descritpion: this.description,
-      //   userId: this.userId,
-      // };
+      const postId = localStorage.getItem('postId');
       this.axios
-        .post('http://localhost:3000/api/comment/createcomment', this.form, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token', 'userId')}`,
+        .post(
+          `http://localhost:3000/api/comment/${postId}/createcomment`,
+          this.form,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem(
+                'token',
+                'userId',
+              )}`,
+            },
+            data: {
+              userId: localStorage.getItem('userId'),
+            },
           },
-          data: {
-            userId: localStorage.getItem('userId'),
-          },
-        })
+        )
         .then((response) => {
           console.log('commentaire posté !');
-          console.log(response);
+          console.log(response.data);
+          localStorage.removeItem('postId');
           this.$router.push({ name: 'Home' });
         })
         .catch((error) => console.log(error));
