@@ -1,9 +1,6 @@
 <template>
-  <div class="home">
-    <div class="home__hello">Bonjour {{ pseudo }} !</div>
-    <div class="home__icone">
-      <button @click.prevent="goToCreatePost()">Créér un post</button>
-    </div>
+  <div class="post">
+    <div class="post__title">Voici le post n° : {{ posts.postId }}</div>
     <div class="home__card" v-for="post in posts" :key="post.postId">
       <div class="home__card__img">
         <img :src="post.media" alt="image du post" />
@@ -15,21 +12,15 @@
         <div class="home__card__content__description">
           {{ post.description }}
         </div>
-        <div class="home__card__content__id">pseudo : {{ post.pseudo }}</div>
+        <div class="home__card__content__id">{{ post.pseudo }}</div>
         <div class="home__card__content__date">{{ post.createdAt }}</div>
       </div>
       <div class="home__card__btn">
-        <div
-          class="home__card__btn__delete"
-          v-if="post.pseudo == pseudo || isAdmin == 1"
-        >
-          <button @click.prevent="goDelete(post)">Supprimer ce post</button>
-        </div>
         <button :postId="post.postId" @click.prevent="goOnPost(post)">
           afficher le post
         </button>
       </div>
-      <!-- <div
+      <div
         class="home__card__comment"
         v-for="comment in comments"
         :key="comment.id"
@@ -37,19 +28,18 @@
         <p>userId : {{ comment.userId }}</p>
         <p>pseudo : {{ comment.pseudo }}</p>
         <p>Commentaire : {{ comment.description }}</p>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
-  components: {},
+  name: 'post',
   data() {
     return {
       posts: {
-        postId: '',
+        postId: localStorage.getItem('postId'),
         userId: '',
         title: '',
         description: '',
@@ -64,97 +54,34 @@ export default {
         description: '',
         createdAt: '',
       },
-      userId: localStorage.getItem('userId'),
-      token: localStorage.getItem('token'),
-      pseudo: localStorage.getItem('pseudo'),
-      isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
+      array: '',
     };
   },
   mounted() {
-    if (this.token == null) {
-      this.$router.push({ name: 'Login' });
-    } else {
-      this.axios
-        .get('http://localhost:3000/api/post/', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        })
-        .then((response) => {
-          this.posts = response.data.post;
-          this.isAdmin = localStorage.getItem('isAdmin');
-          if (localStorage.getItem('userId') === null) {
-            this.$router.push({ name: 'Signup' });
-          }
-          // this.axios
-          //   .get('http://localhost:3000/api/comment/', {
-          //     headers: {
-          //       Authorization: `Bearer ${localStorage.getItem('token')}`,
-          //     },
-          //   })
-          //   .then((res) => {
-          //     this.comments = res.data.comment;
-          //     const posts = response.data.post;
-          //     function postArray(commentId) {
-          //       return commentId === posts.postId;
-          //     }
-          //     const filtre = posts.filter(postArray);
-          //     this.ArrayFilter = filtre;
-          //   })
-          //   .catch((err) => {
-          //     console.log(err);
-          //   });
-        })
-        // eslint-disable-next-line no-console
-        .catch((error) => console.log(error));
-    }
-  },
-  methods: {
-    goToCreatePost() {
-      this.$router.push({ name: 'createPost' });
-    },
-    goDelete(post) {
-      this.axios
-        .delete(`http://localhost:3000/api/post/deletePost/${post.postId}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-          data: {
-            isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
-            userId: this.post.userId,
-          },
-        })
-        .then(() => {
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    goOnPost(post) {
-      console.log(this.posts.postId);
-      localStorage.setItem('postId', post.postId);
-      this.axios
-        .get(`http://localhost:3000/api/post/${post.postId}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-          data: {
-            isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
-            userId: this.posts.userId,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          this.$router.push({ name: 'post' });
-        });
-      this.$router.push({ name: 'post' });
-    },
-    // goComment(post) {
-    //   console.log(post.postId);
-    //   localStorage.setItem('postId', post.postId);
-    //   this.$router.push({ name: 'createComment' });
-    // },
+    this.axios
+      .get('http://localhost:3000/api/post/', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        data: {
+          isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
+          userId: this.posts.userId,
+        },
+      })
+      .then((res) => {
+        // console.log(res.data.post);
+        const posts = res.data.post;
+
+        function findPostId(post) {
+          // return console.log(post.postId, 'Hello');
+          return post.postId === localStorage.getItem('postId');
+        }
+        // console.log(posts.filter(findPostId), 'array');
+        this.posts = posts.filter(findPostId);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

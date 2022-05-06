@@ -10,6 +10,7 @@ import Admin from '../views/Admin.vue';
 // import DeletePost from '../views/DeletePost.vue';
 import Profil from '../views/Profil.vue';
 import createComment from '../views/CreateComment.vue';
+import Post from '../views/Post.vue';
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,11 @@ const routes = [
     path: '/user/:id',
     name: 'Profil',
     component: Profil,
+  },
+  {
+    path: '/post',
+    name: 'post',
+    component: Post,
   },
   {
     path: '/admin', // URL correspondant au composant
