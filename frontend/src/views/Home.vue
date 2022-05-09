@@ -92,7 +92,7 @@ export default {
           },
           data: {
             isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
-            userId: this.post.userId,
+            userId: this.posts.userId,
           },
         })
         .then(() => {
