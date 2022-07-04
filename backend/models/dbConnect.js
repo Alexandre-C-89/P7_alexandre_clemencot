@@ -6,9 +6,9 @@ require("dotenv").config();
 // J'utilise un modèle de Sequelize
 // puis j'indique mes paramètre de connection
 const sequelize = new Sequelize(
-  /*database*/ process.env.BDD_NAME,
-  /*username*/ process.env.BDD_USERNAME,
-  /*password*/ process.env.PASSWORD,
+  /*database*/ /*process.env.BDD_NAME*/ "groupomania",
+  /*username*/ /*process.env.BDD_USERNAME*/"root",
+  /*password*/ /*process.env.PASSWORD*/"",
   {
     host: process.env.NET,
     dialect: "mysql",
