@@ -20,6 +20,7 @@ module.exports = {
     'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }],
     'import/newline-after-import': ['error', { count: 1 }],
     'no-underscore-dangle': ['error', { allow: ['foo_', '_bar'] }],
+    'linebreak-style': ["error", "unix"],
   },
   settings: {
     'import/resolver': {
