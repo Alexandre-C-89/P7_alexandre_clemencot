@@ -8,7 +8,7 @@ require("dotenv").config();
 const sequelize = new Sequelize(
   /*database*/ /*process.env.BDD_NAME*/ "groupomania",
   /*username*/ /*process.env.BDD_USERNAME*/"root",
-  /*password*/ /*process.env.PASSWORD*/"",
+  /*password*/ /*process.env.PASSWORD*/"1234",
   {
     host: process.env.NET,
     dialect: "mysql",
